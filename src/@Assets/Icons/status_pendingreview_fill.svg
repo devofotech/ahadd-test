@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="503" height="99" viewBox="0 0 503 99">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #666;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 48px;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+      }
+
+      .cls-3, .cls-6 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-5 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_6791" data-name="Group 6791" transform="translate(-15366 17384)">
+    <rect id="Rectangle_2477" data-name="Rectangle 2477" class="cls-1" width="503" height="99" rx="49.5" transform="translate(15366 -17384)"/>
+    <text id="Pending_review" data-name="Pending review" class="cls-2" transform="translate(15469 -17318)"><tspan x="0" y="0">Pending review</tspan></text>
+    <g id="Group_6792" data-name="Group 6792" transform="translate(31804.324 1300)">
+      <g id="Ellipse_298" data-name="Ellipse 298" class="cls-3" transform="translate(-16406.324 -18653)">
+        <ellipse class="cls-5" cx="23" cy="22.5" rx="23" ry="22.5"/>
+        <ellipse class="cls-6" cx="23" cy="22.5" rx="21" ry="20.5"/>
+      </g>
+      <rect id="Rectangle_1780" data-name="Rectangle 1780" class="cls-4" width="15" height="3" rx="1.5" transform="translate(-16390.324 -18660)"/>
+      <rect id="Rectangle_1781" data-name="Rectangle 1781" class="cls-4" width="17" height="3" rx="1.5" transform="translate(-16381.324 -18645) rotate(90)"/>
+      <rect id="Rectangle_1782" data-name="Rectangle 1782" class="cls-4" width="7.913" height="3.391" rx="1.696" transform="translate(-16362.672 -18649.746) rotate(135)"/>
+      <rect id="Rectangle_1783" data-name="Rectangle 1783" class="cls-4" width="10.174" height="2.261" rx="1.13" transform="translate(-16366.806 -18655.342) rotate(45)"/>
+    </g>
+  </g>
+</svg>

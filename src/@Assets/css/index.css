@@ -1,0 +1,50 @@
+@import 'variables.css';
+/*  */
+
+.color-primary {
+  color: var(--primary-color);
+}
+
+.color-secondary {
+  color: var(--secondary-color);
+}
+
+.color-tertiary {
+  color: var(--tertiary-color);
+}
+
+.color-active {
+  color: var(--active-color);
+}
+
+.color-container {
+  color: var(--container-color);
+}
+
+.color-background {
+  color: var(--background-color);
+}
+
+.bg-color-primary {
+  background-color: var(--primary-color);
+}
+
+.bg-color-secondary {
+  background-color: var(--secondary-color);
+}
+
+.bg-color-tertiary {
+  background-color: var(--tertiary-color);
+}
+
+.bg-color-active {
+  background-color: var(--active-color);
+}
+
+.bg-color-container {
+  background-color: var(--container-color);
+}
+
+.bg-color-background {
+  background-color: var(--background-color);
+}

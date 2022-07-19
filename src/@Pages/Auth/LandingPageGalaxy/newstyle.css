@@ -1,0 +1,56 @@
+/*===================================
+  Login
+  ===================================*/
+
+.login-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.error {
+  color: red;
+}
+
+.fullscreen-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url('./login-bg.jpg');
+  background-size: cover;
+}
+
+.login-bg-video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.login-input {
+  background-color: transparent !important;
+  border-color: white !important;
+  color: white !important;
+  height: 17.5px;
+  width: 15rem;
+  font-size: 15px;
+}
+
+.login-page .footer-login {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 15px 0;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.1);
+  background: #25b1a4;
+  font-size: 13px;
+  opacity: 0.8;
+  z-index: 2;
+}
+
+.btn-block {
+  width: 15rem;
+}

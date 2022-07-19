@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="503" height="99" viewBox="0 0 503 99">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2ecca9;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 48px;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+      }
+
+      .cls-3, .cls-6 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-5 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_6787" data-name="Group 6787" transform="translate(-15363 17384)">
+    <rect id="Rectangle_2484" data-name="Rectangle 2484" class="cls-1" width="503" height="99" rx="49.5" transform="translate(15363 -17384)"/>
+    <text id="Completed" class="cls-2" transform="translate(15471 -17318)"><tspan x="0" y="0">Completed</tspan></text>
+    <g id="Group_6788" data-name="Group 6788" transform="translate(31862 1294)">
+      <g id="Ellipse_299" data-name="Ellipse 299" class="cls-3" transform="translate(-16467 -18654)">
+        <circle class="cls-5" cx="26" cy="26" r="26"/>
+        <circle class="cls-6" cx="26" cy="26" r="24"/>
+      </g>
+      <path id="checked" class="cls-4" d="M0,75.3l9.133,9.15L26.67,66.926l-2.518-2.483-15.019,15-6.65-6.65Z" transform="translate(-16454.188 -18702.334)"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+.multicolor-bar-2 {
+	margin: 20px 0 10px;
+	font-family: 'CeraProRegular';
+}
+
+.multicolor-bar-2 .values .value {
+	float: left;
+	text-align: right;
+	transform: scale(0.8);
+}
+
+.multicolor-bar-2 .values .value .title {
+	font-weight: bold;
+	margin-left: 2px;
+	white-space: nowrap;
+}
+
+.multicolor-bar-2 .values .value .label {
+	font-size: 13px;
+	margin-left: 6px;
+	white-space: nowrap;
+}
+
+.multicolor-bar-2 .scale .graduation {
+	float: left;
+	text-align: center;
+}
+
+.multicolor-bar-2 .bars .bar {
+	float: left;
+	height: 20px;
+}
+
+.multicolor-bar-2 .bars div.bar:first-of-type {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.multicolor-bar-2 .bars div.bar:last-of-type {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.multicolor-bar-2 .legends {
+	text-align: center;
+}
+
+
+.multicolor-bar-2 .legends .legend {
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+}
+
+.multicolor-bar-2 .legends .legend .dot {
+	font-size: 18px;
+	padding-top: 10px;
+	vertical-align: middle;
+}
+
+.multicolor-bar-2 .legends .legend .label {
+	font-size: 12px;
+	margin-left: 2px;
+	vertical-align: middle;
+}

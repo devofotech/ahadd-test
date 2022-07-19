@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="503" height="99" viewBox="0 0 503 99">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fd4560;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 48px;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+      }
+
+      .cls-3, .cls-5 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #fff;
+        stroke-width: 4px;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_6785" data-name="Group 6785" transform="translate(-15363 17384)">
+    <rect id="Rectangle_2483" data-name="Rectangle 2483" class="cls-1" width="503" height="99" rx="49.5" transform="translate(15363 -17384)"/>
+    <text id="Call_Off" data-name="Call Off" class="cls-2" transform="translate(15471 -17318)"><tspan x="0" y="0">Call Off</tspan></text>
+    <g id="Group_6786" data-name="Group 6786" transform="translate(31862 1294)">
+      <g id="Ellipse_299" data-name="Ellipse 299" class="cls-3" transform="translate(-16467 -18654)">
+        <circle class="cls-4" cx="26" cy="26" r="26"/>
+        <circle class="cls-5" cx="26" cy="26" r="24"/>
+      </g>
+      <g id="Group_6782" data-name="Group 6782" transform="translate(-32192.023 -1552.58)">
+        <path id="Path_1811" data-name="Path 1811" class="cls-3" d="M15760.024-17084.057l-17.637,17.637" transform="translate(-0.363 -0.363)"/>
+        <path id="Path_1812" data-name="Path 1812" class="cls-3" d="M15742.388-17084.057l17.637,17.637" transform="translate(-0.363 -0.363)"/>
+      </g>
+    </g>
+  </g>
+</svg>

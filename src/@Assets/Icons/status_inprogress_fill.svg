@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="503" height="99" viewBox="0 0 503 99">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fb9c5d;
+      }
+
+      .cls-2, .cls-5 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-size: 48px;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+      }
+
+      .cls-3, .cls-4, .cls-7 {
+        fill: none;
+      }
+
+      .cls-3, .cls-4 {
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-width: 4px;
+      }
+
+      .cls-3 {
+        stroke-dasharray: 13 10;
+      }
+
+      .cls-4 {
+        stroke-dasharray: 84;
+      }
+
+      .cls-6 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_6789" data-name="Group 6789" transform="translate(-15363 17384)">
+    <rect id="Rectangle_2485" data-name="Rectangle 2485" class="cls-1" width="503" height="99" rx="49.5" transform="translate(15363 -17384)"/>
+    <text id="In_progress" data-name="In progress" class="cls-2" transform="translate(15471 -17318)"><tspan x="0" y="0">In progress</tspan></text>
+    <g id="Group_6790" data-name="Group 6790" transform="translate(31927 1300)">
+      <g id="Ellipse_300" data-name="Ellipse 300" class="cls-3" transform="translate(-16532 -18660)">
+        <circle class="cls-6" cx="26" cy="26" r="26"/>
+        <circle class="cls-7" cx="26" cy="26" r="24"/>
+      </g>
+      <g id="Ellipse_296" data-name="Ellipse 296" class="cls-4" transform="translate(-16532 -18660)">
+        <circle class="cls-6" cx="26" cy="26" r="26"/>
+        <circle class="cls-7" cx="26" cy="26" r="24"/>
+      </g>
+      <g id="hourglass" transform="translate(-16584.908 -18645.066)">
+        <g id="Group_5693" data-name="Group 5693" transform="translate(70.352 0.001)">
+          <path id="Path_1621" data-name="Path 1621" class="cls-5" d="M78.4,20.161V17.936c0-2.621-2.025-4.188-3.971-5.717A1.539,1.539,0,0,1,73.814,11a2.067,2.067,0,0,1,.611-1.461c1.894-1.593,3.971-3.1,3.971-5.717V2.138h1.527V0h-16.8V2.138H64.65v1.68c0,2.621,2.077,4.124,3.971,5.717A2.066,2.066,0,0,1,69.232,11a1.539,1.539,0,0,1-.611,1.222c-1.946,1.529-3.971,3.1-3.971,5.717v2.225H63.123V22.3h16.8V20.161ZM67.666,5.8a2.931,2.931,0,0,1-.878-1.986V2.138h9.469v1.68A2.931,2.931,0,0,1,75.38,5.8H67.666Zm8.592,13.761-3.6-1.4a3.627,3.627,0,0,0-2.277,0l-3.6,1.4V17.936c0-1.483,1.178-2.484,3.1-3.995l.051-.04a3.692,3.692,0,0,0,1.364-2.248,1,1,0,0,0,.436,0A3.689,3.689,0,0,0,73.1,13.9l.052.041c1.923,1.511,3.1,2.512,3.1,3.995v1.629Z" transform="translate(-63.123)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

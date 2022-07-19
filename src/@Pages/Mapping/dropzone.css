@@ -1,0 +1,11 @@
+.dropzone .cancel-button {
+    font-size: 14px; 
+    margin-left: 6px;
+    color: #ADB5BD;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.dropzone .cancel-button:hover {
+    color: #ED3C58;
+}

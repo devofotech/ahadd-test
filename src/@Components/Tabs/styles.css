@@ -1,0 +1,29 @@
+
+  .tabButton {
+    padding: 10px 20px;
+    border: 1px solid rgba(30, 52, 101, 0.1);
+    color: #FFFFFF;
+    background-color: rgba(30, 52, 101, 1);
+    text-align: center;
+    font-size: 12;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: all 0.2s ease-in-out;
+    height: 51%;
+    cursor: pointer;
+  }
+
+  .tabButton:hover {
+      opacity: 0.9;
+  }
+
+  .tabContent {
+    padding: 20px;
+    text-align: center;
+    display: none;
+  }
+
+  .tabImage {
+    max-width:100%;
+    max-height:100%
+  }

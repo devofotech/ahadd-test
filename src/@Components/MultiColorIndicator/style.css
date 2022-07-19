@@ -1,0 +1,61 @@
+.multicolor-indicator {
+	margin: 20px 0 10px;
+	font-family: 'CeraProRegular';
+	padding-bottom: 4rem;
+	width: 40vw;
+}
+
+.multicolor-indicator .values .value {
+	float: left;
+	text-align: left;
+	position: absolute;
+	margin-top: 2.5rem;
+}
+
+.multicolor-indicator .values .value .title {
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.multicolor-indicator .scale .graduation {
+	float: left;
+	text-align: left;
+	position: absolute;
+	margin-top: 1rem;
+}
+
+.multicolor-indicator .bars .bar {
+	float: left;
+	height: 15px;
+}
+
+.multicolor-indicator .bars div.bar:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.multicolor-indicator .bars div.bar:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.multicolor-indicator .legends {
+	text-align: right;
+}
+
+
+.multicolor-indicator .legends .legend {
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center;
+}
+
+.multicolor-indicator .legends .legend .dot {
+	font-size: 13px;
+	vertical-align: middle;
+}
+
+.multicolor-indicator .legends .legend .label {
+	margin-left: 2px;
+	font-size: 13px;
+}
