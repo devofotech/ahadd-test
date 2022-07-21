@@ -5,6 +5,13 @@ import Phase from './Phase';
 
 export default (h) => {
   return (
-    <Card {...h} />
+    <>
+      {{
+        0: <Card {...h} />,
+        1: <Phase {...h} />,
+        2: <Module {...h} />,
+        3: <Parameter {...h} />,
+      }[h.activeStepAssetType]}
+    </>
   );
 };

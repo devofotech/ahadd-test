@@ -1,104 +1,42 @@
-import React, { useState } from 'react';
 import LocationPicker from '@Components/Map/LocationPicker';
-import { Grid, TextField, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Dropzone from '@Components/DropzoneBox/v3';
+import { Grid, TextField } from '@material-ui/core';
+import Dropzone from '@Components/DropzoneBox/index';
 import { markerToString, stringToMarker } from '@Helpers';
 
 import InputTag from './InputTag';
 
-const useStyles = makeStyles(() => ({
-  gradient: {
-    backgroundColor: 'var(--active-color)',
-    backgroundImage: 'linear-gradient(var(--active-color), #33ABC1)',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  input: {
-    backgroundColor: 'white',
-    padding: 5,
-    borderRadius: 5,
-  },
-  inputTag: {
-    backgroundColor: 'white',
-    paddingLeft: 20,
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderRadius: 5,
-  },
-  label: {
-    marginTop: 5,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    color: 'grey',
-  },
-  labelTag: {
-    marginTop: 5,
-    padding: 20,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    color: 'grey',
-  },
-}));
-
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
-
 export default (h) => {
-  const [currency, setCurrency] = useState('USD');
-  const classes = useStyles();
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
-      <Grid item xs={12} className="px-1 mb-2">
-        <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} />
-        <CustomTextField classes={classes} name="Asset Id" value={h.name} onChange={(e) => h.setName(e.target.value)} />
-      </Grid>
       {[
         {
           title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Network" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
+          children: <CustomTextField name="Asset Name" value={h.name} onChange={(e) => h.setName(e.target.value)} />,
         },
         {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Region" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
-        },
-        {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Section" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
-        },
-        {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Ranking" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
-        },
-        {
-          title: 'Location',
-          children: <Location {...h} classes={classes} locationCoordinate />,
+          title: 'Asset Tag',
+          children: <InputTag
+            className="py-2"
+            setSelectedTags={h.setAssetTag}
+            selectedTags={h.assetTag}
+            fullWidth
+            variant="outlined"
+            id="tags"
+            name="tags"
+            placeholder="Asset Tags"
+          />,
         },
         {
           title: 'Location',
-          children: <Location {...h} classes={classes} />,
+          children: <Location {...h} />,
         },
-      ].map(({ children }) => (
-        <Grid item xs={6} className="px-1 mb-2">
+        {
+          title: 'Upload Image',
+          children: <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} />,
+        },
+      ].map(({ title, children }) => (
+        <Grid item xs={12} className="px-1">
+          <h3 className="pl-2 my-1">{title}</h3>
           {children}
         </Grid>
       ))}
@@ -109,8 +47,19 @@ export default (h) => {
 const Location = (h) => {
   return (
     <Grid container>
+      <Grid container item xs={12}>
+        <Grid item xs={12}>
+          <CustomTextField name="Location" value={h.location} onChange={(e) => h.setLocation(e.target.value)} />
+        </Grid>
+        <Grid item xs={6} className="pr-1">
+          <CustomTextField name="State" value={h.state} onChange={(e) => h.setState(e.target.value)} />
+        </Grid>
+        <Grid item xs={6} className="pl-1">
+          <CustomTextField name="Country" value={h.country} onChange={(e) => h.setCountry(e.target.value)} />
+        </Grid>
+      </Grid>
       <Grid item xs={12}>
-        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={markerToString(h.marker)} onChange={(e) => h.setMarker(stringToMarker(e.target.value))} />
+        <CustomTextField name="Coordinate" value={markerToString(h.marker)} onChange={(e) => h.setMarker(stringToMarker(e.target.value))} />
       </Grid>
       <Grid item xs={12} className="mb-2 py-2" style={{ height: 300 }}>
         <LocationPicker
@@ -124,34 +73,13 @@ const Location = (h) => {
 
 const CustomTextField = (h) => {
   return (
-    h.select ? (
-      <TextField
-        placeholder={`Enter ${h.name} here`}
-        variant="outlined"
-        fullWidth
-        size="small"
-        className="py-2"
-        InputProps={{ className: h.classes.input }}
-        InputLabelProps={{ className: h.classes.label }}
-        {...h}
-      >
-        {currencies.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-    ) : (
-      <TextField
-        placeholder={`Enter ${h.name} here`}
-        variant="outlined"
-        fullWidth
-        size="small"
-        className="py-2"
-        InputProps={{ className: h.classes.input }}
-        InputLabelProps={{ className: h.classes.label }}
-        {...h}
-      />
-    )
+    <TextField
+      placeholder={`Enter ${h.name} here`}
+      variant="outlined"
+      fullWidth
+      size="small"
+      className="py-2"
+      {...h}
+    />
   );
 };

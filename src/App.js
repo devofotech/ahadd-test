@@ -54,6 +54,7 @@ import OrganizationSummary from '@Pages/OrganizationSummary';
 import OrganizationSummaryDetails from '@Pages/OrganizationSummaryDetails';
 import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
+import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -123,7 +124,10 @@ export default function App() {
             <MainContainer user={h.user} child={<AssetList {...h} closeTour={() => setIsOpen(false)} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user} accessible={!!h.user?.can_add_asset}>
-            <MainContainer user={h.user} child={<CreateAsset {...h} />} />
+            {{
+              galaxy: <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />,
+              ahadd: <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />,
+            }[process.env.REACT_APP_BRANCH]}
           </PrivateRoute>
           <PrivateRoute path="/asset/:AssetId/2D" user={h.user} accessible={!!h.user?.can_view_asset}>
             <MainContainer user={h.user} child={<AssetUpload2D {...h} />} />
@@ -235,7 +239,9 @@ export default function App() {
 function MainContainer({
   user, child, adjustedStyle, isProjectSite = false,
 }) {
-  const { setIsOpen, setDisabledActions, setCurrentStep, currentStep, disabledActions } = useTour();
+  const {
+    setIsOpen, setDisabledActions, setCurrentStep, currentStep, disabledActions,
+  } = useTour();
   return (
     <Grid
       className="content"

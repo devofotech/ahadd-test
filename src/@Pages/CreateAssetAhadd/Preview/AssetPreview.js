@@ -7,8 +7,8 @@ export default (h) => {
     asset_type: h.selectedTypeProfile.name, location: h.location, state: h.state,
   };
   return (
-    <div style={{ height: '60vh' }}>
-      <h3 className="text-dark my-4">Asset Preview</h3>
+    <div style={{ height: '100%', boxShadow: '0px 10px 29px -10px #8E8E8E' }}>
+      {/* <h3 className="text-dark my-4">Asset Preview</h3> */}
       <Grid container item xs={12} className="sidebar h-100" style={{ zIndex: 1 }}>
         <img
           className="sidebar-img"
@@ -17,14 +17,14 @@ export default (h) => {
           alt="asset"
         />
         <div className="d-flex justify-content-center flex-wrap" style={{ flex: 1 }}>
-          <Box style={{ width: '90%', marginTop: '10px' }}>
+          <Box style={{ width: '100%' }}>
             <Button
               className="flex-standard"
               style={{
-                width: '100%', height: '55px', borderRadius: 10, backgroundColor: 'var(--secondary-color)', color: '#ffffff', lineHeight: 'normal',
+                width: '100%', height: '55px', color: 'var(--main-color)', lineHeight: 'normal',
               }}
             >
-              <h6 style={{ color: '#ffffff' }}>{h?.name}</h6>
+              <h6 style={{ color: 'var(--main-color)' }}>{h?.name}TEST</h6>
             </Button>
           </Box>
           <AssetDetail assetTypeList={h.assetTypeList} details={assetDetailData} />
