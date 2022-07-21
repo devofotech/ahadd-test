@@ -24,7 +24,7 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
   }, [assetTypeList, details]);
 
   return (
-    <Grid container spacing={1} style={{ width: '93%', flexWrap: 'wrap', justifyContent: 'center' }} className="my-2">
+    <Grid container spacing={1} style={{ width: '100%', flexWrap: 'wrap', justifyContent: 'center' }} className="mb-2 p-4">
       {[
         {
           title: 'Asset Type', data: removeAsset(assetType?.name ?? details.asset_type) ?? 'Loading', show: true, icon: <BusinessIcon fontSize="default" />,
@@ -52,14 +52,14 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
                 }}
               >
                 <Grid container lg={3} justifyContent="center" alignItems="center">
-                  <div className="d-flex mx-auto" style={{ color: 'var(--tertiary-color)' }}>
+                  <div className="d-flex mx-auto" style={{ color: 'var(--primary-color)' }}>
                     {e.icon}
                   </div>
                 </Grid>
                 <Grid container lg={9} justifyContent="center" alignItems="center">
                   <div>
-                    <p style={{ fontWeight: 600, fontSize: '0.7em', color: 'var(--tertiary-color)' }}>{e.title}</p>
-                    <p style={{ fontWeight: 600, fontSize: 14, color: 'var(--secondary-color)' }}>{e.data}</p>
+                    <p style={{ fontWeight: 600, fontSize: '0.7em', color: 'var(--primary-color)' }}>{e.title}</p>
+                    <p style={{ fontWeight: 600, fontSize: 12, color: 'var(--main-color)' }}>{e.data}</p>
                   </div>
                 </Grid>
               </Grid>

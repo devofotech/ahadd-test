@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TagsInput({
-  setSelectedTags, selectedTags, placeholder, tags = [], ...other
+  setSelectedTags, selectedTags, placeholder, tags = [], whiteClasses, ...other
 }) {
   const classes = useStyles();
   const [inputValue, setInputValue] = React.useState('');
@@ -95,6 +95,7 @@ export default function TagsInput({
               <TextField
                 size="small"
                 InputProps={{
+                  className: whiteClasses.inputTag,
                   startAdornment: selectedItem.map(item => (
                     <Chip
                       key={item}
@@ -112,6 +113,7 @@ export default function TagsInput({
                   },
                   onFocus,
                 }}
+                // InputLabelProps={{ className: whiteClasses.labelTag }}
                 {...other}
                 {...inputProps}
               />
