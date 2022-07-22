@@ -4,7 +4,7 @@ import AssetDetail from '@Components/AssetDetail';
 
 export default (h) => {
   const assetDetailData = {
-    asset_type: h.selectedTypeProfile.name, location: h.location, state: h.state,
+    asset_type: h.selectedTypeProfile.name, region: h.region, section: h.section,
   };
   return (
     <div style={{ height: '100%', boxShadow: '0px 10px 29px -10px #8E8E8E' }}>
@@ -24,7 +24,7 @@ export default (h) => {
                 width: '100%', height: '55px', color: 'var(--main-color)', lineHeight: 'normal',
               }}
             >
-              <h6 style={{ color: 'var(--main-color)' }}>{h?.name}TEST</h6>
+              <h6 style={{ color: 'var(--main-color)' }}>{h?.name}</h6>
             </Button>
           </Box>
           <AssetDetail assetTypeList={h.assetTypeList} details={assetDetailData} />

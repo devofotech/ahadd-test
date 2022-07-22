@@ -19,6 +19,11 @@ export default () => {
   const [selectedAssetParameter, setSelectedAssetParameter] = useState({});
   const [parameterOption, setParameterOption] = useState([]);
   const [name, setName] = useState('');
+  const [network, setNetwork] = useState('');
+  const [region, setRegion] = useState('');
+  const [section, setSection] = useState('');
+  const [ranking, setRanking] = useState('');
+  const [polygonCoordinate, setPolygonCoordinate] = useState('');
   const [marker, setMarker] = useState({ lat: 3.093783, lng: 101.655155 });
   const [files, setFiles] = useState([]);
   const [location, setLocation] = useState('');
@@ -61,35 +66,30 @@ export default () => {
 
   const createAsset = () => {
     const data = {
-      name, asset_type: assetTag, lat: marker.lat, lng: marker.lng, location, state, country, AssetTypeId: assetType,
+      name, network, region, section, location, ranking, polygonCoordinate,
     };
-    data.asset_props = JSON.stringify({
-      lifeCycle,
-      selectedModule: getTrueInObject(selectedModule),
-      selectedParameter: selectedGroupParameter.filter(f => !!f.params.length),
-      selectedPhase: getTrueInObject(selectedPhase),
-    });
     if (!data.name) return;
     if (!data.lat) return;
     if (!data.lng) return;
     setIsLoading(true);
-    Api({
-      endpoint: endpoints.newAssets(),
-      data,
-      files,
-      onSuccess: () => {
-        toast('success', 'Asset created');
-        setIsLoading(false);
-        setIsSuccess(true);
-        handleNextStep();
-      },
-      onFail: () => {
-        toast('error', 'Opss, something went wrong, please try again.');
-        setIsLoading(false);
-        setIsSuccess(false);
-        handleNextStep();
-      },
-    });
+    // Api({
+    //   endpoint: endpoints.newAssets(),
+    //   data,
+    //   files,
+    //   onSuccess: () => {
+    //     toast('success', 'Asset created');
+    //     setIsLoading(false);
+    //     setIsSuccess(true);
+    //     handleNextStep();
+    //   },
+    //   onFail: () => {
+    //     toast('error', 'Opss, something went wrong, please try again.');
+    //     setIsLoading(false);
+    //     setIsSuccess(false);
+    //     handleNextStep();
+    //   },
+    // });
+    alert('Data that will be submitted: ', data)
   };
 
   const selectedTypeProfile = _.find(assetTypeList, { id: assetType });
@@ -200,5 +200,15 @@ export default () => {
     setSelectedAssetParameter,
     selectedGroupParameter,
     isLoadingAssets,
+    network,
+    setNetwork,
+    region,
+    setRegion,
+    ranking,
+    setRanking,
+    section,
+    setSection,
+    polygonCoordinate,
+    setPolygonCoordinate,
   };
 };

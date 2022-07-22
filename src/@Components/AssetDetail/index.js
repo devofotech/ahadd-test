@@ -10,7 +10,7 @@ import moment from 'moment';
 export default function AssetDetail({ details, assetTypeList = [], hasSummary = false }) {
   const [assetType, setAssetType] = useState([]);
   let lastinspection = moment(details.lastinspection).isValid() ? moment(details.lastinspection).format('DD MMM YYYY') : 'No Inspection';
-  if (!details.lastinspection) lastinspection = 'No Inspection';
+  if (!details.lastinspection) lastinspection = '-';
   if (details.id === 92) lastinspection = '8 Nov 2021';
   if (details.id === 93) lastinspection = '21 Nov 2021';
 
@@ -30,13 +30,13 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
           title: 'Asset Type', data: removeAsset(assetType?.name ?? details.asset_type) ?? 'Loading', show: true, icon: <BusinessIcon fontSize="default" />,
         },
         {
+          title: 'Region', data: details.region, show: true, icon: <PublicIcon fontSize="default" />,
+        },
+        {
+          title: 'Section', data: details.section, show: true, icon: <LocationOnIcon fontSize="default" />,
+        },
+        {
           title: 'Last Inspection', data: lastinspection, show: true, icon: <CalendarTodayIcon fontSize="default" />,
-        },
-        {
-          title: 'Location', data: details.location, show: true, icon: <LocationOnIcon fontSize="default" />,
-        },
-        {
-          title: 'Region', data: details.state, show: true, icon: <PublicIcon fontSize="default" />,
         },
         {
           title: 'Asset Life Cycle', data: !details.isLifeCycle ? 'No' : 'Yes', show: hasSummary, icon: <CycleIcon fontSize="default" />,

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import LocationPicker from '@Components/Map/LocationPicker';
-import { Grid, TextField, MenuItem } from '@material-ui/core';
+import {
+  Grid, TextField, MenuItem,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Dropzone from '@Components/DropzoneBox/v3';
 import { markerToString, stringToMarker } from '@Helpers';
@@ -44,27 +45,58 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const currencies = [
+const network = [
   {
-    value: 'USD',
-    label: '$',
+    value: 'BKE',
   },
   {
-    value: 'EUR',
-    label: '€',
+    value: 'LPT2',
+  },
+];
+
+const region = [
+  {
+    value: 'North',
   },
   {
-    value: 'BTC',
-    label: '฿',
+    value: 'Central',
   },
   {
-    value: 'JPY',
-    label: '¥',
+    value: 'South',
+  },
+];
+
+const section = [
+  {
+    value: 'N1',
+  },
+  {
+    value: 'N2',
+  },
+  {
+    value: 'N3',
+  },
+];
+
+const ranking = [
+  {
+    value: 'Very High (AA)',
+  },
+  {
+    value: 'High (A)',
+  },
+  {
+    value: 'Medium (B)',
+  },
+  {
+    value: 'Low (C)',
+  },
+  {
+    value: 'Unranked',
   },
 ];
 
 export default (h) => {
-  const [currency, setCurrency] = useState('USD');
   const classes = useStyles();
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
@@ -74,27 +106,27 @@ export default (h) => {
       </Grid>
       {[
         {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Network" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
+          title: 'Network',
+          children: <CustomTextField classes={classes} name="Network" value={h.network} values={network} onChange={(e) => h.setNetwork(e.target.value)} select />,
         },
         {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Region" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
+          title: 'Region',
+          children: <CustomTextField classes={classes} name="Region" value={h.region} values={region} onChange={(e) => h.setRegion(e.target.value)} select />,
         },
         {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Section" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
+          title: 'Section',
+          children: <CustomTextField classes={classes} name="Section" value={h.section} values={section} onChange={(e) => h.setSection(e.target.value)} select />,
         },
         {
-          title: 'Asset Name',
-          children: <CustomTextField classes={classes} name="Ranking" value={currency} onChange={(e) => setCurrency(e.target.value)} select />,
+          title: 'Ranking',
+          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={ranking} onChange={(e) => h.setRanking(e.target.value)} select />,
         },
         {
           title: 'Location',
           children: <Location {...h} classes={classes} locationCoordinate />,
         },
         {
-          title: 'Location',
+          title: 'Polygon Coordinate',
           children: <Location {...h} classes={classes} />,
         },
       ].map(({ children }) => (
@@ -135,9 +167,9 @@ const CustomTextField = (h) => {
         InputLabelProps={{ className: h.classes.label }}
         {...h}
       >
-        {currencies.map((option) => (
+        {h.values.map((option) => (
           <MenuItem key={option.value} value={option.value}>
-            {option.label}
+            {option.value}
           </MenuItem>
         ))}
       </TextField>

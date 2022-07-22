@@ -13,10 +13,10 @@ export default (h) => {
       <Grid container className="pl-5 pt-3 position-relative" style={{ borderRadius: 10, height: '60vh' }}>
         <Grid item xs={12}>
           <Grid xs={12}><CustomLabelDataField title="ASSET ID" value={h.name} /></Grid>
-          <Grid xs={12}><CustomLabelDataField title="NETWORK" value={h.assetTag} /></Grid>
-          <Grid xs={12}><CustomLabelDataField title="REGION" value={h.location} /></Grid>
-          <Grid xs={12}><CustomLabelDataField title="SECTION" value={h.state} /></Grid>
-          <Grid xs={12}><CustomLabelDataField title="RANKING" value={h.selectedTypeProfile.name} /></Grid>
+          <Grid xs={12}><CustomLabelDataField title="NETWORK" value={h.network} /></Grid>
+          <Grid xs={12}><CustomLabelDataField title="REGION" value={h.region} /></Grid>
+          <Grid xs={12}><CustomLabelDataField title="SECTION" value={h.section} /></Grid>
+          <Grid xs={12}><CustomLabelDataField title="RANKING" value={h.ranking} /></Grid>
         </Grid>
       </Grid>
     </>
