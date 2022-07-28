@@ -125,7 +125,7 @@ export default function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user} accessible={!!h.user?.can_add_asset}>
             {{
-              galaxy: <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />,
+              galaxy: <MainContainer user={h.user} child={<CreateAsset {...h} />} />,
               ahadd: <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />,
             }[process.env.REACT_APP_BRANCH]}
           </PrivateRoute>
