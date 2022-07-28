@@ -13,11 +13,12 @@ import Report from '@Pages/Report';
 import CCTV from '@Pages/CCTV';
 import IFrame from '@Pages/IFrame';
 import IFrameList from '@Pages/IFrameList';
-import AssetDemoButton from './components/AssetDemo';
 import CenteredLoading from '@Components/CenteredLoading';
+import AssetDemoButton from './components/AssetDemo';
 import InfoDialog from './components/InfoDialog';
 
 import Sidebar from './Sidebar';
+import SidebarV2 from './SidebarV2';
 import Hook from './hook';
 import WelcomePage from './components/WelcomePage';
 
@@ -54,7 +55,13 @@ export default function Property(props) {
       <Grid container className="position-relative">
         {!!h.openInfoDialog && <InfoDialog {...h} />}
         {!!props.user?.is_show_intro && <WelcomePage {...h} />}
-        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && <Sidebar {...h} parentProps={props} />}
+        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && (
+          {
+            galaxy: <Sidebar {...h} parentProps={props} />,
+            supervision: <Sidebar {...h} parentProps={props} />,
+            ahadd: <SidebarV2 {...h} parentProps={props} />,
+          }[process.env.REACT_APP_BRANCH]
+        )}
         {(!!!isAssetView && !h.isLoadingMap && _.isEmpty(h.project)) && (
           <div onClick={() => { props.setCurrentStep(0); props.setIsOpen(false); }}>
             <AssetDemoButton {...h} tourId="demo_asset" />
