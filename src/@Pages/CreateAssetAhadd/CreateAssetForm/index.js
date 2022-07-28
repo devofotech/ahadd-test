@@ -19,7 +19,7 @@ export default (h) => {
         <Button variant="text" onClick={h.handleBackStep} size="small">
           PREVIOUS
         </Button>
-        <Button disabled={!isDisabled} onClick={h.handleNextStep} size="small">
+        <Button disabled={isDisabled} onClick={h.handleNextStep} size="small">
           NEXT
         </Button>
       </div>
