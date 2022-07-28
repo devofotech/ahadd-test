@@ -1,4 +1,5 @@
 import LocationPicker from '@Components/Map/LocationPicker';
+import Map from '@Components/MapV2';
 import {
   Grid, TextField, MenuItem,
 } from '@material-ui/core';
@@ -29,7 +30,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: 5,
   },
   label: {
-    marginTop: 5,
+    marginTop: 13,
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -127,7 +128,7 @@ export default (h) => {
         },
         {
           title: 'Polygon Coordinate',
-          children: <Location {...h} classes={classes} />,
+          children: <PolygonCoordinate {...h} classes={classes} />,
         },
       ].map(({ children }) => (
         <Grid item xs={6} className="px-1 mb-2">
@@ -154,14 +155,35 @@ const Location = (h) => {
   );
 };
 
+const PolygonCoordinate = (h) => {
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={markerToString(h.marker)} onChange={(e) => h.setMarker(stringToMarker(e.target.value))} />
+      </Grid>
+      <Grid item xs={12} className="mb-2 py-2" style={{ height: 300 }}>
+        <Map
+          filtered_projects={h.images?.map(d => ({ ...d, lat: d.lat ?? h.asset_details.lat, lng: d.lng ?? h.asset_details.lng }))}
+          project={h.mainImage}
+          mapStyle={{
+            maxHeight: '60vh', minHeight: 284, minWidth: 'auto', maxWidth: '71vw',
+          }}
+          isDrawAnnotation
+          annotationProps={{ ...h }}
+        />
+      </Grid>
+    </Grid>
+  );
+};
+
 const CustomTextField = (h) => {
   return (
     h.select ? (
       <TextField
-        placeholder={`Enter ${h.name} here`}
         variant="outlined"
         fullWidth
         size="small"
+        label={h.name}
         className="py-2"
         InputProps={{ className: h.classes.input }}
         InputLabelProps={{ className: h.classes.label }}

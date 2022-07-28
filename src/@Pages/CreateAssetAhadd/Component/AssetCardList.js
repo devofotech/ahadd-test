@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   title: { height: 9 },
   description: {
     height: '12rem', overflow: 'auto', padding: '0 5px',
-  }
+  },
 });
 
 export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
@@ -55,10 +55,26 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
         <CardMedia image={assetImage} title={h.data.name} style={{ filter: isDisabled && 'grayscale(1)', height: '16.3rem', minWidth: 250 }} />
         <Box>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h1" className={`${classes.title} ${textTitle}`} style={{ opacity, transition: 'all .25s', marginBottom: 30, marginTop: -10 }}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h1"
+              className={`${classes.title} ${textTitle}`}
+              style={{
+                opacity, transition: 'all .25s', marginBottom: 30, marginTop: -10,
+              }}
+            >
               {h.data.name}
             </Typography>
-            {isDisabled && <p className={`${textTitle} pt-1`} style={{ opacity, position: 'absolute', bottom: 251, left: 630 }}>(Coming soon)</p>}
+            {isDisabled && (
+              <p
+                className={`${textTitle} pt-1`}
+                style={{
+                  opacity, position: 'absolute', bottom: 251, left: 630,
+                }}
+              >(Coming soon)
+              </p>
+            )}
             <Typography className={classes.description} variant="body2" color="textSecondary" component="p" style={{ position: 'relative' }}>
               {h.data.description.split('|').map(e => (
                 <>
