@@ -11,12 +11,10 @@ import Tour from 'reactour';
 import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
 import BarChart from '@Components/BarChart/v2';
+import { Link } from 'react-router-dom';
 import CycleDialog from './components/CycleDialog';
 
 export default function SidebarV2(props) {
-  const hasSeverity = ![92, 93].includes(props.project.id);
-  const hasProjectPhasePackage = ![92, 93].includes(props.project.id);
-  const hasPhasePageAccess = !!props.selectedPhaseWithViewPageAccess.length;
   const [currentStep, setCurrentStep] = useState(0);
   const [openCycleDialog, setOpenCycleDialog] = useState(false);
   const [cycleChart, setCycleChart] = useState();
@@ -81,10 +79,12 @@ export default function SidebarV2(props) {
           </Box>
 
           <div className="d-flex mt-2" style={{ width: '90%' }}>
-            <Button className="mx-auto" style={{ backgroundImage: 'linear-gradient(to right, var(--main-color), var(--primary-color))', borderRadius: 18, width: '45%' }}>
-              <CameraAlt style={{ fontSize: 16, marginLeft: 4, marginRight: 4 }} />
-              INSPECTION
-            </Button>
+            <Link to={`/project/inspection?id=${props.project?.id}`} className="mx-auto" style={{ width: '45%' }}>
+              <Button className="w-100" style={{ backgroundImage: 'linear-gradient(to right, var(--main-color), var(--primary-color))', borderRadius: 18, }}>
+                <CameraAlt style={{ fontSize: 16, marginLeft: 4, marginRight: 4 }} />
+                INSPECTION
+              </Button>
+            </Link>
 
             <Button className="mx-auto color-gradient-inline" style={{ borderRadius: 18, width: '45%' }}>
               <ReportIcon color="var(--light-color)" transform="scale(0.55)" />
