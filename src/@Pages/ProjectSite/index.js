@@ -8,6 +8,7 @@ import Map from '@Components/MapV2';
 import _ from 'lodash';
 
 import InspectionSession from '@Pages/InspectionSession';
+import InspectionSessionAhadd from '@Pages/InspectionSessionAhadd';
 import Mapping from '@Pages/Mapping';
 import Report from '@Pages/Report';
 import CCTV from '@Pages/CCTV';
@@ -78,7 +79,13 @@ export default function Property(props) {
               },
               {
                 path: '/project/inspection',
-                children: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
+                children: (
+                  {
+                    galaxy: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
+                    supervision: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
+                    ahadd: <InspectionSessionAhadd {...h} user={props.user} assetTypeList={h.assetTypeList} />,
+                  }[process.env.REACT_APP_BRANCH]
+                ),
               },
               {
                 path: '/project/report',
