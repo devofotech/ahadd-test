@@ -4,7 +4,7 @@ import AssetCard from '../Component/AssetCard';
 import FormInput from './FormInput';
 
 export default (h) => {
-  const isDisabled = !(!!h.name && !!h.marker && !!h.location && !!h.state);
+  const isDisabled = (!!h.name && !!h.marker && !!h.location && !!h.polygon);
   return (
     <div className="mx-auto" style={{ width: '90%', background: 'linear-gradient(45deg, var(--primary-color), var(--main-color))', padding: 20 }}>
       <Grid container spacing={2}>

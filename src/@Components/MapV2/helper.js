@@ -61,10 +61,9 @@ export const setGroupLayerOverlayActive = (defaultActiveLyrGroup, map) => {
   if (defaultActiveLyrGroup.length) defaultActiveLyrGroup.forEach(activeLyrGrop => activeLyrGrop.addTo(map));
 };
 
-export const clearingMapLayers = async (map) => {
+export const clearingMapLayers = async (map, options) => {
   await map.eachLayer(async (layer) => {
-    const removeoptions = ['layer', 'polyline', 'Polyline', 'polygon', 'Polygon', 'LineString', 'rectangle'];
-    
+    const removeoptions = options ?? ['layer', 'polyline', 'Polyline', 'polygon', 'Polygon', 'LineString', 'rectangle'];
     if (layer.defaultOptions && removeoptions.includes(layer.defaultOptions.layer_type)) {
       // console.log('MAPDEBUG: existing layers removed', layer);
       await map.removeLayer(layer);

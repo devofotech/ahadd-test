@@ -66,12 +66,15 @@ export const groupByYearAndMonth = (obj) => {
   return res;
 };
 
-export const markerToString = (marker) => `${marker.lat || ''},${marker.lng || ''}`;
+export const markerToString = (marker) => (marker && marker.lat && marker.lng ? `${marker.lat},${marker.lng}` : null);
+export const polygonToString = (polygon) => JSON.stringify(polygon);
 
 export const stringToMarker = (string) => {
   const temp = string.replace(/\s/g, '', '').split(',');
   return { lat: parseFloat(temp[0]), lng: parseFloat(temp[1]) };
 };
+
+export const getRanking = (ranking) => (ranking === 'Unranked' ? <><span style={{ fontSize: 32 }}>--</span>&nbsp;</>: ranking.match(/^([^()]+)\((.*)\)$/)[2]);
 
 export const today = moment().format('YYYY-MM-DD');
 

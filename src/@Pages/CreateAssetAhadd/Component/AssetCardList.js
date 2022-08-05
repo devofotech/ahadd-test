@@ -53,7 +53,7 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
     <Card {...cardProps[isDisabled]}>
       <div className="d-flex">
         <CardMedia image={assetImage} title={h.data.name} style={{ filter: isDisabled && 'grayscale(1)', height: '16.3rem', minWidth: 250 }} />
-        <Box>
+        <Box style={{ position: 'relative' }}>
           <CardContent>
             <Typography
               gutterBottom
@@ -70,7 +70,7 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
               <p
                 className={`${textTitle} pt-1`}
                 style={{
-                  opacity, position: 'absolute', bottom: 251, left: 630,
+                  opacity, position: 'absolute', top: 7, right: 15, zIndex: 99
                 }}
               >(Coming soon)
               </p>
