@@ -70,9 +70,9 @@ export default function SortDropdown() {
           <MenuItem key={d.value} value={d.value}>
             <Checkbox
               checked={ranking.includes(d.value)}
-              style={{ color: 'linear-gradient(var(--main-color), var(--primary-color))' }}
+              style={{ color: 'var(--main-color)' }}
             />
-            <ListItemText primary={d.label} />
+            <ListItemText primary={d.label} style={{ color: 'var(--main-color)' }} />
           </MenuItem>
         ))}
       </Select>
