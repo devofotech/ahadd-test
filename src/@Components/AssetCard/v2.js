@@ -7,6 +7,7 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { makeStyles, styled } from '@material-ui/core/styles';
+import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
 import DemoLabel from '@Assets/Images/demo-label.svg';
 import ShieldIcon from '@Assets/Icons/ShiledIcon.svg';
@@ -58,11 +59,11 @@ export default function AssetCard({
         />
       )}
       <>
-        <img
+        <div
+          className="position-absolute"
           onMouseOver={() => setOnHover(true)}
           onMouseLeave={() => setOnHover(false)}
           onFocus={() => setOnHover(true)}
-          src={ShieldIcon}
           style={{
             position: 'absolute',
             zIndex: 99,
@@ -71,40 +72,9 @@ export default function AssetCard({
             transform: onHover ? 'scale(0.94)' : 'scale(0.8)',
             transition: 'all .5s',
           }}
-        />
-        <h3
-          onMouseOver={() => setOnHover(true)}
-          onMouseLeave={() => setOnHover(false)}
-          onFocus={() => setOnHover(true)}
-          style={{
-            position: 'absolute',
-            zIndex: 100,
-            top: 20,
-            left: 26,
-            transform: onHover ? 'scale(0.94)' : 'scale(0.8)',
-            transition: 'all .5s',
-            fontSize: 10,
-            color: 'white'
-          }}
-        >Rank
-        </h3>
-        <h3
-          onMouseOver={() => setOnHover(true)}
-          onMouseLeave={() => setOnHover(false)}
-          onFocus={() => setOnHover(true)}
-          style={{
-            position: 'absolute',
-            zIndex: 100,
-            top: 25,
-            left: 23,
-            transform: onHover ? 'scale(0.94)' : 'scale(0.8)',
-            transition: 'all .5s',
-            color: 'white',
-            marginTop: 2,
-            fontSize: 22,
-          }}
-        >AA
-        </h3>
+        >
+          <RankingAhaddIcon type="unrank" />
+        </div>
       </>
       <Card
         onMouseOver={() => setOnHover(true)}
