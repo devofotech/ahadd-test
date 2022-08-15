@@ -358,3 +358,7 @@ a {
 .color-gradient-block {
   background-image: linear-gradient(var(--main-color), var(--primary-color)) !important;
 }
+
+.box-shadow-bottom { 
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
