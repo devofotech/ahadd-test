@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 const StyledMenuItem = withStyles(() => ({
   root: {
     justifyContent: 'center',
-    backgroundColor: primaryColor,
+    backgroundColor: 'var(--dark-blue-color)',
     '& h1, h2, h3, h4, h5, h6': {
       textAlign: 'center',
       color: 'white',
@@ -28,7 +28,7 @@ const StyledMenuItem = withStyles(() => ({
     '&:focus, &:hover': {
       backgroundColor: 'white',
       '& h1, h2, h3, h4, h5, h6': {
-        color: primaryColor,
+        color: 'var(--dark-blue-color)',
       },
     },
   },
@@ -56,13 +56,13 @@ export default function Dropdown({
     <div>
       <Button
         onClick={handleClick}
-        endIcon={<ExpandMore />}
+        endIcon={<ExpandMore style={{ color: 'var(--dark-blue-color)' }} />}
         style={{
           width: width || '100%',
           height: (size === 'small') ? '40px' : '55px',
           borderRadius: 10,
-          backgroundColor: primaryColor,
-          color: 'var(--light-color)',
+          // backgroundColor: primaryColor,
+          color: 'white',
           display: 'flex',
           justifyContent: 'space-between',
           lineHeight: 'normal',
@@ -70,14 +70,9 @@ export default function Dropdown({
       >
         <div />
         <div>
-          <Hx style={{ color: '#ffffff', fontSize: '15px' }}>
+          <Hx style={{ color: 'var(--dark-blue-color)', fontSize: '15px', fontWeight: 700 }}>
             {selectedItem < itemList.length ? itemList[selectedItem] : xtraText}
           </Hx>
-          {propertyValue && (
-            <small style={{ fontFamily: 'Poppins' }}>
-              {`RM ${propertyValue / 1000000} Million`}
-            </small>
-          )}
         </div>
       </Button>
       <div className={classes.formControlContainer}>
