@@ -5,7 +5,7 @@ import {
   Grid, TextField, MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Dropzone from '@Components/DropzoneBox/v3';
+import Dropzone from '@Components/DropzoneBox/index';
 import { markerToString, polygonToString } from '@Helpers';
 
 import InputTag from './InputTag';
@@ -103,7 +103,7 @@ export default (h) => {
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
       <Grid item xs={12} className="px-1 mb-2">
-        <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} />
+        <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} customStyle={{ backgroundColor: 'white', marginBottom: 10 }} />
         <CustomTextField classes={classes} name="Asset Id" value={h.name} onChange={(e) => h.setName(e.target.value)} />
       </Grid>
       {[
@@ -154,16 +154,15 @@ const Location = (h) => {
         />
       </Grid>
     </Grid>
- 
+
   );
- 
 };
 
 const PolygonCoordinate = (h) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={polygonToString(h.polygon)} disabled />
+        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={polygonToString(h?.polygon)} disabled />
       </Grid>
       <Grid item xs={12} className="mb-2 py-2" style={{ height: 300 }}>
         <PolygonPicker

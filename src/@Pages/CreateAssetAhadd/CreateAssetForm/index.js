@@ -1,4 +1,4 @@
-import Button from '@Components/Button copy';
+import Button from '@Components/Button';
 import { Grid } from '@material-ui/core';
 import AssetCard from '../Component/AssetCard';
 import FormInput from './FormInput';
@@ -19,7 +19,7 @@ export default (h) => {
         <Button variant="text" onClick={h.handleBackStep} size="small">
           PREVIOUS
         </Button>
-        <Button disabled={isDisabled} onClick={h.handleNextStep} size="small">
+        <Button className="color-gradient-inline" disabled={isDisabled} onClick={h.handleNextStep} size="small">
           NEXT
         </Button>
       </div>

@@ -25,6 +25,7 @@ export default function Dropzone({
           borderRadius: 10,
           height: 700,
           padding: 5,
+          ...props.customStyle,
         },
         ...isScrollable,
         ...isCustomStyle,

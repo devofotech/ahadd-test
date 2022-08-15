@@ -32,41 +32,7 @@ export default () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingAssets, setIsLoadingAssets] = useState(false);
-  const [polygon, setPolygon] = useState({
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'Polygon',
-      coordinates: [
-        [
-          [
-            101.6261100769043,
-            3.119433252237636,
-          ],
-          [
-            101.58731460571289,
-            3.0906364795014616,
-          ],
-          [
-            101.60842895507812,
-            3.0601247606563886,
-          ],
-          [
-            101.66421890258788,
-            3.046582763910366,
-          ],
-          [
-            101.6949462890625,
-            3.086694003205406,
-          ],
-          [
-            101.6261100769043,
-            3.119433252237636,
-          ],
-        ],
-      ],
-    },
-  });
+  const [polygon, setPolygon] = useState(null);
   const isFirstStep = activeStepAssetType === 0;
 
   const handleUpdatePhase = (event) => {

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Box, Button, Grid } from '@material-ui/core';
 import AssetDetail from '@Components/AssetDetail';
-import ShieldIcon from '@Assets/Icons/ShiledIcon.svg';
-import { getRanking } from '@Helpers';
+import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 
 export default (h) => {
   const assetDetailData = {
@@ -13,44 +12,14 @@ export default (h) => {
       {/* <h3 className="text-dark my-4">Asset Preview</h3> */}
       <Grid container item xs={12} className="sidebar h-100" style={{ zIndex: 1 }}>
         <div className="position-relative">
-          <img
-            src={ShieldIcon}
+          <div
+            className="position-absolute"
             style={{
-              position: 'absolute',
-              zIndex: 1,
-              top: 10,
-              right: 20,
-              transition: 'all .5s',
-              transform: 'scale(0.8)',
+              position: 'absolute', zIndex: 99, top: 10, right: 10, transform: 'scale(0.8)',
             }}
-          />
-          <h3
-            style={{
-              position: 'absolute',
-              zIndex: 1,
-              top: 20,
-              right: 37,
-              transition: 'all .5s',
-              fontSize: 10,
-              color: 'white',
-              transform: 'scale(0.8)',
-            }}
-          >Rank
-          </h3>
-          <h3
-            style={{
-              position: 'absolute',
-              zIndex: 1,
-              top: 25,
-              right: getRanking(h.ranking).length === 1 ? 41 : 34,
-              transition: 'all .5s',
-              color: 'white',
-              marginTop: 2,
-              fontSize: 22,
-              transform: 'scale(0.8)',
-            }}
-          >{getRanking(h.ranking)}
-          </h3>
+          >
+            <RankingAhaddIcon type={h.rank} />
+          </div>
           <img
             className="sidebar-img"
             style={{ objectFit: 'contain', width: '100%', aspectRatio: '3/2' }}

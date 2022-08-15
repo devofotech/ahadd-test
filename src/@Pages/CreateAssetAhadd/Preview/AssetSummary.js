@@ -10,7 +10,7 @@ export default (h) => {
   return (
     <>
       {/* <h3 className="text-dark my-4">Asset Summary</h3> */}
-      <Grid container className="pl-5 pt-3 position-relative" style={{ borderRadius: 10, height: '60vh' }}>
+      <Grid container className="pl-5 pt-3 position-relative color-gradient-inline" style={{ borderTopRightRadius: 10, borderBottomRightRadius: 10, height: '60vh' }}>
         <Grid item xs={12}>
           <Grid xs={12}><CustomLabelDataField title="ASSET ID" value={h.name} /></Grid>
           <Grid xs={12}><CustomLabelDataField title="NETWORK" value={h.network} /></Grid>

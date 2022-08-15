@@ -1,4 +1,4 @@
-import Button from '@Components/Button copy';
+import Button from '@Components/Button';
 import { CircularProgress, Grid } from '@material-ui/core';
 import AssetPreview from './AssetPreview';
 import AssetSummary from './AssetSummary';
@@ -10,7 +10,7 @@ export default (h) => {
         <>
           <div
             className="mx-auto"
-            style={{ width: '40%', height: '60vh', background: 'linear-gradient(var(--main-color), var(--primary-color))', borderRadius: 10 }}>
+            style={{ width: '40%', height: '60vh', borderRadius: 10 }}>
             <Grid container xs={12}>
               <Grid item xs={7}>
                 <AssetPreview {...h} />
@@ -24,7 +24,7 @@ export default (h) => {
             <Button variant="text" onClick={h.handleBackStep} size="small">
               PREVIOUS
             </Button>
-            <Button onClick={h.createAsset} size="small">
+            <Button className="color-gradient-block" onClick={h.createAsset} size="small">
               NEXT
             </Button>
           </div>
