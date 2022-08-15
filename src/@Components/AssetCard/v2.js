@@ -42,22 +42,6 @@ export default function AssetCard({
   const [onHover, setOnHover] = useState(false);
   return (
     <Grid item xs={6} sm={4} md={3} lg={3} className="mt-2 position-relative" key={projects?.id}>
-      {!!projects.is_demo && (
-        <img
-          onMouseOver={() => setOnHover(true)}
-          onMouseLeave={() => setOnHover(false)}
-          onFocus={() => setOnHover(true)}
-          src={DemoLabel}
-          style={{
-            position: 'absolute',
-            zIndex: 99,
-            top: -7,
-            left: 5,
-            transform: onHover ? 'scale(0.94)' : 'scale(0.8)',
-            transition: 'all .5s',
-          }}
-        />
-      )}
       <>
         <div
           className="position-absolute"
