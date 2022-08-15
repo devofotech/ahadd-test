@@ -450,3 +450,31 @@ export const DeleteIcon = (props) => {
     </svg>
   );
 };
+
+export const ShareIcon = ({ height = 24, width = 21.687 }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width={width} height={height} viewBox="0 0 21.687 24">
+      <defs>
+        <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+          <stop offset="0" stopColor="#30a6d3" />
+          <stop offset="1" stopColor="#51dba5" />
+        </linearGradient>
+      </defs>
+      <path id="Icon_material-share" data-name="Icon material-share" d="M22.572,19.964a3.508,3.508,0,0,0-2.361.928l-8.59-5a3.944,3.944,0,0,0,.108-.843,3.944,3.944,0,0,0-.108-.843l8.494-4.952a3.606,3.606,0,1,0-1.157-2.639,3.944,3.944,0,0,0,.108.843L10.572,12.41a3.614,3.614,0,1,0,0,5.277L19.151,22.7a3.4,3.4,0,0,0-.1.783,3.518,3.518,0,1,0,3.518-3.518Z" transform="translate(-4.5 -3)" fill="url(#linear-gradient)" />
+    </svg>
+  );
+};
+
+export const DownloadIconV2 = ({ height = 18, width = 24 }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width={width} height={height} viewBox="0 0 18 24">
+      <defs>
+        <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+          <stop offset="0" stopColor="#30a6d3" />
+          <stop offset="1" stopColor="#51dba5" />
+        </linearGradient>
+      </defs>
+      <path id="Icon_awesome-file-download" data-name="Icon awesome-file-download" d="M10.5,6.375V0H1.125A1.122,1.122,0,0,0,0,1.125v21.75A1.122,1.122,0,0,0,1.125,24h15.75A1.122,1.122,0,0,0,18,22.875V7.5H11.625A1.128,1.128,0,0,1,10.5,6.375Zm3.584,9.907-4.52,4.486a.8.8,0,0,1-1.127,0l-4.52-4.486A.75.75,0,0,1,4.445,15H7.5V11.25a.75.75,0,0,1,.75-.75h1.5a.75.75,0,0,1,.75.75V15h3.055A.75.75,0,0,1,14.084,16.282ZM17.672,4.922,13.083.328a1.124,1.124,0,0,0-.8-.328H12V6h6V5.714A1.121,1.121,0,0,0,17.672,4.922Z" fill="url(#linear-gradient)" />
+    </svg>
+  );
+};
