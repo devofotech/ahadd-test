@@ -169,12 +169,12 @@ export default function TopBar(props) {
                 </IconButton>
               </Tooltip>
             )}
-            {!isOrgUnlimited
+            {/* {!isOrgUnlimited
               && (
                 <div data-tut="token">
                   <CoinWallet isOrgUnlimited={isOrgUnlimited} />
                 </div>
-              )}
+              )} */}
           </div>
           &nbsp;&nbsp;&nbsp;
           {!!props.can_see_activity_log && (
