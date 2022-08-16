@@ -17,16 +17,16 @@ export default function Hook({ token }) {
     });
   };
 
-  useEffect(() => {
-    if (token) {
-      console.log('vvv h checking balance interval registered');
-      const interval = setInterval(() => {
-        setRefreshBalance(pv => pv + 1);
-        console.log('checking balance');
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     console.log('vvv h checking balance interval registered');
+  //     const interval = setInterval(() => {
+  //       setRefreshBalance(pv => pv + 1);
+  //       console.log('checking balance');
+  //     }, 3000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [token]);
 
   useEffect(() => {
     if (token) getWallet();
