@@ -230,6 +230,7 @@ export default function App() {
           <PrivateRoute exact path="/about-us" user={h.user}>
             <MainContainer user={h.user} child={<AboutUs {...h} />} isFullPage />
           </PrivateRoute>
+          <UndeclareRoute />
         </Switch>
       </Router>
     </AuthProvider>
@@ -290,5 +291,11 @@ function PrivateRoute({ children, accessible = true, ...rest }) {
         />
       ))}
     />
+  );
+}
+
+function UndeclareRoute() {
+  return (
+    <Route path="*" render={() => (<Redirect to={{ pathname: '/project' }} />)} />
   );
 }
