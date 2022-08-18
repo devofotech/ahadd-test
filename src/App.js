@@ -55,6 +55,7 @@ import OrganizationSummary from '@Pages/OrganizationSummary';
 import OrganizationSummaryDetails from '@Pages/OrganizationSummaryDetails';
 import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
+import AboutUs from '@Pages/AboutUs';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -120,13 +121,10 @@ export default function App() {
           <PrivateRoute path="/dashboard/analytic" user={h.user} accessible={!!h.user?.can_view_dashboard}>
             <MainContainer user={h.user} child={<Dashboard {...h} />} />
           </PrivateRoute>
-          <PrivateRoute exact path="/asset/" user={h.user} accessible={!!h.user?.can_view_asset}>
-            {{
-              galaxy: <MainContainer user={h.user} child={<AssetList {...h} closeTour={() => setIsOpen(false)} />} />,
-              ahadd: <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />,
-            }[process.env.REACT_APP_BRANCH]}
+          <PrivateRoute exact path="/asset/" user={h.user}>
+            <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
           </PrivateRoute>
-          <PrivateRoute exact path="/create-asset" user={h.user} accessible={!!h.user?.can_add_asset}>
+          <PrivateRoute exact path="/create-asset" user={h.user}>
             <MainContainer user={h.user} child={<CreateAsset {...h} />} />
           </PrivateRoute>
           <PrivateRoute path="/asset/:AssetId/2D" user={h.user} accessible={!!h.user?.can_view_asset}>
@@ -230,6 +228,10 @@ export default function App() {
           <PrivateRoute exact path="/assetfile-conversion" user={h.user} accessible={['processing'].includes(h.user?.raise_role)}>
             <MainContainer user={h.user} child={<AssetFileConversion {...h} />} />
           </PrivateRoute>
+          <PrivateRoute exact path="/about-us" user={h.user}>
+            <MainContainer user={h.user} child={<AboutUs {...h} />} isFullPage />
+          </PrivateRoute>
+          <UndeclareRoute />
         </Switch>
       </Router>
     </AuthProvider>
@@ -237,18 +239,18 @@ export default function App() {
 }
 
 function MainContainer({
-  user, child, adjustedStyle, isProjectSite = false,
+  user, child, adjustedStyle, isProjectSite = false, isFullPage = false,
 }) {
   const {
     setIsOpen, setDisabledActions, setCurrentStep, currentStep, disabledActions,
   } = useTour();
   return (
     <Grid
-      className="content"
+      className={`${!isFullPage && 'content'}`}
       style={{
         position: 'fixed',
         paddingTop: isProjectSite && '70px',
-        top: isProjectSite ? '0px' : '60px',
+        top: isProjectSite ? '0px' : '50px',
         left: '0px',
         right: '0px',
         bottom: '0px',
@@ -256,7 +258,15 @@ function MainContainer({
         ...adjustedStyle,
       }}
     >
-      <TopBar {...user} isProjectSite={isProjectSite} setIsOpen={setIsOpen} setDisabledActions={setDisabledActions} setCurrentStep={setCurrentStep} currentStep={currentStep} disabledActions={disabledActions} />
+      <TopBar
+        {...user}
+        isProjectSite={isProjectSite}
+        setIsOpen={setIsOpen}
+        setDisabledActions={setDisabledActions}
+        setCurrentStep={setCurrentStep}
+        currentStep={currentStep}
+        disabledActions={disabledActions}
+      />
       <Grid item xs={12}>
         {child}
       </Grid>
@@ -285,8 +295,8 @@ function PrivateRoute({ children, accessible = true, ...rest }) {
   );
 }
 
-const getMuiTheme = () => createMuiTheme({
-  typography: {
-    fontFamily: 'CeraProRegular',
-  },
-});
+function UndeclareRoute() {
+  return (
+    <Route path="*" render={() => (<Redirect to={{ pathname: '/project' }} />)} />
+  );
+}

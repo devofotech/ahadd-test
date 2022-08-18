@@ -79,17 +79,19 @@ export default function SidebarV2(props) {
           </Box>
 
           <div className="d-flex mt-2" style={{ width: '90%' }}>
-            <Link to={`/project/inspection?id=${props.project?.id}`} className="mx-auto" style={{ width: '45%' }}>
-              <Button className="w-100" style={{ backgroundImage: 'linear-gradient(to right, var(--main-color), var(--primary-color))', borderRadius: 18, }}>
+            <Link to={`/project/inspection?id=${props.project?.id}`} className="mx-auto flex-standard" style={{ width: '45%' }}>
+              <Button className="w-100 color-gradient-inline box-shadow-bottom" style={{ borderRadius: 18 }}>
                 <CameraAlt style={{ fontSize: 16, marginLeft: 4, marginRight: 4 }} />
                 INSPECTION
               </Button>
             </Link>
 
-            <Button className="mx-auto color-gradient-inline" style={{ borderRadius: 18, width: '45%' }}>
-              <ReportIcon color="var(--light-color)" transform="scale(0.55)" />
-              DOCUMENT
-            </Button>
+            <Link to={`/project/report?id=${props.project?.id}`} className="mx-auto flex-standard" style={{ width: '45%' }}>
+              <Button className="w-100 color-gradient-inline box-shadow-bottom" style={{ borderRadius: 18 }}>
+                <ReportIcon color="var(--light-color)" transform="scale(0.55)" />
+                DOCUMENT
+              </Button>
+            </Link>
           </div>
 
           <AssetDetail details={props.project} assetTypeList={props.assetTypeList} />

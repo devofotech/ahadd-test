@@ -68,12 +68,12 @@ export default function Hook() {
       },
     });
   };
-  const ssologin = ({ code }) => {
+  const ssologin = ({ code, loginDone = () => null }) => {
     setIsLoading(true);
     setLoginError('');
     Api({
-      endpoint: endpoints.ssoCallback('google'),
-      data: { code },
+      endpoint: endpoints.ssoCallback('microsoft'),
+      data: { code, redirect_url: `${window.location.origin}/login` },
       onSuccess: (response) => {
         setToken(response.token);
         setCookies('token', response.token);
@@ -84,6 +84,7 @@ export default function Hook() {
         removeCookie();
         setIsLoading(false);
         setLoginError(err);
+        loginDone();
       },
     });
   };

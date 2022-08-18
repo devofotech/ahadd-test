@@ -15,12 +15,12 @@ export default function Hook({ division, project }) {
     } else {
       data.filterOnly = 'osh';
     }
-    Api({
-      endpoint: endpoints.getReports(),
-      data,
-      onSuccess: (response) => setReports(response.data),
-      onFail: setReports([]),
-    });
+    // Api({
+    //   endpoint: endpoints.getReports(),
+    //   data,
+    //   onSuccess: (response) => setReports(response.data),
+    //   onFail: setReports([]),
+    // });
     Api({
       endpoint: endpoints.getStoredReport(),
       data,
@@ -64,10 +64,16 @@ export default function Hook({ division, project }) {
         setJustUpdated(true);
       },
       onFail: console.log('lol'),
-    })
-  }
+    });
+  };
+
   return {
-    reports,
+    reports: [...[...Array(4)].map((m, idx) => ({
+      id: idx + 1,
+      name: 'Bukit_Merah_July11',
+      cycle: 'Cycle 2',
+      createdAt: '2022-07-07T11:28:26.000Z',
+    }))],
     onDelete,
     onSave,
     storedReports,
