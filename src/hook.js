@@ -85,7 +85,6 @@ export default function Hook() {
         setIsLoading(false);
         setLoginError(err);
         loginDone();
-        window.location = '/login';
       },
     });
   };

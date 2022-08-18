@@ -10,6 +10,7 @@ export default (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(false);
+  const [error, setError] = useState(false);
 
   const toggleForgotPassword = () => {
     setIsForgotPassword(!isForgotPassword);
@@ -39,7 +40,7 @@ export default (props) => {
     });
   };
 
-  const loginDone = () => setIsLogin(false);
+  const loginDone = () => { setIsLogin(false); setError(true); };
   useEffect(() => {
     const { code } = queryString.parse(location.search);
     if (!code) return;
@@ -60,5 +61,7 @@ export default (props) => {
     setIsForgotPassword,
     location,
     isLogin,
+    error,
+    setError,
   };
 };

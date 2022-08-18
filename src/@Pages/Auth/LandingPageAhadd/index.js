@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '@Context/Auth';
 import LoginForm from './LoginForm';
+import RedirectPage from './Redirect';
+import UnauthorizedLogin from './UnauthorizedLogin';
 
 export default function LandingPageAhadd(h) {
   const { token } = useContext(AuthContext);
@@ -13,9 +15,10 @@ export default function LandingPageAhadd(h) {
   if (token && h.user !== 'logged out') return <Redirect to={h.from} />;
   return (
     <>
+      <UnauthorizedLogin {...h} />
       <Container maxWidth="false" className="px-0">
         {h.isLogin ? (
-          <div className="flex-standard text-center">Login...</div>
+          <RedirectPage />
         ) : (
           <Grid container alignItems="center" justify="space-around" style={{ height: '100vh' }}>
             <Grid item xs={12} lg={6} xl={7} alignItems="center">
