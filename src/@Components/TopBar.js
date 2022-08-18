@@ -130,6 +130,13 @@ export default function TopBar(props) {
             title: 'Asset File Conversion',
             page_access: ['processing'].includes(props.raise_role),
           },
+          {
+            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+            link: '/about-us',
+            icon: <BuildingIcon />,
+            title: 'About Us',
+            page_access: true,
+          },
         ].map(nav => !!nav.page_access && (
           <Link to={nav.link}>
             <Grid

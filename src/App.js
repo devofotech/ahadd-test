@@ -54,6 +54,7 @@ import OrganizationSummary from '@Pages/OrganizationSummary';
 import OrganizationSummaryDetails from '@Pages/OrganizationSummaryDetails';
 import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
+import AboutUs from '@Pages/AboutUs';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -226,6 +227,9 @@ export default function App() {
           <PrivateRoute exact path="/assetfile-conversion" user={h.user} accessible={['processing'].includes(h.user?.raise_role)}>
             <MainContainer user={h.user} child={<AssetFileConversion {...h} />} />
           </PrivateRoute>
+          <PrivateRoute exact path="/about-us" user={h.user}>
+            <MainContainer user={h.user} child={<AboutUs {...h} />} isFullPage />
+          </PrivateRoute>
         </Switch>
       </Router>
     </AuthProvider>
@@ -233,12 +237,12 @@ export default function App() {
 }
 
 function MainContainer({
-  user, child, adjustedStyle, isProjectSite = false,
+  user, child, adjustedStyle, isProjectSite = false, isFullPage = false,
 }) {
   const { setIsOpen, setDisabledActions, setCurrentStep, currentStep, disabledActions } = useTour();
   return (
     <Grid
-      className="content"
+      className={`${!isFullPage && 'content'}`}
       style={{
         position: 'fixed',
         paddingTop: isProjectSite && '70px',
