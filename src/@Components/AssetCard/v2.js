@@ -9,8 +9,6 @@ import withReactContent from 'sweetalert2-react-content';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
-import DemoLabel from '@Assets/Images/demo-label.svg';
-import ShieldIcon from '@Assets/Icons/ShiledIcon.svg';
 import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -94,11 +92,6 @@ export default function AssetCard({
               >
                 <h3 className="text-white mr-1 h-25" style={{ fontSize: 16 }}>• • •</h3>
               </Button>
-              {/* <Link to={`/asset/${projects?.id}`}>
-                <Tooltip title="View / Edit Asset">
-                  <EditOutlinedIcon className={classes.editButton} />
-                </Tooltip>
-              </Link> */}
             </Grid>
           )}
           <CardContent className="position-relative p-0">
@@ -112,17 +105,6 @@ export default function AssetCard({
                 </Typography>
               </div>
             </Link>
-            {/* {userData?.can_remove_asset && (
-              <div className={`position-absolute flex-standard float-right ${classes.deleteButtonContent}`}>
-                <Tooltip title="Delete Asset">
-                  <DeleteIcon
-                    className={classes.deleteButton}
-                    fontSize="large"
-                    onClick={() => { setSelectedAsset(projects); setOpen(true); }}
-                  />
-                </Tooltip>
-              </div>
-            )} */}
             <div
               className={`position-absolute flex-standard float-right ${classes.avatarContent}`}
               onClick={() => (
