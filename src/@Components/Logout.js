@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { removeCookie } from '@Helpers/authUtils';
 
-export default ({ setUser = () => null }) => {
+export default ({ user, setUser = () => null }) => {
+  if (user === 'logged out') {
+    return <Redirect to="/login" />;
+  }
   useEffect(() => {
     async function logout() {
       try {
@@ -14,5 +17,5 @@ export default ({ setUser = () => null }) => {
     }
     logout();
   }, []);
-  return <Redirect to="/login" />;
+  return <Redirect to="/logout" />;
 };

@@ -9,7 +9,7 @@ import TokenIcon from '@Assets/Icons/icon_raise_coin.png';
 import { formatBytes } from '@Helpers';
 import moment from 'moment';
 import { AllInclusive } from '@material-ui/icons';
-import CoinWallet from '@Components/CoinWallet';
+// import CoinWallet from '@Components/CoinWallet';
 
 export default function ProfileCard(props) {
   const usagePercentage = (num1, num2) => (num1 / num2) * 100;
@@ -86,11 +86,11 @@ export default function ProfileCard(props) {
             show: false,
             value: usagePercentage(props.organizationData?.['Organization.UserCount'], props.organizationData?.['StoreStorage.user_limit']),
           },
-          {
-            title: 'geoRÄISE Token',
-            data: props.isOrgUnlimited ? (<AllInclusive style={{ color: '#FEB019' }} />) : <CoinWallet valueOnly />,
-            showToken: true,
-          },
+        //   {
+        //     title: 'geoRÄISE Token',
+        //     data: props.isOrgUnlimited ? (<AllInclusive style={{ color: '#FEB019' }} />) : <CoinWallet valueOnly />,
+        //     showToken: true,
+        //   },
         ].map(e => (
           <Grid item xs={12} sm={6} md={12} lg={6}>
             <Grid

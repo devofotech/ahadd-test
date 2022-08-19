@@ -9,17 +9,15 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import {
   Grid, Menu, MenuItem, Drawer, Box, Badge, Popover, Button, IconButton, Tooltip,
 } from '@material-ui/core';
-import { decimalNumberFormat, tokenFormatter } from '@Helpers';
-import {
-  DashboardIcon, MapIcon, BuildingIcon, HRIcon, MarketingIcon, BellIcon, ProjectSiteIcon,
-} from '@Assets/Icons/TopbarIcons';
 import tokenIcon from '@Assets/Images/RaiseToken-shadow.png';
-import logo_raise from '@Assets/Images/georaise-logo.svg';
+import plus_ahadd from '@Assets/Images/plus_ahadd.svg';
+import {
+  Dashboard, MapView, AssetList, Analytic, AboutUs,
+} from '@Assets/Icons/topbarIcon';
 import { db } from '@Configs/firebase';
 import { ref, onChildAdded } from 'firebase/database';
 import Avatar from './Avatar';
 import ActivityLog from './ActivityLog';
-import CoinWallet from './CoinWallet';
 
 export default function TopBar(props) {
   const { path } = useRouteMatch();
@@ -70,24 +68,42 @@ export default function TopBar(props) {
     };
   }, [props.currentStep, anchorEl]);
 
-  let projectSiteStyle = {
+  const topbarStyle = {
     zIndex: 99,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    backdropFilter: 'blur(10px)',
+    backgroundColor: 'white',
+    // backdropFilter: 'blur(10px)',
   };
-  if (!props.isProjectSite) projectSiteStyle = {};
+  // if (!props.isProjectSite) topbarStyle = {};
+  const iconColor = (selectedNav) => (selectedNav ? '#0061aa' : '#8b95ab');
   return (
-    <Grid container item xs={12} direction="row" justify="space-between" alignItems="center" className="topbar navbar-text" style={{ ...projectSiteStyle }}>
+    <Grid
+      container
+      item
+      xs={12}
+      direction="row"
+      justify="space-between"
+      alignItems="center"
+      className="topbar navbar-text"
+      style={{ ...topbarStyle }}
+    >
       <Link to="/" style={{ zIndex: 100 }}>
-        <img src={logo_raise} height={25} />
+        <img src={plus_ahadd} height={35} style={{ marginTop: -5 }} />
       </Link>
-      <Grid container item xs={12} justify="center" alignItems="center" className="position-absolute">
+      <Grid
+        container
+        item
+        xs={12}
+        justify="flex-end"
+        alignItems="center"
+        className="position-absolute"
+        style={{ right: '10%', translate: 'transform(90%, 0)' }}
+      >
         {[
           {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
             link: '/project',
-            icon: <ProjectSiteIcon />,
-            title: 'Map View',
+            icon: (e) => <MapView color={iconColor(e)} />,
+            title: 'Map',
             page_access: true,
             tourId: 'map_view',
           },
@@ -95,41 +111,55 @@ export default function TopBar(props) {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
             link: '/dashboard/analytic',
             selected: '/dashboard',
-            icon: <DashboardIcon />,
+            icon: (e) => <Dashboard color={iconColor(e)} />,
             title: 'Dashboard',
-            page_access: props.can_view_dashboard,
+            page_access: true,
             tourId: 'dashboard',
           },
           {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
             link: '/asset/',
-            icon: <BuildingIcon />,
+            icon: (e) => <AssetList color={iconColor(e)} />,
             title: 'Asset List',
-            page_access: props.can_view_asset,
+            page_access: true,
             tourId: 'asset_list',
           },
           {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/mapping-list',
-            icon: <BuildingIcon />,
-            title: 'Geo Processing',
-            page_access: props.can_view_mapping_list,
-            tourId: 'geo_processing',
+            link: '/analytics',
+            icon: (e) => <Analytic color={iconColor(e)} />,
+            title: 'Analytics',
+            page_access: true,
           },
           {
-            roles: ['developer'],
-            link: '/mapping-processing',
-            icon: <BuildingIcon />,
-            title: 'GIS Processing',
-            page_access: ['processing'].includes(props.raise_role),
+            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+            link: '/about-us',
+            icon: (e) => <AboutUs color={iconColor(e)} />,
+            title: 'About Us',
+            page_access: true,
           },
-          {
-            roles: ['developer'],
-            link: '/assetfile-conversion',
-            icon: <BuildingIcon />,
-            title: 'Asset File Conversion',
-            page_access: ['processing'].includes(props.raise_role),
-          },
+          // {
+          //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+          //   link: '/mapping-list',
+          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+          //   title: 'Geo Processing',
+          //   page_access: props.can_view_mapping_list,
+          //   tourId: 'geo_processing',
+          // },
+          // {
+          //   roles: ['developer'],
+          //   link: '/mapping-processing',
+          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+          //   title: 'GIS Processing',
+          //   page_access: ['processing'].includes(props.raise_role),
+          // },
+          // {
+          //   roles: ['developer'],
+          //   link: '/assetfile-conversion',
+          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+          //   title: 'Asset File Conversion',
+          //   page_access: ['processing'].includes(props.raise_role),
+          // },
         ].map(nav => !!nav.page_access && (
           <Link to={nav.link}>
             <Grid
@@ -138,15 +168,16 @@ export default function TopBar(props) {
               alignItems="center"
               className="mx-4"
             >
+              <span className="mx-1 mr-2" style={{ opacity: path.includes(nav.selected ?? nav.link) ? 1 : 0.8 }}>
+                {nav.icon(path.includes(nav.selected ?? nav.link))}
+              </span>
               <h6
                 className={path.includes(nav.selected ?? nav.link)
-                  ? `color-secondary ${props.isProjectSite ? 'shadow-selected' : ''}`
-                  : `color-tertiary ${props.isProjectSite ? 'shadow-unselected' : ''}`}
+                  ? 'color-secondary shadow-selected mt-1'
+                  : 'color-tertiary shadow-unselected mt-1'}
                 data-tut={nav.tourId}
+                style={{ fontWeight: 600 }}
               >
-                {/* <span className="mx-1" style={{ opacity: path.includes(nav.selected ?? nav.link) ? 1 : 0.4 }}>
-                  {nav.icon}
-                </span> */}
                 {nav.title}
               </h6>
             </Grid>
@@ -162,28 +193,28 @@ export default function TopBar(props) {
           style={{ cursor: 'pointer' }}
         >
           <div className="d-flex align-items-center">
-            {props.isProjectSite && (
+            {/* {props.isProjectSite && (
               <Tooltip title="View Guide">
                 <IconButton disableRipple style={{ backgroundColor: 'transparent', padding: 0, marginRight: 10 }}>
                   <HelpOutline onClick={() => props.setIsOpen(true)} color="disabled" />
                 </IconButton>
               </Tooltip>
-            )}
-            {!isOrgUnlimited
+            )} */}
+            {/* {!isOrgUnlimited
               && (
                 <div data-tut="token">
                   <CoinWallet isOrgUnlimited={isOrgUnlimited} />
                 </div>
-              )}
+              )} */}
           </div>
           &nbsp;&nbsp;&nbsp;
-          {!!props.can_see_activity_log && (
-            <div className="mr-4">
-              <Badge badgeContent={hasRead ? 0 : activityLog.data?.length} color="secondary" onClick={(e) => handleClickNotification(e)}>
-                <Notifications onClick={(e) => handleClickNotification(e)} style={{ backgroundColor: 'primary' }} data-tut="notification" />
-              </Badge>
-            </div>
-          )}
+          {/* {!!props.can_see_activity_log && ( */}
+          <div className="mr-4">
+            <Badge badgeContent={hasRead ? 0 : activityLog.data?.length} color="secondary" onClick={(e) => handleClickNotification(e)}>
+              <Notifications onClick={(e) => handleClickNotification(e)} style={{ backgroundColor: 'primary' }} data-tut="notification" />
+            </Badge>
+          </div>
+          {/* )} */}
           <Avatar {...props} />
           <div style={{ cursor: 'pointer', zIndex: 99999 }} onClick={handleClickMenu}>
             <p style={{ fontSize: 16, fontWeight: 600 }} className="mb-0 navbar-text">{props.name?.split(' ').slice(0, 2).join(' ')}</p>

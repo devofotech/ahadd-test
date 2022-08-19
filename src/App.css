@@ -323,12 +323,11 @@ a {
 }
 
 .shadow-selected {
-  text-shadow: 0 0 3px #FFFFFF;
+  color: #00A94F;
 }
 
 .shadow-unselected {
-  text-shadow: 0 0 3px #000000;
-  color: #FFFFFF;
+  color: #8b95ab;
 }
 
 .toolbar-class {

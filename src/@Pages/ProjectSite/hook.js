@@ -134,8 +134,8 @@ export default function Hook({ user, setIsOpen }) {
         setSeverityList(res.data);
       },
     });
-    getModules();
-    getAllParameters();
+    // getModules();
+    // getAllParameters();
     setIsFirstSidebarTour(JSON.parse(window.localStorage.getItem('tour')));
   }, []);
 
