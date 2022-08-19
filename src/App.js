@@ -4,7 +4,6 @@ import React, { useContext } from 'react';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { useTour } from '@reactour/tour';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -62,9 +61,6 @@ const HomePage = (h) => {
   if (h.user === 'logged out') {
     return <Redirect to="/login" />;
   }
-  // if (!!h.user && (!h.user?.OrganizationId || !h.user?.name)) {
-  //   return <Redirect to="/pending-information" />;
-  // }
   return <Redirect to="/project" />;
 };
 
