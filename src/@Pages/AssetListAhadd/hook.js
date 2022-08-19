@@ -9,27 +9,12 @@ export default function Hook() {
   const [selectedAsset, setSelectedAsset] = useState();
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [tags, setTags] = useState([]);
   const [tagsFilter, setTagsFilter] = useState(['']);
-  const [openCustomMenu, setOpenCustomMenu] = useState(false);
   const [openRelative, setOpenRelative] = useState(false);
   const [workflowAccess, setWorkflowAccess] = useState([]);
   const [teamAccess, setTeamAccess] = useState([]);
   const [userAccess, setUserAccess] = useState([]);
-  const [view, setView] = useState('card');
   const anchorRef = useRef(null);
-
-  const handleToggle = () => setOpenCustomMenu((prevOpen) => !prevOpen);
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) return;
-    setOpenCustomMenu(false);
-  };
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpenCustomMenu(false);
-    }
-  }
 
   useEffect(() => {
     refresh();
@@ -43,7 +28,6 @@ export default function Hook() {
         setAllProjects(data);
         setSearchProjects(data);
         setFilterProjects(null);
-        setTags(data.map(d => d.asset_type));
         setIsLoading(false);
       },
       onFail: (err) => { toast('error', err); setIsLoading(false); },
@@ -124,12 +108,7 @@ export default function Hook() {
     open,
     setOpen,
     isLoading,
-    openCustomMenu,
     anchorRef,
-    handleToggle,
-    handleClose,
-    handleListKeyDown,
-    tags: _.uniq(tags.filter(tag => !!tag).map(t => (t.indexOf(',') > -1 ? t.split(',') : t)).flat()),
     tagsFilter,
     setTagsFilter,
     filterProjects,
@@ -141,8 +120,6 @@ export default function Hook() {
     setTeamAccess,
     userAccess,
     setUserAccess,
-    view,
-    setView,
     refreshAsset: refresh,
   };
 }

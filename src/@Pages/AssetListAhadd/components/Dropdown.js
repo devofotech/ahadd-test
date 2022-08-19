@@ -23,32 +23,19 @@ const MenuProps = {
   getContentAnchorEl: null,
 };
 
-export default function SortDropdown() {
-  const [network, setNetwork] = useState([]);
-
-  const networks = [
-    {
-      value: 0,
-      label: 'BKE',
-    },
-    {
-      value: 1,
-      label: 'LPT2',
-    },
-  ];
-
+export default function SortDropdown(props) {
   return (
     <FormControl style={{ m: 1, width: '8vw', marginLeft: 10 }} size="small">
       <Select
         style={{ borderRadius: 30, height: '4vh'}}
         multiple
         displayEmpty
-        value={network}
-        onChange={(e) => setNetwork(e.target.value)}
+        value={props.selected}
+        onChange={(e) => props.setSelected(e.target.value)}
         input={<OutlinedInput />}
         renderValue={(selected) => (
           <div className="d-flex align-items-center">
-            <span style={{ color: 'var(--main-color)' }}>Network</span>&nbsp;
+            <span style={{ color: 'var(--main-color)' }}>{props.title}</span>&nbsp;
             {selected.length === 0 ? (
               <Chip label={selected.length} size="small" style={{ transform: 'scale(0.8)', backgroundColor: 'transparent', color: 'transparent' }} />
             ) : (
@@ -60,12 +47,12 @@ export default function SortDropdown() {
         MenuProps={MenuProps}
       >
         <MenuItem disabled value="">
-          <em>Network</em>
+          <em>{props.title}</em>
         </MenuItem>
-        {networks.map((d) => (
+        {props.data.map((d) => (
           <MenuItem key={d.value} value={d.value}>
             <Checkbox
-              checked={network.includes(d.value)}
+              checked={props.selected.includes(d.value)}
               style={{ color: 'var(--main-color)' }}
             />
             <ListItemText primary={d.label} style={{ color: 'var(--main-color)' }} />

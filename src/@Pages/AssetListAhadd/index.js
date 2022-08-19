@@ -1,38 +1,21 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MainContentContainer from '@Components/MainContentContainer';
 import {
-  Box, IconButton, Button, Popper, Grow, Paper, ClickAwayListener, MenuList, MenuItem, List, Tooltip, TextField,
+  Box, Button,
 } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
 import DeleteDialog from '@Components/DeleteDialog';
 import WarningDialog from '@Components/WarningDialog';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import {
-  AddOutlined, ChevronLeft, ChevronRight, SettingsRemoteOutlined,
-} from '@material-ui/icons';
+import { AddOutlined } from '@material-ui/icons';
 import NoData from '@Assets/Images/Data-not-found3.png';
 import DialogCarousel from '@Components/DialogCarousel';
 import RelativeDialog from '@Components/RelativeDialog';
-import { AssetFile } from '@Assets/Icons';
 import SearchBox from '@Components/SearchBox/v2';
-import AssetDemoButton from '@Components/AssetDemo';
 import CenteredLoadingContainer from '@Components/CenteredLoadingContainer';
+import Dropdown from './components/Dropdown';
 import useHook from './hook';
-import FilterAssetTag from './components/FilterAssetTag';
-import ToggleButton from './components/ToggleButton';
 import AssetListContent from './components/AssetListContent';
 import SortDropdown from './components/SortDropdown';
-import RegionDropdown from './components/RegionDropdown';
-import NetworkDropdown from './components/NetworkDropdown';
-import SectionDropdown from './components/SectionDropdown';
-import RankingDropdown from './components/RankingDropdown';
-
-const SeverityButton = styled(Button)(() => ({
-  backgroundColor: '#FFF',
-  color: 'var(--primary-color)',
-  border: '2px solid var(--primary-color)',
-  paddingBottom: '3px !important',
-}));
 
 const titleStyle = {
   fontWeight: 600,
@@ -40,12 +23,87 @@ const titleStyle = {
   color: 'var(--primary-color)',
 };
 
+const regions = [
+  {
+    value: 0,
+    label: 'North',
+  },
+  {
+    value: 1,
+    label: 'Central',
+  },
+  {
+    value: 2,
+    label: 'South',
+  },
+];
+
+const networks = [
+  {
+    value: 0,
+    label: 'BKE',
+  },
+  {
+    value: 1,
+    label: 'LPT2',
+  },
+];
+
+const rankings = [
+  {
+    value: 0,
+    label: 'North',
+  },
+  {
+    value: 1,
+    label: 'Central',
+  },
+  {
+    value: 2,
+    label: 'South',
+  },
+];
+
+const sections = [
+  {
+    value: 0,
+    label: 'N1',
+  },
+  {
+    value: 1,
+    label: 'N2',
+  },
+  {
+    value: 2,
+    label: 'N3',
+  },
+  {
+    value: 3,
+    label: 'N4',
+  },
+  {
+    value: 4,
+    label: 'N5',
+  },
+  {
+    value: 5,
+    label: 'N6',
+  },
+  {
+    value: 6,
+    label: 'N7',
+  },
+];
+
 export default function AssetList({ user, closeTour }) {
   const history = useHistory();
   const location = useLocation();
-  const ref = useRef(null);
   const h = useHook();
   const [openDialog, setOpenDialog] = useState(false);
+  const [network, setNetwork] = useState([]);
+  const [region, setRegion] = useState([]);
+  const [ranking, setRanking] = useState([]);
+  const [section, setSection] = useState([]);
   const createAsset = () => {
     if (h.projects.filter(e => !e.is_demo).length < user['Organization.AssetLimit']) return history.push('/create-asset');
     setOpenDialog(true);
@@ -57,9 +115,6 @@ export default function AssetList({ user, closeTour }) {
     }
   }, [location.pathname]);
 
-  const scroll = (scrollOffset) => {
-    ref.current.scrollLeft += scrollOffset;
-  };
   return (
     <MainContentContainer style={{ height: '100vh' }}>
       <div style={{ minHeight: '40rem', width: '100%' }}>
@@ -103,10 +158,10 @@ export default function AssetList({ user, closeTour }) {
           </Box>
         </div>
         <div className="d-flex pl-4">
-          <RegionDropdown />
-          <NetworkDropdown />
-          <SectionDropdown />
-          <RankingDropdown />
+          <Dropdown selected={region} setSelected={setRegion} data={regions} title="Region" />
+          <Dropdown selected={network} setSelected={setNetwork} data={networks} title="Network" />
+          <Dropdown selected={section} setSelected={setSection} data={sections} title="Section" />
+          <Dropdown selected={ranking} setSelected={setRanking} data={rankings} title="Ranking" />
         </div>
         <Box className="d-flex flex-wrap" style={{ margin: '20px -8px 0px' }}>
           <>
@@ -135,30 +190,3 @@ export default function AssetList({ user, closeTour }) {
     </MainContentContainer>
   );
 }
-
-const CustomizePopover = (props) => {
-  return (
-    <>
-      <SeverityButton className="mr-2" variant="outlined" ref={props.anchorRef} onClick={props.handleToggle}>
-        <p>Customize</p>
-      </SeverityButton>
-      <Popper open={props.openCustomMenu} anchorEl={props.anchorRef.current} role={undefined} transition disablePortal style={{ zIndex: 999 }}>
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={props.handleClose}>
-                <MenuList autoFocusItem={props.openCustomMenu} id="menu-list-grow" onKeyDown={props.handleListKeyDown}>
-                  {props.user?.can_edit_severity_level && <Link to="/severity-level"><MenuItem><p>Severity Level</p></MenuItem></Link>}
-                  {props.user?.can_edit_issue_status && <Link to="/issue-status-level"><MenuItem><p>Inspection Status</p></MenuItem></Link>}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
-    </>
-  );
-};
