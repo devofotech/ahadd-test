@@ -55,6 +55,7 @@ import OrganizationSummaryDetails from '@Pages/OrganizationSummaryDetails';
 import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
 import AboutUs from '@Pages/AboutUs';
+import InspectionAhadd from '@Pages/InspectionAhadd';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -171,7 +172,7 @@ export default function App() {
           <PrivateRoute path="/inspection/:inspection_session" user={h.user} accessible={[2, 3].includes(h.user?.RoleId)}>
             <MainContainer
               user={h.user}
-              child={<InspectionJland {...h} />}
+              child={<InspectionAhadd {...h} />}
               adjustedStyle={{ paddingLeft: '2%', paddingRight: '0%' }}
             />
           </PrivateRoute>

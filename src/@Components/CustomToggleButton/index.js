@@ -6,12 +6,13 @@ import { Tooltip, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(() => ({
   toggleButton: {
     backgroundColor: 'white',
-    color: 'var(--primary-color)',
-    border: '2px solid var(--primary-color)',
+    color: 'var(--main-color)',
+    border: '2px solid var(--main-color)',
     height: '38px',
+    borderRadius: 20,
     '&.Mui-selected': {
-      backgroundColor: 'var(--primary-color)',
-      border: '2px solid var(--primary-color)',
+      backgroundColor: 'var(--main-color)',
+      border: '2px solid var(--main-color)',
       color: 'white !important',
     },
   },
@@ -27,13 +28,13 @@ export default function index({ inspectionType, setInspectionType }) {
       onChange={handleTogggle}
       size="small"
     >
-      <ToggleButton className={classes.toggleButton} value="Image">
-        <Tooltip title="On-Image Annotation">
+      <ToggleButton className={classes.toggleButton} value="image">
+        <Tooltip title="Image">
           <ImageOutlined />
         </Tooltip>
       </ToggleButton>
-      <ToggleButton className={classes.toggleButton} value="Map">
-        <Tooltip title="On-Map Annotation">
+      <ToggleButton className={classes.toggleButton} value="map">
+        <Tooltip title="Map">
           <MapOutlined />
         </Tooltip>
       </ToggleButton>

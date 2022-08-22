@@ -52,7 +52,7 @@ export const centeringMap = (map, targetCenter) => {
 
 export const setBaseLayerActive = (lyr_active, map) => {
   if (!lyr_active) return;
-  const all_base = Object.values(map._layers).filter(alllyr => alllyr.options.isBaseLayer);
+  const all_base = Object.values(map?._layers).filter(alllyr => alllyr.options.isBaseLayer);
   if (all_base.length) all_base.forEach(lyr => { map.removeLayer(lyr); });
   map.addLayer(lyr_active);
 };
