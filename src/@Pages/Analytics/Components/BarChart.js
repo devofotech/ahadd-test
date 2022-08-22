@@ -4,18 +4,13 @@ import {
 } from 'victory';
 import data from './data.json';
 
-function BarChart({ width, height, padding, ...props }) {
-  const chartPadding = padding ?? { top: 30, bottom: 60, right: 50, left: 50 };
-  width = width ?? 600;
-  height = height ?? 350;
+function BarChart() {
   return (
     <VictoryChart
       // domainPadding will add space to each side of VictoryBar to
       // prevent it from overlapping the axis
       // domainPadding={60}
-      width={width}
-      padding={chartPadding}
-      height={height}
+      width={600}
       theme={VictoryTheme.material}
     >
       <VictoryAxis
@@ -23,7 +18,7 @@ function BarChart({ width, height, padding, ...props }) {
         // they are placed on the axis
         tickFormat={(x) => x}
         style={{
-          tickLabels: { fontFamily: 'CeraProRegular', fontSize: 18, padding: 8 },
+          tickLabels: { fontFamily: 'CeraProRegular', fontSize: 25, padding: 8 },
           ticks: { size: 0 },
           axis: { stroke: 'rgba(30, 52, 101, 0.15)' },
           grid: { stroke: 'transparent' },
