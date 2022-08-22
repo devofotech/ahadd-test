@@ -101,20 +101,20 @@ export default function TopBar(props) {
         {[
           {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/project',
-            icon: (e) => <MapView color={iconColor(e)} />,
-            title: 'Map',
-            page_access: true,
-            tourId: 'map_view',
-          },
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
             link: '/dashboard/analytic',
             selected: '/dashboard',
             icon: (e) => <Dashboard color={iconColor(e)} />,
             title: 'Dashboard',
             page_access: true,
             tourId: 'dashboard',
+          },
+          {
+            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+            link: '/project',
+            icon: (e) => <MapView color={iconColor(e)} />,
+            title: 'Map',
+            page_access: true,
+            tourId: 'map_view',
           },
           {
             roles: ['developer', 'organization_admin', 'asset_manager', 'user'],

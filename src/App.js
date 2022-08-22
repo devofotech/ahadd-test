@@ -21,6 +21,7 @@ import NewProcessing from '@Pages/NewProcessing';
 import { AuthProvider, AuthContext } from '@Context/Auth';
 import DataMining from '@Pages/DataMining';
 import AssetList from '@Pages/AssetList';
+import AssetListAhadd from '@Pages/AssetListAhadd';
 import PrivacyPolicy from '@Pages/PrivacyPolicy';
 import ExternalMap from '@Pages/ExternalMap';
 import UserManagement from '@Pages/UserManagement';
@@ -54,7 +55,7 @@ import OrganizationSummaryDetails from '@Pages/OrganizationSummaryDetails';
 import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
 import AboutUs from '@Pages/AboutUs';
-import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
+import InspectionAhadd from '@Pages/InspectionAhadd';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -118,7 +119,7 @@ export default function App() {
             <MainContainer user={h.user} child={<Dashboard {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/asset/" user={h.user}>
-            <MainContainer user={h.user} child={<AssetList {...h} closeTour={() => setIsOpen(false)} />} />
+            <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
             <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />
@@ -171,7 +172,7 @@ export default function App() {
           <PrivateRoute path="/inspection/:inspection_session" user={h.user} accessible={[2, 3].includes(h.user?.RoleId)}>
             <MainContainer
               user={h.user}
-              child={<InspectionJland {...h} />}
+              child={<InspectionAhadd {...h} />}
               adjustedStyle={{ paddingLeft: '2%', paddingRight: '0%' }}
             />
           </PrivateRoute>

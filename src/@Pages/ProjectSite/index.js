@@ -25,9 +25,9 @@ import WelcomePage from './components/WelcomePage';
 
 export default function Property(props) {
   const location = useLocation();
-  if (!!props.user && ['name', 'email'].map(attr => !!props.user[attr]).includes(false)) {
-    if (props.user.RoleId > 1 && !!props.user.OrganizationId) return <Redirect to="/pending-information" />;
-  }
+  // if (!!props.user && ['name', 'email'].map(attr => !!props.user[attr]).includes(false)) {
+  //   if (props.user.RoleId > 1 && !!props.user.OrganizationId) return <Redirect to="/pending-information" />;
+  // }
   const prefixLocation = location.pathname.split('/');
   const isAssetView = prefixLocation.length > 4 && prefixLocation[2] === 'asset';
 
