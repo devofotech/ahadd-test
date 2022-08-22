@@ -14,7 +14,7 @@ import { Link, useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
   root: { maxWidth: '100%', margin: '0 2px', minHeight: '100%' },
   media: { height: '30vh' },
-  title: { fontWeight: 'bold', fontSize: 20, fontFamily: 'CeraProRegular' },
+  title: { fontWeight: 'bold', fontSize: 20, color: 'var(--dark-blue-color)', fontFamily: 'CeraProRegular' },
   content: { color: '#707070', fontSize: 12, fontFamily: 'CeraProRegular' },
   deleteButtonContent: { right: 15, top: '30%' },
   avatarContent: { right: 10, top: '20%' },
@@ -62,7 +62,7 @@ export default function AssetCard({
         onMouseOver={() => setOnHover(true)}
         onMouseLeave={() => setOnHover(false)}
         className={classes.root}
-        style={{ transform: onHover ? 'scale(1.02)' : 'scale(1)', transition: 'all .5s' }}
+        style={{ transform: onHover ? 'scale(1.01)' : 'scale(1)', transition: 'all .5s' }}
       >
         <CardActionArea>
           <Link to={`/project?id=${projects?.id}`}>

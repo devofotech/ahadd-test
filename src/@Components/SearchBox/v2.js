@@ -9,7 +9,7 @@ const SearchTextField = styled(TextField)(() => ({
 }));
 
 export default function SearchBox({
-  onChange, onKeyDown = () => null, onClick = () => null, hasOnClick = false, label = 'Search',
+  onChange, onKeyDown = () => null, onClick = () => null, hasOnClick = false, label = 'Search', style,
 }) {
   const SearchIcon = () => (
     hasOnClick
@@ -30,6 +30,7 @@ export default function SearchBox({
           </InputAdornment>
         ),
       }}
+      style={{ ...style }}
     />
   );
 }

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   Select, MenuItem, Checkbox, FormControl, ListItemText, OutlinedInput, Chip,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -24,22 +25,24 @@ const MenuProps = {
 };
 
 export default function SortDropdown() {
+  const classes = useStyles();
   const [sortBy, setSortBy] = useState('');
 
   const sort = [
     {
-      value: 0,
+      value: 1,
       label: 'Alphabetically',
     },
     {
-      value: 1,
+      value: 2,
       label: 'Date Created',
     },
   ];
 
   return (
-    <FormControl style={{ m: 1, width: '10vw', marginLeft: 10, marginRight: 10 }} size="small">
+    <FormControl style={{ minWidth: '9rem' }} size="small">
       <Select
+        className={classes.root}
         style={{ borderRadius: 30 }}
         displayEmpty
         value={sortBy}
@@ -48,7 +51,7 @@ export default function SortDropdown() {
         inputProps={{ 'aria-label': 'Without label' }}
         MenuProps={MenuProps}
       >
-        <MenuItem disabled value="">
+        <MenuItem value={0}>
           <span style={{ color: 'var(--secondary-color)' }}>Sort By</span>
         </MenuItem>
         {sort.map((d) => (
@@ -60,3 +63,12 @@ export default function SortDropdown() {
     </FormControl>
   );
 }
+
+const useStyles = makeStyles(() => ({
+  root: {
+    transform: 'scale(0.85)',
+    '& .MuiSelect-select:focus': {
+      backgroundColor: 'transparent',
+    },
+  },
+}));
