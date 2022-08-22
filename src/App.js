@@ -21,6 +21,7 @@ import NewProcessing from '@Pages/NewProcessing';
 import { AuthProvider, AuthContext } from '@Context/Auth';
 import DataMining from '@Pages/DataMining';
 import AssetList from '@Pages/AssetList';
+import AssetListAhadd from '@Pages/AssetListAhadd';
 import PrivacyPolicy from '@Pages/PrivacyPolicy';
 import ExternalMap from '@Pages/ExternalMap';
 import UserManagement from '@Pages/UserManagement';
@@ -117,7 +118,7 @@ export default function App() {
             <MainContainer user={h.user} child={<Dashboard {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/asset/" user={h.user}>
-            <MainContainer user={h.user} child={<AssetList {...h} closeTour={() => setIsOpen(false)} />} />
+            <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
             <MainContainer user={h.user} child={<CreateAsset {...h} />} />
