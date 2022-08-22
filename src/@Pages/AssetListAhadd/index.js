@@ -99,15 +99,10 @@ export default function AssetList({ user, closeTour }) {
   const history = useHistory();
   const location = useLocation();
   const h = useHook();
-  const [openDialog, setOpenDialog] = useState(false);
   const [network, setNetwork] = useState([]);
   const [region, setRegion] = useState([]);
   const [ranking, setRanking] = useState([]);
   const [section, setSection] = useState([]);
-  const createAsset = () => {
-    if (h.projects.filter(e => !e.is_demo).length < user['Organization.AssetLimit']) return history.push('/create-asset');
-    setOpenDialog(true);
-  };
 
   useEffect(() => {
     if (location.pathname === '/asset') {
@@ -132,8 +127,6 @@ export default function AssetList({ user, closeTour }) {
             />
             <SearchBox onChange={(e) => h.handleSearch(e)} />
             <SortDropdown />
-            {user?.can_add_asset && (
-              <>
                 <Button
                   variant="contained"
                   style={{
@@ -142,19 +135,11 @@ export default function AssetList({ user, closeTour }) {
                     background: 'linear-gradient(var(--main-color), var(--primary-color))',
                     width: '10vw',
                   }}
-                  onClick={() => createAsset()}
+                  onClick={() => history.push('/create-asset')}
                 >
                   <AddOutlined />
                   <p className="text-white">Add Asset</p>
                 </Button>
-                <WarningDialog
-                  open={openDialog}
-                  setOpen={setOpenDialog}
-                  type="asset"
-                  user={user}
-                />
-              </>
-            )}
           </Box>
         </div>
         <div className="d-flex pl-4">

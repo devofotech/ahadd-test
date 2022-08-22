@@ -58,7 +58,7 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
           </Typography>
           {isDisabled && <p className={`${textTitle} pt-1`} style={{ opacity, position: 'absolute', top: 240 }}>(Coming soon)</p>}
           <Typography className={classes.description} variant="body2" color="textSecondary" component="p" style={{ position: 'relative' }}>
-            {h.data.description.split('|').map(e => (
+            {h.data.description?.split('|').map(e => (
               <>
                 <p className={`text-justify ${textDesc}`} style={{ transition: 'all .25s', opacity }}>{e}</p>
                 <br />

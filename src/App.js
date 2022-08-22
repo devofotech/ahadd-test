@@ -56,6 +56,7 @@ import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
 import AboutUs from '@Pages/AboutUs';
 import InspectionAhadd from '@Pages/InspectionAhadd';
+import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
 import Hook from './hook';
 
 const HomePage = (h) => {
