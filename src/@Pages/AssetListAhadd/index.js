@@ -27,12 +27,6 @@ export default function AssetList({ user, closeTour }) {
   const history = useHistory();
   const location = useLocation();
   const h = useHook();
-  const [openDialog, setOpenDialog] = useState(false);
-  const createAsset = () => {
-    if (h.projects.filter(e => !e.is_demo).length < user['Organization.AssetLimit']) return history.push('/create-asset');
-    setOpenDialog(true);
-  };
-
   useEffect(() => {
     if (location.pathname === '/asset') {
       closeTour();
@@ -64,17 +58,11 @@ export default function AssetList({ user, closeTour }) {
                 background: 'linear-gradient(var(--main-color), var(--primary-color))',
                 width: '10rem',
               }}
-              onClick={() => createAsset()}
+              onClick={() => history.push('/create-asset')}
             >
               <AddOutlined />
               <p className="text-white">Add Asset</p>
             </Button>
-            <WarningDialog
-              open={openDialog}
-              setOpen={setOpenDialog}
-              type="asset"
-              user={user}
-            />
           </Box>
         </div>
         <div className="d-flex">

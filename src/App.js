@@ -56,6 +56,7 @@ import UnsubscribePlan from '@Pages/UnsubscribePlan';
 import AssetFileConversion from '@Pages/AssetFileConversion';
 import AboutUs from '@Pages/AboutUs';
 import InspectionAhadd from '@Pages/InspectionAhadd';
+import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
 import Hook from './hook';
 import Analytics from '@Pages/Analytics';
 
@@ -126,7 +127,7 @@ export default function App() {
             <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
-            <MainContainer user={h.user} child={<CreateAsset {...h} />} />
+            <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />
           </PrivateRoute>
           <PrivateRoute path="/asset/:AssetId/2D" user={h.user} accessible={!!h.user?.can_view_asset}>
             <MainContainer user={h.user} child={<AssetUpload2D {...h} />} />

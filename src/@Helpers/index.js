@@ -66,7 +66,8 @@ export const groupByYearAndMonth = (obj) => {
   return res;
 };
 
-export const markerToString = (marker) => `${marker.lat || ''},${marker.lng || ''}`;
+export const markerToString = (marker) => (marker && marker.lat && marker.lng ? `${marker.lat},${marker.lng}` : null);
+export const polygonToString = (polygon) => (polygon ? 'No coordinate' : JSON.stringify(polygon));
 
 export const stringToMarker = (string) => {
   const temp = string.replace(/\s/g, '', '').split(',');

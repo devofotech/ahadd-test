@@ -10,7 +10,7 @@ import moment from 'moment';
 export default function AssetDetail({ details, assetTypeList = [], hasSummary = false }) {
   const [assetType, setAssetType] = useState([]);
   let lastinspection = moment(details.lastinspection).isValid() ? moment(details.lastinspection).format('DD MMM YYYY') : 'No Inspection';
-  if (!details.lastinspection) lastinspection = 'No Inspection';
+  if (!details.lastinspection) lastinspection = '-';
   if (details.id === 92) lastinspection = '8 Nov 2021';
   if (details.id === 93) lastinspection = '21 Nov 2021';
 
@@ -24,19 +24,19 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
   }, [assetTypeList, details]);
 
   return (
-    <Grid container spacing={1} style={{ width: '93%', flexWrap: 'wrap', justifyContent: 'center' }} className="my-2">
+    <Grid container spacing={1} style={{ width: '100%', flexWrap: 'wrap', justifyContent: 'center' }} className="mb-2 p-4">
       {[
         {
           title: 'Asset Type', data: removeAsset(assetType?.name ?? details.asset_type) ?? 'Loading', show: true, icon: <BusinessIcon fontSize="default" />,
         },
         {
+          title: 'Region', data: details.region, show: true, icon: <PublicIcon fontSize="default" />,
+        },
+        {
+          title: 'Section', data: details.section, show: true, icon: <LocationOnIcon fontSize="default" />,
+        },
+        {
           title: 'Last Inspection', data: lastinspection, show: true, icon: <CalendarTodayIcon fontSize="default" />,
-        },
-        {
-          title: 'Location', data: details.location, show: true, icon: <LocationOnIcon fontSize="default" />,
-        },
-        {
-          title: 'Region', data: details.state, show: true, icon: <PublicIcon fontSize="default" />,
         },
         {
           title: 'Asset Life Cycle', data: !details.isLifeCycle ? 'No' : 'Yes', show: hasSummary, icon: <CycleIcon fontSize="default" />,
@@ -52,14 +52,14 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
                 }}
               >
                 <Grid container lg={3} justifyContent="center" alignItems="center">
-                  <div className="d-flex mx-auto" style={{ color: 'var(--tertiary-color)' }}>
+                  <div className="d-flex mx-auto" style={{ color: 'var(--primary-color)' }}>
                     {e.icon}
                   </div>
                 </Grid>
                 <Grid container lg={9} justifyContent="center" alignItems="center">
                   <div>
-                    <p style={{ fontWeight: 600, fontSize: '0.7em', color: 'var(--tertiary-color)' }}>{e.title}</p>
-                    <p style={{ fontWeight: 600, fontSize: 14, color: 'var(--secondary-color)' }}>{e.data}</p>
+                    <p style={{ fontWeight: 600, fontSize: '0.7em', color: 'var(--primary-color)' }}>{e.title}</p>
+                    <p style={{ fontWeight: 600, fontSize: 12, color: 'var(--main-color)' }}>{e.data}</p>
                   </div>
                 </Grid>
               </Grid>
