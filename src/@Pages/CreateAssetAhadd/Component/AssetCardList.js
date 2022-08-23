@@ -42,10 +42,15 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
       onClick: () => nextStep(),
       onMouseOver: () => setOnHover(true),
       onMouseLeave: () => setOnHover(false),
-      style: { background: animation && 'linear-gradient(var(--main-color), var(--primary-color))', transition: 'all .25s', display: 'flex' },
+      style: {
+        background: animation && 'linear-gradient(var(--main-color), var(--primary-color))',
+        transition: 'all .25s',
+        display: 'flex',
+        cursor: 'default',
+      },
     },
     true: {
-      style: { backgroundColor: 'lightgrey' },
+      style: { backgroundColor: 'lightgrey', cursor: 'default' },
     },
   };
 
@@ -70,7 +75,7 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
               <p
                 className={`${textTitle} pt-1`}
                 style={{
-                  opacity, position: 'absolute', top: 7, right: 15, zIndex: 99
+                  opacity, position: 'absolute', top: 7, right: 15, zIndex: 99,
                 }}
               >(Coming soon)
               </p>

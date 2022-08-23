@@ -112,19 +112,19 @@ export default () => {
   };
 
   const getModules = () => {
-    Api({
-      endpoint: endpoints.getModules(),
-      onSuccess: ({ data }) => setModules(data.map(m => ({ ...m, label: m.name }))),
-      onFail: () => toast('error', 'Something went wrong, please try again later.'),
-    });
+    // Api({
+    //   endpoint: endpoints.getModules(),
+    //   onSuccess: ({ data }) => setModules(data.map(m => ({ ...m, label: m.name }))),
+    //   onFail: () => toast('error', 'Something went wrong, please try again later.'),
+    // });
   };
 
   const getAssetParameters = () => {
-    Api({
-      endpoint: endpoints.getParameters(),
-      onSuccess: ({ data }) => setAssetParameters(data),
-      onFail: () => toast('error', 'Something went wrong, please try again later.'),
-    });
+    // Api({
+    //   endpoint: endpoints.getParameters(),
+    //   onSuccess: ({ data }) => setAssetParameters(data),
+    //   onFail: () => toast('error', 'Something went wrong, please try again later.'),
+    // });
   };
 
   useEffect(() => {
