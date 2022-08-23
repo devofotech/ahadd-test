@@ -58,6 +58,7 @@ import AboutUs from '@Pages/AboutUs';
 import InspectionAhadd from '@Pages/InspectionAhadd';
 import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
 import Hook from './hook';
+import Analytics from '@Pages/Analytics';
 
 const HomePage = (h) => {
   if (h.user === 'logged out') {
@@ -118,6 +119,9 @@ export default function App() {
           </PrivateRoute>
           <PrivateRoute path="/dashboard/analytic" user={h.user} accessible={!!h.user?.can_view_dashboard}>
             <MainContainer user={h.user} child={<Dashboard {...h} />} />
+          </PrivateRoute>
+          <PrivateRoute path="/analytics" user={h.user}>
+            <MainContainer user={h.user} child={<Analytics {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/asset/" user={h.user}>
             <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
