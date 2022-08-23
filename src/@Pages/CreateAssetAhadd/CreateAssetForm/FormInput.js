@@ -47,57 +47,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const network = [
-  {
-    value: 'BKE',
-  },
-  {
-    value: 'LPT2',
-  },
-];
-
-const region = [
-  {
-    value: 'North',
-  },
-  {
-    value: 'Central',
-  },
-  {
-    value: 'South',
-  },
-];
-
-const section = [
-  {
-    value: 'N1',
-  },
-  {
-    value: 'N2',
-  },
-  {
-    value: 'N3',
-  },
-];
-
-const ranking = [
-  {
-    value: 'Very High (AA)',
-  },
-  {
-    value: 'High (A)',
-  },
-  {
-    value: 'Medium (B)',
-  },
-  {
-    value: 'Low (C)',
-  },
-  {
-    value: 'Unranked',
-  },
-];
-
 export default (h) => {
   const classes = useStyles();
   return (
@@ -109,19 +58,19 @@ export default (h) => {
       {[
         {
           title: 'Network',
-          children: <CustomTextField classes={classes} name="Network" value={h.network} values={network} onChange={(e) => h.setNetwork(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Network" value={h.network} values={h.networks} onChange={(e) => h.setNetwork(e.target.value)} select />,
         },
         {
           title: 'Region',
-          children: <CustomTextField classes={classes} name="Region" value={h.region} values={region} onChange={(e) => h.setRegion(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Region" value={h.region} values={h.regions} onChange={(e) => h.setRegion(e.target.value)} select />,
         },
         {
           title: 'Section',
-          children: <CustomTextField classes={classes} name="Section" value={h.section} values={section} onChange={(e) => h.setSection(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Section" value={h.section} values={h.sections} onChange={(e) => h.setSection(e.target.value)} select />,
         },
         {
           title: 'Ranking',
-          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={ranking} onChange={(e) => h.setRanking(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={h.rankings} onChange={(e) => h.setRanking(e.target.value)} select />,
         },
         {
           title: 'Location',
@@ -190,8 +139,8 @@ const CustomTextField = (h) => {
         {...h}
       >
         {h.values.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.value}
+          <MenuItem key={option.value} value={option}>
+            {option.label}
           </MenuItem>
         ))}
       </TextField>

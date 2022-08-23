@@ -64,7 +64,7 @@ export default ({
     // setZoomControl(zoomctrl);
     const control = new L.Control.GroupedLayers(basemapHook);
     // mapRef.current.leafletElement.addControl(control);
-    setBaseLayerActive(basemapHook['Azure Base Road'], mapRef.current.leafletElement); // set active basemap , control will keep track and smart enough
+    setBaseLayerActive(basemapHook['Google Street'], mapRef.current.leafletElement); // set active basemap , control will keep track and smart enough
     setActiveControl(control);
     set_initialReady(true);
   }, []);

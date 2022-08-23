@@ -19,20 +19,21 @@ export default () => {
   const [selectedAssetParameter, setSelectedAssetParameter] = useState({});
   const [parameterOption, setParameterOption] = useState([]);
   const [name, setName] = useState('');
-  const [network, setNetwork] = useState('');
-  const [region, setRegion] = useState('');
-  const [section, setSection] = useState('');
-  const [ranking, setRanking] = useState('');
+  const [network, setNetwork] = useState([]);
+  const [region, setRegion] = useState([]);
+  const [section, setSection] = useState([]);
+  const [ranking, setRanking] = useState([]);
   const [marker, setMarker] = useState({ lat: 3.093783, lng: 101.655155 });
   const [files, setFiles] = useState([]);
-  const [location, setLocation] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
   const [assetTag, setAssetTag] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingAssets, setIsLoadingAssets] = useState(false);
   const [polygon, setPolygon] = useState(null);
+  const [networks, setNetworks] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [regions, setRegions] = useState([]);
+  const [rankings, setRankings] = useState([]);
   const isFirstStep = activeStepAssetType === 0;
 
   const handleUpdatePhase = (event) => {
@@ -66,30 +67,37 @@ export default () => {
 
   const createAsset = () => {
     const data = {
-      name, network, region, section, location, ranking, polygonCoordinate,
+      name,
+      network: network.value,
+      region: region.value,
+      section: section.value,
+      ranking: ranking.value,
+      polygon,
+      marker,
+      lat: marker.lat,
+      lng: marker.lng,
     };
     if (!data.name) return;
-    if (!data.lat) return;
-    if (!data.lng) return;
+    if (!data.network) return;
+    // if (!data.polygon) return;
     setIsLoading(true);
-    // Api({
-    //   endpoint: endpoints.newAssets(),
-    //   data,
-    //   files,
-    //   onSuccess: () => {
-    //     toast('success', 'Asset created');
-    //     setIsLoading(false);
-    //     setIsSuccess(true);
-    //     handleNextStep();
-    //   },
-    //   onFail: () => {
-    //     toast('error', 'Opss, something went wrong, please try again.');
-    //     setIsLoading(false);
-    //     setIsSuccess(false);
-    //     handleNextStep();
-    //   },
-    // });
-    alert('Data that will be submitted: ', data)
+    Api({
+      endpoint: endpoints.newAssets(),
+      data,
+      files,
+      onSuccess: () => {
+        toast('success', 'Asset created');
+        setIsLoading(false);
+        setIsSuccess(true);
+        handleNextStep();
+      },
+      onFail: () => {
+        toast('error', 'Opss, something went wrong, please try again.');
+        setIsLoading(false);
+        setIsSuccess(false);
+        handleNextStep();
+      },
+    });
   };
 
   const selectedTypeProfile = _.find(assetTypeList, { id: assetType });
@@ -104,7 +112,10 @@ export default () => {
       endpoint: endpoints.getStaticData(),
       onSuccess: ({ data }) => {
         setAssetTypeList(data.AssetType ?? []);
-        setAssetPhaseList(data.projectphase ?? []);
+        setNetworks(data.Network.map(m => ({ label: m.name, value: m.id })));
+        setRegions(data.Region.map(m => ({ label: m.name, value: m.id })));
+        setSections(data.Section.map(m => ({ label: m.name, value: m.id })));
+        setRankings(data.Ranking.map(m => ({ label: m.name, value: m.id })));
         setIsLoadingAssets(false);
       },
       onFail: () => console.log('error loading static data'),
@@ -178,12 +189,6 @@ export default () => {
     setMarker,
     files,
     setFiles,
-    location,
-    setLocation,
-    state,
-    setState,
-    country,
-    setCountry,
     assetTag,
     setAssetTag,
     isSuccess,
@@ -210,5 +215,9 @@ export default () => {
     setSection,
     polygon,
     setPolygon,
+    networks,
+    regions,
+    sections,
+    rankings,
   };
 };
