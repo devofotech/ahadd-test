@@ -74,7 +74,6 @@ export default () => {
       SectionId: section.value,
       RankingId: ranking.value,
       polygon,
-      marker,
       lat: marker.lat,
       lng: marker.lng,
     };
