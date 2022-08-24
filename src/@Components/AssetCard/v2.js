@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 
 export default function AssetCard({
   data: projects, setSelectedAsset, setOpen, userData, setOpenRelative,
-  setWorkflowAccess, setTeamAccess, setUserAccess,
+  setWorkflowAccess, setTeamAccess, setUserAccess, ...h
 }) {
   const history = useHistory();
   const MySwal = withReactContent(Swal);
@@ -36,6 +36,9 @@ export default function AssetCard({
   const assetWorkflowAccess = projects.AssetAccesses.filter(acc => !!acc.Workflow).map(acc => ({ ...acc.Workflow, type: 'Workflow' }));
   const assetTeamAccess = projects.AssetAccesses.filter(acc => !!acc.Team).map(acc => ({ ...acc.Team, type: 'Team' }));
   const assetUserAccess = projects.AssetAccesses.filter(acc => !!acc.User).map(acc => acc.User);
+  const region = h.regions.find(f => f.value === projects.RegionId)?.label;
+  const network = h.networks.find(f => f.value === projects.NetworkId)?.label;
+  const section = h.sections.find(f => f.value === projects.SectionId)?.label;
   const [onIconHover, setOnIconHover] = useState({});
   const [onHover, setOnHover] = useState(false);
   return (
@@ -99,7 +102,7 @@ export default function AssetCard({
               <div style={{ padding: 16 }}>
                 <Typography gutterBottom className={classes.title}>{projects?.name}</Typography>
                 <Typography component="p" className={classes.content}>
-                  {`${projects?.location}, ${projects?.state}`}
+                  {`${region}, ${network}, ${section}`}
                   <br />
                   {`Last Update on ${moment(projects?.updatedAt).format('D MMMM YYYY, hh:mm A')}`}
                 </Typography>

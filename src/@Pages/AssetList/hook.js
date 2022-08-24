@@ -104,7 +104,6 @@ export default function Hook() {
         const projs = [...allProjects].filter(x => !!x.asset_type);
 
         return projs?.filter(project => {
-          console.log('vvv', project.asset_type);
           return project.asset_type.toLowerCase().search(data.toLowerCase()) != -1;
         });
       });

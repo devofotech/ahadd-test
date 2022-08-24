@@ -26,7 +26,7 @@ const MenuProps = {
 
 export default function SortDropdown() {
   const classes = useStyles();
-  const [sortBy, setSortBy] = useState('');
+  const [sortBy, setSortBy] = useState(0);
 
   const sort = [
     {
