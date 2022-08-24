@@ -68,17 +68,18 @@ export default () => {
   const createAsset = () => {
     const data = {
       name,
-      network: network.value,
-      region: region.value,
-      section: section.value,
-      ranking: ranking.value,
+      AssetTypeId: assetType,
+      NetworkId: network.value,
+      RegionId: region.value,
+      SectionId: section.value,
+      RankingId: ranking.value,
       polygon,
       marker,
       lat: marker.lat,
       lng: marker.lng,
     };
     if (!data.name) return;
-    if (!data.network) return;
+    if (!data.NetworkId) return;
     // if (!data.polygon) return;
     setIsLoading(true);
     Api({
