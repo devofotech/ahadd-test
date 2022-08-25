@@ -15,6 +15,7 @@ import {
   Dashboard, MapView, AssetList, Analytic, AboutUs,
 } from '@Assets/Icons/topbarIcon';
 import { db } from '@Configs/firebase';
+import { truncateString } from '@Helpers';
 import { ref, onChildAdded } from 'firebase/database';
 import Avatar from './Avatar';
 import ActivityLog from './ActivityLog';
@@ -146,28 +147,6 @@ export default function TopBar(props) {
                 title: 'About Us',
                 page_access: true,
               },
-              // {
-              //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-              //   link: '/mapping-list',
-              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-              //   title: 'Geo Processing',
-              //   page_access: props.can_view_mapping_list,
-              //   tourId: 'geo_processing',
-              // },
-              // {
-              //   roles: ['developer'],
-              //   link: '/mapping-processing',
-              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-              //   title: 'GIS Processing',
-              //   page_access: ['processing'].includes(props.raise_role),
-              // },
-              // {
-              //   roles: ['developer'],
-              //   link: '/assetfile-conversion',
-              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-              //   title: 'Asset File Conversion',
-              //   page_access: ['processing'].includes(props.raise_role),
-              // },
             ].map(nav => !!nav.page_access && (
               <Link to={nav.link}>
                 <Grid
@@ -192,32 +171,19 @@ export default function TopBar(props) {
               </Link>
             ))}
           </Grid>
-          <div className="d-flex align-items-center">
-            {/* {props.isProjectSite && (
-              <Tooltip title="View Guide">
-                <IconButton disableRipple style={{ backgroundColor: 'transparent', padding: 0, marginRight: 10 }}>
-                  <HelpOutline onClick={() => props.setIsOpen(true)} color="disabled" />
-                </IconButton>
-              </Tooltip>
-            )} */}
-            {/* {!isOrgUnlimited
-              && (
-                <div data-tut="token">
-                  <CoinWallet isOrgUnlimited={isOrgUnlimited} />
-                </div>
-              )} */}
-          </div>
-          &nbsp;&nbsp;&nbsp;
-          {/* {!!props.can_see_activity_log && ( */}
-          <div className="mr-4">
+          <div className="mr-4 ml-3">
             <Badge badgeContent={hasRead ? 0 : activityLog.data?.length} color="secondary" onClick={(e) => handleClickNotification(e)}>
               <Notifications onClick={(e) => handleClickNotification(e)} style={{ backgroundColor: 'primary' }} data-tut="notification" />
             </Badge>
           </div>
-          {/* )} */}
-          <Avatar {...props} style={{ width: '3em' }} />
-          <div style={{ cursor: 'pointer', zIndex: 99999 }} onClick={handleClickMenu}>
-            <p style={{ fontSize: 16, fontWeight: 600 }} className="mb-0 navbar-text">{props.name?.split(' ').slice(0, 2).join(' ')}</p>
+          <div
+            className="d-flex flex-row flex-standard"
+            style={{ cursor: 'pointer', zIndex: 99999, minWidth: 'fit-content' }}
+          >
+            <Avatar {...props} />
+            <p style={{ fontSize: 16, fontWeight: 600 }} className="mb-0 navbar-text">
+              {truncateString(props.name?.split(' ').slice(0, 2).join(' '), 15)}
+            </p>
             <ExpandMore onBlur={handleCloseMenu} onClick={handleClickMenu} data-tut="dropdown_icon" />
           </div>
           <Menu
