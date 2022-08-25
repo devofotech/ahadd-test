@@ -89,109 +89,109 @@ export default function TopBar(props) {
       <Link to="/" style={{ zIndex: 100 }}>
         <img src={plus_ahadd} height={35} style={{ marginTop: -5 }} />
       </Link>
-      <Grid
-        container
-        item
-        xs={12}
-        justify="flex-end"
-        alignItems="center"
-        className="position-absolute"
-        style={{ right: '10%', translate: 'transform(90%, 0)' }}
-      >
-        {[
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/dashboard/analytic',
-            selected: '/dashboard',
-            icon: (e) => <Dashboard color={iconColor(e)} />,
-            title: 'Dashboard',
-            page_access: true,
-            tourId: 'dashboard',
-          },
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/project',
-            icon: (e) => <MapView color={iconColor(e)} />,
-            title: 'Map',
-            page_access: true,
-            tourId: 'map_view',
-          },
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/asset/',
-            icon: (e) => <AssetList color={iconColor(e)} />,
-            title: 'Asset List',
-            page_access: true,
-            tourId: 'asset_list',
-          },
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/analytics',
-            icon: (e) => <Analytic color={iconColor(e)} />,
-            title: 'Analytics',
-            page_access: true,
-          },
-          {
-            roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-            link: '/about-us',
-            icon: (e) => <AboutUs color={iconColor(e)} />,
-            title: 'About Us',
-            page_access: true,
-          },
-          // {
-          //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-          //   link: '/mapping-list',
-          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-          //   title: 'Geo Processing',
-          //   page_access: props.can_view_mapping_list,
-          //   tourId: 'geo_processing',
-          // },
-          // {
-          //   roles: ['developer'],
-          //   link: '/mapping-processing',
-          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-          //   title: 'GIS Processing',
-          //   page_access: ['processing'].includes(props.raise_role),
-          // },
-          // {
-          //   roles: ['developer'],
-          //   link: '/assetfile-conversion',
-          //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
-          //   title: 'Asset File Conversion',
-          //   page_access: ['processing'].includes(props.raise_role),
-          // },
-        ].map(nav => !!nav.page_access && (
-          <Link to={nav.link}>
-            <Grid
-              item
-              container
-              alignItems="center"
-              className="mx-4"
-            >
-              <span className="mx-1 mr-2" style={{ opacity: path.includes(nav.selected ?? nav.link) ? 1 : 0.8 }}>
-                {nav.icon(path.includes(nav.selected ?? nav.link))}
-              </span>
-              <h6
-                className={path.includes(nav.selected ?? nav.link)
-                  ? 'color-secondary shadow-selected mt-1'
-                  : 'color-tertiary shadow-unselected mt-1'}
-                data-tut={nav.tourId}
-                style={{ fontWeight: 600 }}
-              >
-                {nav.title}
-              </h6>
-            </Grid>
-          </Link>
-        ))}
-      </Grid>
       <div>
         <Grid
           container
           item
           // justify='flex-end'
           alignItems="center"
-          style={{ cursor: 'pointer' }}
+          className="d-flex flex-row"
+          style={{ cursor: 'pointer', flexWrap: 'nowrap' }}
         >
+
+          <Grid
+            container
+            item
+            xs={12}
+            justify="flex-end"
+            alignItems="center"
+          >
+            {[
+              {
+                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+                link: '/dashboard/analytic',
+                selected: '/dashboard',
+                icon: (e) => <Dashboard color={iconColor(e)} />,
+                title: 'Dashboard',
+                page_access: true,
+                tourId: 'dashboard',
+              },
+              {
+                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+                link: '/project',
+                icon: (e) => <MapView color={iconColor(e)} />,
+                title: 'Map',
+                page_access: true,
+                tourId: 'map_view',
+              },
+              {
+                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+                link: '/asset/',
+                icon: (e) => <AssetList color={iconColor(e)} />,
+                title: 'Asset List',
+                page_access: true,
+                tourId: 'asset_list',
+              },
+              {
+                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+                link: '/analytics',
+                icon: (e) => <Analytic color={iconColor(e)} />,
+                title: 'Analytics',
+                page_access: true,
+              },
+              {
+                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+                link: '/about-us',
+                icon: (e) => <AboutUs color={iconColor(e)} />,
+                title: 'About Us',
+                page_access: true,
+              },
+              // {
+              //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+              //   link: '/mapping-list',
+              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+              //   title: 'Geo Processing',
+              //   page_access: props.can_view_mapping_list,
+              //   tourId: 'geo_processing',
+              // },
+              // {
+              //   roles: ['developer'],
+              //   link: '/mapping-processing',
+              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+              //   title: 'GIS Processing',
+              //   page_access: ['processing'].includes(props.raise_role),
+              // },
+              // {
+              //   roles: ['developer'],
+              //   link: '/assetfile-conversion',
+              //   icon: (e) => <BuildingIcon color={iconColor(e)} />,
+              //   title: 'Asset File Conversion',
+              //   page_access: ['processing'].includes(props.raise_role),
+              // },
+            ].map(nav => !!nav.page_access && (
+              <Link to={nav.link}>
+                <Grid
+                  item
+                  container
+                  alignItems="center"
+                  style={{ marginLeft: '2rem', marginRight: '0.5rem' }}
+                >
+                  <span className="mx-1 mr-2" style={{ opacity: path.includes(nav.selected ?? nav.link) ? 1 : 0.8 }}>
+                    {nav.icon(path.includes(nav.selected ?? nav.link))}
+                  </span>
+                  <h6
+                    className={path.includes(nav.selected ?? nav.link)
+                      ? 'color-secondary shadow-selected mt-1'
+                      : 'color-tertiary shadow-unselected mt-1'}
+                    data-tut={nav.tourId}
+                    style={{ fontWeight: 600 }}
+                  >
+                    {nav.title}
+                  </h6>
+                </Grid>
+              </Link>
+            ))}
+          </Grid>
           <div className="d-flex align-items-center">
             {/* {props.isProjectSite && (
               <Tooltip title="View Guide">
@@ -215,7 +215,7 @@ export default function TopBar(props) {
             </Badge>
           </div>
           {/* )} */}
-          <Avatar {...props} />
+          <Avatar {...props} style={{ width: '3em' }} />
           <div style={{ cursor: 'pointer', zIndex: 99999 }} onClick={handleClickMenu}>
             <p style={{ fontSize: 16, fontWeight: 600 }} className="mb-0 navbar-text">{props.name?.split(' ').slice(0, 2).join(' ')}</p>
             <ExpandMore onBlur={handleCloseMenu} onClick={handleClickMenu} data-tut="dropdown_icon" />
@@ -325,7 +325,6 @@ export default function TopBar(props) {
           <ActivityLog />
         </Popover>
       )}
-
     </Grid>
   );
 }

@@ -20,9 +20,10 @@ import HighlightTabs from '@Components/HighlightTabs';
 import MainContentContainer from '@Components/MainContentContainer';
 import CenteredLoadingContainer from '@Components/CenteredLoadingContainer';
 import { Delete, Search } from '@material-ui/icons';
-import metro_pin_icon from '@Assets/Icons/metro-pin.svg';
 import CreateInspection from './CreateInspection';
 import Hook from './hook';
+import ViewSummary from './ViewSummary';
+import SetMainImage from './SetMainImage';
 
 const columns = [
   {
@@ -197,9 +198,7 @@ export default function InspectionSessionAhadd(props) {
         <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }}>
           <Search style={{ color: 'white' }} height="18px" width="18px" />
         </IconButton>
-        <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }}>
-          <img src={metro_pin_icon} height="18px" width="18px" />
-        </IconButton>
+        <SetMainImage />
         <Delete style={{
           color: 'red', width: 34, height: 34, cursor: 'pointer',
         }}
@@ -209,9 +208,7 @@ export default function InspectionSessionAhadd(props) {
   };
   const summaryBtn = () => {
     return (
-      <Button className="color-gradient-inline" style={{ borderRadius: 18, color: 'white' }}>
-        VIEW SUMMARY
-      </Button>
+      <ViewSummary />
     );
   };
 
