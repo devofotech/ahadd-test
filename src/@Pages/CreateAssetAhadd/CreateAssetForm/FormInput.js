@@ -1,14 +1,12 @@
-import LocationPicker from '@Components/Map/LocationPicker';
+/* eslint-disable max-len */
+import { useState, useEffect } from 'react';
 import PolygonPicker from '@Components/MapV2/PolygonPicker';
-import Map from '@Components/MapV2';
 import {
   Grid, TextField, MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Dropzone from '@Components/DropzoneBox/index';
-import { markerToString, polygonToString } from '@Helpers';
-
-import InputTag from './InputTag';
+import { markerToString, polygonToString, stringToMarker } from '@Helpers';
 
 const useStyles = makeStyles(() => ({
   gradient: {
@@ -47,59 +45,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const network = [
-  {
-    value: 'BKE',
-  },
-  {
-    value: 'LPT2',
-  },
-];
-
-const region = [
-  {
-    value: 'North',
-  },
-  {
-    value: 'Central',
-  },
-  {
-    value: 'South',
-  },
-];
-
-const section = [
-  {
-    value: 'N1',
-  },
-  {
-    value: 'N2',
-  },
-  {
-    value: 'N3',
-  },
-];
-
-const ranking = [
-  {
-    value: 'Very High (AA)',
-  },
-  {
-    value: 'High (A)',
-  },
-  {
-    value: 'Medium (B)',
-  },
-  {
-    value: 'Low (C)',
-  },
-  {
-    value: 'Unranked',
-  },
-];
-
 export default (h) => {
   const classes = useStyles();
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!h.network.value) return;
+    if (h.network.value == 1) {
+      setIsDisabled(false);
+      return;
+    }
+    h.setRegion({});
+    h.setSection({});
+    setIsDisabled(true);
+  }, [h.network]);
+
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
       <Grid item xs={12} className="px-1 mb-2">
@@ -109,19 +69,19 @@ export default (h) => {
       {[
         {
           title: 'Network',
-          children: <CustomTextField classes={classes} name="Network" value={h.network} values={network} onChange={(e) => h.setNetwork(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Network" value={h.network} values={h.networks} onChange={(e) => h.setNetwork(e.target.value)} select />,
         },
         {
           title: 'Region',
-          children: <CustomTextField classes={classes} name="Region" value={h.region} values={region} onChange={(e) => h.setRegion(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Region" value={h.region} values={h.regions} onChange={(e) => h.setRegion(e.target.value)} select disabled={isDisabled} />,
         },
         {
           title: 'Section',
-          children: <CustomTextField classes={classes} name="Section" value={h.section} values={section} onChange={(e) => h.setSection(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Section" value={h.section} values={h.sections} onChange={(e) => h.setSection(e.target.value)} select disabled={isDisabled} />,
         },
         {
           title: 'Ranking',
-          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={ranking} onChange={(e) => h.setRanking(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={h.rankings} onChange={(e) => h.setRanking(e.target.value)} select />,
         },
         {
           title: 'Location',
@@ -190,8 +150,8 @@ const CustomTextField = (h) => {
         {...h}
       >
         {h.values.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.value}
+          <MenuItem key={option.value} value={option}>
+            {option.label}
           </MenuItem>
         ))}
       </TextField>

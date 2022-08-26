@@ -30,10 +30,10 @@ export default function AssetDetail({ details, assetTypeList = [], hasSummary = 
           title: 'Asset Type', data: removeAsset(assetType?.name ?? details.asset_type) ?? 'Loading', show: true, icon: <BusinessIcon fontSize="default" />,
         },
         {
-          title: 'Region', data: details.region, show: true, icon: <PublicIcon fontSize="default" />,
+          title: 'Region', data: details.region.label, show: true, icon: <PublicIcon fontSize="default" />,
         },
         {
-          title: 'Section', data: details.section, show: true, icon: <LocationOnIcon fontSize="default" />,
+          title: 'Section', data: details.section.label, show: true, icon: <LocationOnIcon fontSize="default" />,
         },
         {
           title: 'Last Inspection', data: lastinspection, show: true, icon: <CalendarTodayIcon fontSize="default" />,

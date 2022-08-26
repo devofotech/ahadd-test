@@ -102,7 +102,7 @@ export default function AssetCard({
               <div style={{ padding: 16 }}>
                 <Typography gutterBottom className={classes.title}>{projects?.name}</Typography>
                 <Typography component="p" className={classes.content}>
-                  {`${region}, ${network}, ${section}`}
+                  {`${!!region ? `${region},` : ''} ${network}${!!section ? `, ${section}` : ''}`}
                   <br />
                   {`Last Update on ${moment(projects?.updatedAt).format('D MMMM YYYY, hh:mm A')}`}
                 </Typography>
