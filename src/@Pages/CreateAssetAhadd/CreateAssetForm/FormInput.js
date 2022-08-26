@@ -1,14 +1,12 @@
-import LocationPicker from '@Components/Map/LocationPicker';
+/* eslint-disable max-len */
+import { useState, useEffect } from 'react';
 import PolygonPicker from '@Components/MapV2/PolygonPicker';
-import Map from '@Components/MapV2';
 import {
   Grid, TextField, MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Dropzone from '@Components/DropzoneBox/index';
-import { markerToString, polygonToString } from '@Helpers';
-
-import InputTag from './InputTag';
+import { markerToString, polygonToString, stringToMarker } from '@Helpers';
 
 const useStyles = makeStyles(() => ({
   gradient: {
@@ -49,6 +47,19 @@ const useStyles = makeStyles(() => ({
 
 export default (h) => {
   const classes = useStyles();
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!h.network.value) return;
+    if (h.network.value == 1) {
+      setIsDisabled(false);
+      return;
+    }
+    h.setRegion({});
+    h.setSection({});
+    setIsDisabled(true);
+  }, [h.network]);
+
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
       <Grid item xs={12} className="px-1 mb-2">
@@ -62,11 +73,11 @@ export default (h) => {
         },
         {
           title: 'Region',
-          children: <CustomTextField classes={classes} name="Region" value={h.region} values={h.regions} onChange={(e) => h.setRegion(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Region" value={h.region} values={h.regions} onChange={(e) => h.setRegion(e.target.value)} select disabled={isDisabled} />,
         },
         {
           title: 'Section',
-          children: <CustomTextField classes={classes} name="Section" value={h.section} values={h.sections} onChange={(e) => h.setSection(e.target.value)} select />,
+          children: <CustomTextField classes={classes} name="Section" value={h.section} values={h.sections} onChange={(e) => h.setSection(e.target.value)} select disabled={isDisabled} />,
         },
         {
           title: 'Ranking',

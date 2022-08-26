@@ -40,13 +40,13 @@ export default () => {
       name,
       AssetTypeId: assetType,
       NetworkId: network.value,
-      RegionId: region.value,
-      SectionId: section.value,
       RankingId: ranking.value,
       polygon,
       lat: marker.lat,
       lng: marker.lng,
     };
+    if (!!region?.value) data.RegionId = region.value;
+    if (!!section?.value) data.SectionId = section.value;
     if (!data.name) return;
     if (!data.NetworkId) return;
     setIsLoading(true);
