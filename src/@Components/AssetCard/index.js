@@ -7,8 +7,6 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import moment from 'moment';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DemoLabel from '@Assets/Images/demo-label.svg';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -77,11 +75,11 @@ export default function AssetCard({
                     showDenyButton: true,
                     showConfirmButton: true,
                     denyButtonText: 'Delete Asset',
-                    confirmButtonText: 'View / Edit Asset',
+                    confirmButtonText: 'Edit Asset',
                     confirmButtonColor: 'var(--primary-color)',
                     cancelButtonText: 'Do Nothing',
                   }).then((result) => {
-                    if (result.isConfirmed) history.push(`/asset/${projects?.id}`);
+                    if (result.isConfirmed) history.push(`/edit-asset/${projects?.id}`);
                     if (result.isDenied) {
                       setSelectedAsset(projects);
                       setOpen(true);

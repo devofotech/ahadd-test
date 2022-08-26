@@ -57,8 +57,9 @@ import AssetFileConversion from '@Pages/AssetFileConversion';
 import AboutUs from '@Pages/AboutUs';
 import InspectionAhadd from '@Pages/InspectionAhadd';
 import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
-import Hook from './hook';
 import Analytics from '@Pages/Analytics';
+import EditAsset from '@Pages/EditAsset'
+import Hook from './hook';
 
 const HomePage = (h) => {
   if (h.user === 'logged out') {
@@ -128,6 +129,9 @@ export default function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
             <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />
+          </PrivateRoute>
+          <PrivateRoute exact path="/edit-asset/:AssetId" user={h.user}>
+            <MainContainer user={h.user} child={<EditAsset {...h} />} />
           </PrivateRoute>
           <PrivateRoute path="/asset/:AssetId/2D" user={h.user} accessible={!!h.user?.can_view_asset}>
             <MainContainer user={h.user} child={<AssetUpload2D {...h} />} />
