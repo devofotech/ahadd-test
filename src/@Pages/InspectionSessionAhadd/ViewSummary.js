@@ -12,12 +12,12 @@ const useStyles = makeStyles(() => ({
   root: { '&$checked': { color: 'rgb(30, 52, 101)' }, transform: 'scale(0.8)' },
 }));
 
-export default () => {
+export default (props) => {
   const classes = useStyles();
-  const [open, set_open] = useState();
+  const [open, set_open] = useState(false);
   return (
     <>
-      <Button className="color-gradient-inline" style={{ borderRadius: 18, color: 'white' }} onClick={() => set_open(true)}>
+      <Button className="color-gradient-inline px-3" style={{ borderRadius: 18, color: 'white', fontSize: 12 }} onClick={() => set_open(true)}>
         VIEW SUMMARY
       </Button>
       <Dialog
@@ -37,10 +37,10 @@ export default () => {
         <DialogContent className="px-5 d-flex justify-content-center">
           <Grid container>
             {[
-              { label: 'Asset ID', value: 'Bukit Merah' },
-              { label: 'Cycle', value: 'Cycle 2' },
-              { label: 'Year', value: moment().format('YYYY') },
-              { label: 'Date', value: moment().format('DD MMM YYYY') },
+              { label: 'Asset ID', value: props.Asset?.name },
+              { label: 'Cycle', value: `Cycle ${props?.cycle}` },
+              { label: 'Year', value: moment(props?.date).format('YYYY') },
+              { label: 'Date', value: moment(props?.date).format('DD MMM YYYY') },
             ].map(e => (
               <>
                 <Grid xs={6} item className="my-1">
@@ -53,9 +53,9 @@ export default () => {
             ))}
             <Divider className="w-100 my-1" style={{ color: 'var(--secondary-color)' }} />
             {[
-              { label: 'Total Image', value: '624 Images' },
-              { label: 'AI Slope Condition', value: 'Good' },
-              { label: 'Overall Condition', value: 'Very Good' },
+              { label: 'Total Image', value: `${props?.total_image ?? 0} Images` },
+              { label: 'AI Slope Condition', value: props?.ai_slope_condition ?? 'No Record' },
+              { label: 'Overall Condition', value: props?.overall_condition ?? 'No Record' },
             ].map(e => (
               <>
                 <Grid xs={6} item className="my-1">

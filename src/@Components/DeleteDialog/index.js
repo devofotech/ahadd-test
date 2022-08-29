@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 export default function DeleteDialog({
-  open, setOpen, selected, setSelected, deleteFunction, message,
+  open = false, setOpen = () => null, selected = {}, setSelected = () => null, deleteFunction = () => null, message = '',
 }) {
   const click = useRef(null);
   const container = useRef(null);
