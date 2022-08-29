@@ -13,7 +13,7 @@ export default function Hook({ project, onSave, user }) {
       cycle,
       date,
       year: moment(date).format('YYYY'),
-      pilot_name: user.name,
+      pilot_name: user.email,
       assetId: project.id,
     };
     onSave(input);

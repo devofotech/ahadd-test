@@ -21,11 +21,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function CreateInspection({
-  project, onSave, projectPhase, user, modules, inspectionType,
+  project, onSave, projectPhase, user, modules,
 }) {
-  const h = useHook({
-    project, onSave, user, inspectionType,
-  });
+  const h = useHook({ project, onSave, user });
   const classes = useStyles();
 
   return (
