@@ -1,4 +1,5 @@
-import LocationPicker from '@Components/Map/LocationPicker';
+/* eslint-disable max-lines */
+import { useState, useEffect } from 'react';
 import PolygonPicker from '@Components/MapV2/PolygonPicker';
 import {
   Grid, TextField, MenuItem,
@@ -44,82 +45,75 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const network = [
-  {
-    value: 'BKE',
-  },
-  {
-    value: 'LPT2',
-  },
-];
-
-const region = [
-  {
-    value: 'North',
-  },
-  {
-    value: 'Central',
-  },
-  {
-    value: 'South',
-  },
-];
-
-const section = [
-  {
-    value: 'N1',
-  },
-  {
-    value: 'N2',
-  },
-  {
-    value: 'N3',
-  },
-];
-
-const ranking = [
-  {
-    value: 'Very High (AA)',
-  },
-  {
-    value: 'High (A)',
-  },
-  {
-    value: 'Medium (B)',
-  },
-  {
-    value: 'Low (C)',
-  },
-  {
-    value: 'Unranked',
-  },
-];
-
 export default (h) => {
   const classes = useStyles();
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useEffect(() => {
+    if (!h.network) return;
+    if (h.network == 1) {
+      setIsDisabled(false);
+      return;
+    }
+    h.setRegion(null);
+    h.setSection(null);
+    setIsDisabled(true);
+  }, [h.network]);
+
   return (
     <Grid container className="px-1 overflow-auto" style={{ maxHeight: '39.8rem' }}>
       <Grid item xs={12} className="px-1 mb-2">
-        <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} customStyle={{ backgroundColor: 'white', marginBottom: 10 }}/>
+        <Dropzone files={h.files} setFiles={h.setFiles} type="image" height={180} customStyle={{ backgroundColor: 'white', marginBottom: 10 }} />
         <br />
         <CustomTextField classes={classes} name="Asset Id" value={h.name} onChange={(e) => h.setName(e.target.value)} />
       </Grid>
       {[
         {
           title: 'Network',
-          children: <CustomTextField classes={classes} name="Network" value={h.network} values={network} onChange={(e) => h.setNetwork(e.target.value)} select />,
+          children: (
+            <CustomTextField
+              classes={classes}
+              name="Network"
+              value={h.network}
+              itemList={h.networks}
+              onChange={(e) => h.setNetwork(e.target.value)}
+              select
+            />),
         },
         {
           title: 'Region',
-          children: <CustomTextField classes={classes} name="Region" value={h.region} values={region} onChange={(e) => h.setRegion(e.target.value)} select />,
+          children: (<CustomTextField
+            classes={classes}
+            name="Region"
+            value={h.network == 1 ? h.region : []}
+            itemList={h.regions}
+            onChange={(e) => h.setRegion(e.target.value)}
+            select
+            disabled={isDisabled}
+          />),
         },
         {
           title: 'Section',
-          children: <CustomTextField classes={classes} name="Section" value={h.section} values={section} onChange={(e) => h.setSection(e.target.value)} select />,
+          children: (<CustomTextField
+            classes={classes}
+            name="Section"
+            value={h.network == 1 ? h.region : []}
+            itemList={h.sections}
+            onChange={(e) => h.setSection(e.target.value)}
+            select
+            disabled={isDisabled}
+          />),
         },
         {
           title: 'Ranking',
-          children: <CustomTextField classes={classes} name="Ranking" value={h.ranking} values={ranking} onChange={(e) => h.setRanking(e.target.value)} select />,
+          children: (<CustomTextField
+            classes={classes}
+            name="Ranking"
+            value={h.ranking}
+            itemList={h.rankings}
+            onChange={(e) => h.setRanking(e.target.value)}
+            select
+          />),
         },
         {
           title: 'Location',
@@ -142,7 +136,12 @@ const Location = (h) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={markerToString(h.marker)} onChange={(e) => h.setMarker(stringToMarker(e.target.value))} />
+        <CustomTextField
+          classes={h.classes}
+          name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'}
+          value={markerToString(h.marker)}
+          onChange={(e) => h.setMarker(stringToMarker(e.target.value))}
+        />
       </Grid>
       <Grid item xs={12} className="mb-2 py-2" style={{ height: 300 }}>
         <PolygonPicker
@@ -159,7 +158,12 @@ const PolygonCoordinate = (h) => {
   return (
     <Grid container>
       <Grid item xs={12}>
-        <CustomTextField classes={h.classes} name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'} value={polygonToString(h.polygon)} disabled />
+        <CustomTextField
+          classes={h.classes}
+          name={h.locationCoordinate ? 'Pin Coordinate' : 'Polygon Coordinate'}
+          value={polygonToString(h.polygon)}
+          disabled
+        />
       </Grid>
       <Grid item xs={12} className="mb-2 py-2" style={{ height: 300 }}>
         <PolygonPicker
@@ -186,9 +190,9 @@ const CustomTextField = (h) => {
         InputLabelProps={{ className: h.classes.label }}
         {...h}
       >
-        {h.values.map((option) => (
+        {h.itemList.map((option) => (
           <MenuItem key={option.value} value={option.value}>
-            {option.value}
+            {option.label}
           </MenuItem>
         ))}
       </TextField>

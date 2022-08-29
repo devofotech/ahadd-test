@@ -13,8 +13,8 @@ export default function Dropzone({
 }) {
   const classes = useStyles();
   const { getRootProps, getInputProps, open } = useHook({ files, setFiles, ...props });
-  const isScrollable = files.length > 0 ? { overflowY: 'scroll' } : { alignItems: 'center' };
-  const isChildCustomCenter = files.length > 0 ? 'dropzone d-flex flex-column noData' : clsx('dropzone d-flex flex-column my-auto noData', classes.noData);
+  const isScrollable = files?.length > 0 ? { overflowY: 'scroll' } : { alignItems: 'center' };
+  const isChildCustomCenter = files?.length > 0 ? 'dropzone d-flex flex-column noData' : clsx('dropzone d-flex flex-column my-auto noData', classes.noData);
   const isCustomStyle = height ? { height } : {};
 
   return (
@@ -37,7 +37,7 @@ export default function Dropzone({
       >
         <input {...getInputProps()} />
 
-        {files.length > 0 ? (
+        {files?.length > 0 ? (
           files.map((file, fileidx) => {
             console.log('xxx file', file);
             return (

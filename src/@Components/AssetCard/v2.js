@@ -14,7 +14,9 @@ import { Link, useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
   root: { maxWidth: '100%', margin: '0 2px', minHeight: '100%' },
   media: { height: '30vh' },
-  title: { fontWeight: 'bold', fontSize: 20, color: 'var(--dark-blue-color)', fontFamily: 'CeraProRegular' },
+  title: {
+    fontWeight: 'bold', fontSize: 20, color: 'var(--dark-blue-color)', fontFamily: 'CeraProRegular',
+  },
   content: { color: '#707070', fontSize: 12, fontFamily: 'CeraProRegular' },
   deleteButtonContent: { right: 15, top: '30%' },
   avatarContent: { right: 10, top: '20%' },
@@ -71,32 +73,30 @@ export default function AssetCard({
           <Link to={`/project?id=${projects?.id}`}>
             <CardMedia className={classes.media} image={project_img} />
           </Link>
-          {userData?.can_edit_asset && (
-            <Grid item className={classes.editButtonContent}>
-              <Button
-                onClick={() => {
-                  MySwal.fire({
-                    title: 'Please choose the action that you want',
-                    showCancelButton: true,
-                    showDenyButton: true,
-                    showConfirmButton: true,
-                    denyButtonText: 'Delete Asset',
-                    confirmButtonText: 'View / Edit Asset',
-                    confirmButtonColor: 'var(--primary-color)',
-                    cancelButtonText: 'Do Nothing',
-                  }).then((result) => {
-                    if (result.isConfirmed) history.push(`/asset/${projects?.id}`);
-                    if (result.isDenied) {
-                      setSelectedAsset(projects);
-                      setOpen(true);
-                    }
-                  });
-                }}
-              >
-                <h3 className="text-white mr-1 h-25" style={{ fontSize: 16 }}>• • •</h3>
-              </Button>
-            </Grid>
-          )}
+          <Grid item className={classes.editButtonContent}>
+            <Button
+              onClick={() => {
+                MySwal.fire({
+                  title: 'Please choose the action that you want',
+                  showCancelButton: true,
+                  showDenyButton: true,
+                  showConfirmButton: true,
+                  denyButtonText: 'Delete Asset',
+                  confirmButtonText: 'Edit Asset',
+                  confirmButtonColor: 'var(--primary-color)',
+                  cancelButtonText: 'Do Nothing',
+                }).then((result) => {
+                  if (result.isConfirmed && projects?.id) history.push(`/edit-asset/${projects.id}`);
+                  if (result.isDenied) {
+                    setSelectedAsset(projects);
+                    setOpen(true);
+                  }
+                });
+              }}
+            >
+              <h3 className="text-white mr-1 h-25" style={{ fontSize: 16 }}>• • •</h3>
+            </Button>
+          </Grid>
           <CardContent className="position-relative p-0">
             <Link to={`/project?id=${projects?.id}`}>
               <div style={{ padding: 16 }}>
