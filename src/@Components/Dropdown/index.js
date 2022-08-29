@@ -35,7 +35,7 @@ const StyledMenuItem = withStyles(() => ({
 }))(MenuItem);
 
 export default function Dropdown({
-  selectedItem = 0, setSelectedItem, itemList, width, propertyValue, Hx = 'h3', size, xtraText = '',
+  selectedItem = 0, setSelectedItem, itemList, width, propertyValue, Hx = 'h3', size, xtraText = '', isNonIndexId = false,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -49,8 +49,10 @@ export default function Dropdown({
   };
 
   const handleChange = (event) => {
-    setSelectedItem(event.target.value);
+    const newValue = isNonIndexId ? (event.target.value + 1) : event.target.value;
+    setSelectedItem(newValue);
   };
+  selectedItem = isNonIndexId ? (selectedItem - 1) : selectedItem;
 
   return (
     <div>

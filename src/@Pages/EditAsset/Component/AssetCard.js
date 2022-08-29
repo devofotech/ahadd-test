@@ -2,10 +2,11 @@
 /* eslint-disable max-len */
 import { useState, useEffect } from 'react';
 import {
-  Card, CardActionArea, CardContent, CardMedia, Typography,
+  Card, CardActionArea, CardContent, CardMedia, Typography, TextField, MenuItem,
 } from '@material-ui/core';
 import mapping_2d from '@Assets/Images/mapping_2d.png';
 import { makeStyles } from '@material-ui/core/styles';
+import Dropdown from '@Components/Dropdown';
 
 const useStyles = makeStyles({
   media: { height: 200 },
@@ -23,7 +24,8 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
       h.setAssetType(h.data.id);
     }
   };
-  const assetImage = !!h.data?.image ? `${process.env.REACT_APP_S3}/${h.data?.image}` : mapping_2d;
+  // const assetImage = !!h.data?.image ? `${process.env.REACT_APP_S3}/${h.data?.image}` : mapping_2d;
+  const assetImage = `${process.env.REACT_APP_S3}/${!!h.asset?.image ? h.asset.image : 'static/media/defaultAssetImg-01.png'}`;
   const opacity = isDisabled ? '70%' : '100%';
   const textTitle = isDisabled ? 'text-secondary' : animation && 'text-white';
   const textDesc = animation ? 'text-white' : 'text-secondary';
@@ -50,12 +52,20 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
 
   return (
     <Card {...cardProps[isDisabled]}>
-      <CardActionArea>
+      <CardActionArea disableRipple>
         <CardMedia className={classes.media} image={assetImage} title={h.data?.name} style={{ filter: isDisabled && 'grayscale(1)' }} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" className={`${classes.title} ${textTitle}`} style={{ opacity, transition: 'all .25s' }}>
             {h.data?.name}
           </Typography>
+          {/* <Dropdown
+            selectedItem={h.assetType}
+            setSelectedItem={h.setAssetType}
+            itemList={h.assetTypeList.map(e => e.name)}
+            size="big"
+            Hx="h6"
+            isNonIndexId
+          /> */}
           {isDisabled && <p className={`${textTitle} pt-1`} style={{ opacity, position: 'absolute', top: 240 }}>(Coming soon)</p>}
           <Typography className={classes.description} variant="body2" color="textSecondary" component="p" style={{ position: 'relative' }}>
             {h.data?.description?.split('|').map(e => (
@@ -73,5 +83,27 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
         </CardContent>
       </CardActionArea>
     </Card>
+  );
+};
+
+const CustomTextField = (h) => {
+  return (
+    <TextField
+      variant="outlined"
+      fullWidth
+      size="small"
+      label={h.name}
+      className="mb-2"
+      InputProps={{ className: h.classes.input }}
+      InputLabelProps={{ className: h.classes.label }}
+      select
+      {...h}
+    >
+      {h.values.map((option) => (
+        <MenuItem key={option.id} value={option.id}>
+          {option.name}
+        </MenuItem>
+      ))}
+    </TextField>
   );
 };

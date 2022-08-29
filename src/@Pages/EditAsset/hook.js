@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import Api, { endpoints } from '@Helpers/api';
-import { getTrueInObject } from '@Helpers';
 import { useParams } from 'react-router-dom';
 
 export default () => {
@@ -14,15 +13,16 @@ export default () => {
   const [marker, setMarker] = useState(null);
   const [polygon, setPolygon] = useState(null);
   const [files, setFiles] = useState([]);
-  const [location, setLocation] = useState('');
-  const [region, setRegion] = useState('');
-  const [section, setSection] = useState('');
-  const [network, setNetwork] = useState('');
-  const [ranking, setRanking] = useState('');
-  const [assetTag, setAssetTag] = useState('');
+  const [region, setRegion] = useState(null);
+  const [section, setSection] = useState(null);
+  const [network, setNetwork] = useState([]);
+  const [ranking, setRanking] = useState([]);
+  const [regions, setRegions] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [networks, setNetworks] = useState([]);
+  const [rankings, setRankings] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingAssets, setIsLoadingAssets] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -31,42 +31,45 @@ export default () => {
       endpoint: endpoints.showAssets(AssetId),
       onSuccess: ({ data }) => {
         setAsset(data);
+        setName(data.name);
+        setMarker({ lat: data.lat, lng: data.lng });
+        setNetwork(data.NetworkId);
+        setRanking(data.RankingId);
+        setSection(data.SectionId);
+        setRegion(data.RegionId);
+        setPolygon(data.polygon);
+        setAssetType(data.AssetTypeId);
         setIsLoading(false);
       },
       onFail: () => { toast('error', 'Failed to get asset data'); },
     });
   }, []);
 
-  const createAsset = () => {
-    const data = {
+  const updateAsset = () => {
+    const input = {
       name,
-      region,
-      section,
-      network,
-      ranking,
-      asset_type: assetTag,
+      NetworkId: network,
+      RankingId: ranking,
+      polygon,
       lat: marker.lat,
       lng: marker.lng,
-      AssetTypeId: assetType,
-      polygon,
     };
-    if (!data.name) return;
-    if (!data.lat) return;
-    if (!data.lng) return;
+    input.RegionId = region ?? null;
+    input.SectionId = section ?? null;
+    if (!input.name) return;
+    if (!input.NetworkId) return;
     setIsLoading(true);
     Api({
-      endpoint: endpoints.newAssets(),
-      data,
+      endpoint: endpoints.updateAssets(AssetId),
+      data: { input },
       files,
       onSuccess: () => {
-        toast('success', 'Asset created');
-        setIsLoading(false);
-        setIsSuccess(true);
+        toast('success', 'Asset updated');
+        window.location.replace('/asset');
       },
       onFail: () => {
         toast('error', 'Opss, something went wrong, please try again.');
-        setIsLoading(false);
-        setIsSuccess(false);
+        window.location.replace('/asset');
       },
     });
   };
@@ -74,12 +77,14 @@ export default () => {
   const selectedTypeProfile = _.find(assetTypeList, { id: asset.AssetTypeId });
 
   const getStaticData = () => {
-    setIsLoadingAssets(true);
     Api({
       endpoint: endpoints.getStaticData(),
       onSuccess: ({ data }) => {
         setAssetTypeList(data.AssetType ?? []);
-        setIsLoadingAssets(false);
+        setNetworks(data.Network.map(m => ({ label: m.name, value: m.id })));
+        setRegions(data.Region.map(m => ({ label: m.name, value: m.id })));
+        setSections(data.Section.map(m => ({ label: m.name, value: m.id })));
+        setRankings(data.Ranking.map(m => ({ label: m.name, value: m.id })));
       },
       onFail: () => console.log('error loading static data'),
     });
@@ -98,15 +103,10 @@ export default () => {
     setPolygon,
     files,
     setFiles,
-    location,
-    setLocation,
-    assetTag,
-    setAssetTag,
     isSuccess,
     setIsSuccess,
     isLoading,
-    createAsset,
-    isLoadingAssets,
+    updateAsset,
     asset,
     network,
     setNetwork,
@@ -116,5 +116,9 @@ export default () => {
     setSection,
     ranking,
     setRanking,
+    networks,
+    regions,
+    sections,
+    rankings,
   };
 };
