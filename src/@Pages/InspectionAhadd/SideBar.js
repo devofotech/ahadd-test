@@ -76,33 +76,35 @@ export default function SideBar(props) {
                     <div className="mx-2">
                       <div
                         className={`d-flex justify-content-end img-container ${isselected ? 'inner-border-inspection' : ''}`}
-                        style={{ backgroundImage: `url(${process.env.REACT_APP_S3}/${image.thumbnail})` }}
+                        style={{ backgroundImage: `url(${process.env.REACT_APP_S3}/${image.thumbnail ?? image.path})` }}
                         onClick={() => props.handleChangeMainImage(image.id)}
                       >
-                        <h3
-                          className="text-white mr-1 h-25"
-                          style={{ fontSize: 16 }}
-                          onClick={() => {
-                            MySwal.fire({
-                              title: image['Inspection.name'],
-                              imageUrl: `${process.env.REACT_APP_S3}/${image.src}`,
-                              imageHeight: 320,
-                              imageAlt: 'Annotation Image',
-                              showCancelButton: true,
-                              showDenyButton: true,
-                              showConfirmButton: false,
-                              denyButtonText: 'Delete Image',
-                              cancelButtonText: 'Do Nothing',
-                            }).then((result) => {
-                              /* Read more about isConfirmed, isDenied below */
-                              if (result.isDenied) {
-                                props.deleteImage(image.id);
-                              }
-                            });
-                          }}
-                        >
-                          • • •
-                        </h3>
+                        {!image.is_main && (
+                          <h3
+                            className="text-white mr-1 h-25"
+                            style={{ fontSize: 16 }}
+                            onClick={() => {
+                              MySwal.fire({
+                                title: image['Inspection.name'],
+                                imageUrl: `${process.env.REACT_APP_S3}/${image.src}`,
+                                imageHeight: 320,
+                                imageAlt: 'Annotation Image',
+                                showCancelButton: true,
+                                showDenyButton: true,
+                                showConfirmButton: false,
+                                denyButtonText: 'Delete Image',
+                                cancelButtonText: 'Do Nothing',
+                              }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isDenied) {
+                                  props.deleteImage(image.id);
+                                }
+                              });
+                            }}
+                          >
+                            • • •
+                          </h3>
+                        )}
                       </div>
                     </div>
                   );

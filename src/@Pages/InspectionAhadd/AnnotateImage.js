@@ -51,14 +51,15 @@ export default function AnnotateImage({
     setOnZoomRatio(device);
   };
   let imageSettingsOnLoad = {};
-  let userCanEditAnnotation = false;
+  const userCanEditAnnotation = true;
+  // let userCanEditAnnotation = false;
   // osh
-  if (!mainImage['Inspection.InspectionCategoryId']) userCanEditAnnotation = !!user?.can_annotate;
-  if (mainImage['Inspection.ProjectPhaseId'] === 1) userCanEditAnnotation = !!user?.can_edit_planning;
-  if (mainImage['Inspection.ProjectPhaseId'] === 2) userCanEditAnnotation = !!user?.can_edit_development;
-  if (mainImage['Inspection.ProjectPhaseId'] === 3) userCanEditAnnotation = !!user?.can_edit_construction;
-  if (mainImage['Inspection.ProjectPhaseId'] === 4) userCanEditAnnotation = !!user?.can_edit_om;
-  if (mainImage['Inspection.ProjectPhaseId'] === 5) userCanEditAnnotation = !!user?.can_edit_decommission;
+  // if (!mainImage['Inspection.InspectionCategoryId']) userCanEditAnnotation = !!user?.can_annotate;
+  // if (mainImage['Inspection.ProjectPhaseId'] === 1) userCanEditAnnotation = !!user?.can_edit_planning;
+  // if (mainImage['Inspection.ProjectPhaseId'] === 2) userCanEditAnnotation = !!user?.can_edit_development;
+  // if (mainImage['Inspection.ProjectPhaseId'] === 3) userCanEditAnnotation = !!user?.can_edit_construction;
+  // if (mainImage['Inspection.ProjectPhaseId'] === 4) userCanEditAnnotation = !!user?.can_edit_om;
+  // if (mainImage['Inspection.ProjectPhaseId'] === 5) userCanEditAnnotation = !!user?.can_edit_decommission;
   // for zoom and pan
   let isDragging = false;
   let lastPosX;
@@ -72,9 +73,6 @@ export default function AnnotateImage({
       id: newId,
       is_close: 0,
       isNew: true,
-      SeverityId: severity[0].id,
-      ModuleParameterId: !!inspection_module?.is_general ? null : inspection_module?.ModuleParameters[0]?.id,
-      is_compliance: 0,
     };
     const newRectPostion = {
       top: editor.canvas?.height * 0.5 - (150 / 2),

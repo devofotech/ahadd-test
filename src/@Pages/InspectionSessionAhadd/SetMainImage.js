@@ -13,9 +13,18 @@ const useStyles = makeStyles(() => ({
   root: { '&$checked': { color: 'rgb(30, 52, 101)' }, transform: 'scale(0.8)' },
 }));
 
-export default ({ InspectionFiles }) => {
+export default ({ InspectionFiles, ...props }) => {
   const classes = useStyles();
   const [open, set_open] = useState(false);
+  const [selected_image, set_selected_image] = useState(InspectionFiles.find(e => !!e.is_main) ?? {});
+  const images_with_path = InspectionFiles.filter(e => !!e.path);
+
+  const handleSubmit = () => {
+    if (!selected_image?.id) return;
+    set_open(false);
+    props.onSave(selected_image?.id, props.id);
+  };
+
   return (
     <>
       <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }} onClick={() => set_open(true)}>
@@ -25,7 +34,7 @@ export default ({ InspectionFiles }) => {
         open={open}
         onClose={() => set_open(false)}
         fullWidth
-        maxWidth={!InspectionFiles.length ? 'sm' : 'xl'}
+        maxWidth={!images_with_path.length ? 'sm' : 'xl'}
       >
         <DialogTitle>
           <div className="w-100 d-flex justify-content-between">
@@ -37,50 +46,77 @@ export default ({ InspectionFiles }) => {
           </DialogContentText>
         </DialogTitle>
         <DialogContent className="d-flex justify-content-center pb-4">
-          {!InspectionFiles.length ? (
+          {!images_with_path.length ? (
             <img src={NoData} style={{ width: '100%' }} />
           ) : (
-            <Grid container>
-              <Grid container item xs={12} lg={7} xl={7} spacing={2} style={{ maxHeight: '70vh', overflowX: 'auto' }}>
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(() => (
-                  <Grid item xs={3}>
-                    <div style={{}}>
-                      <img
-                        className="border"
-                        style={{ width: '100%', borderRadius: 10, objectFit: 'cover' }}
-                        src={`${process.env.REACT_APP_S3}/static/media/defaultAssetImg-01.png`}
-                        alt="asset"
-                      />
-                    </div>
-                  </Grid>
-                ))}
+            <Grid container xs={12}>
+              <Grid item xs={6} className="p-1">
+                <Grid container xs={12} spacing={2} style={{ maxHeight: '65vh', overflow: 'auto' }}>
+                  {images_with_path.map((item) => (
+                    <ImageCard item={item} onClickImage={() => set_selected_image(item)} selected_image={selected_image} />
+                  ))}
+                </Grid>
               </Grid>
-              <Grid container item xs={12} lg={5} xl={5} className="py-3 pl-3">
-                <Grid item xs={12} className="border flex-standard position-relative" style={{ height: '50vh' }}>
-                  <img
-                    loading="lazy"
-                    style={{ objectFit: 'contain', borderRadius: 10, height: '100%' }}
-                    src={`${process.env.REACT_APP_S3}/static/media/defaultAssetImg-01.png`}
-                    alt="asset"
-                  />
+              <Grid container item xs={6}>
+                <Grid item xs={12} className="flex-standard" style={{ border: '1px solid grey', borderRadius: 15, height: '55vh' }}>
+                  {!!selected_image.id ? (
+                    <img
+                      src={`${process.env.REACT_APP_S3}/${selected_image?.path}`}
+                      loading="lazy"
+                      style={{ maxHeight: '100%', maxWidth: '100%' }}
+                    />
+                  ) : 'No Selected Image'}
                 </Grid>
-                <Grid item xs={12} className="d-flex" direction="column" style={{ alignItems: 'flex-end' }}>
-                  <p style={{ color: '#022C64', fontSize: 18 }}>Title</p>
-                  <p className="text-light">{moment().format('DD MMM YYYY')}</p>
-                  <p className="text-light">{moment().format('h:mm A')}</p>
-                </Grid>
-                <Grid item xs={12} className="d-flex justify-content-end" style={{}}>
-                  <div>
-                    <Button className="color-gradient-inline" style={{ borderRadius: 18, color: 'white' }} onClick={() => set_open(false)}>
+                {selected_image?.id && (
+                  <Grid item xs={12} className="d-flex py-3" direction="column" style={{ alignItems: 'flex-end' }}>
+                    <p style={{ color: '#022C64', fontSize: 18 }}>{`Cycle ${props?.cycle} (${props?.year}), ${props.Asset?.name}`}</p>
+                    <p className="text-secondary">{moment(selected_image?.createdAt).format('DD MMM YYYY')}</p>
+                    <p className="text-secondary">{moment(selected_image?.createdAt).format('h:mm A')}</p>
+                    <Button className="color-gradient-inline mt-3" style={{ borderRadius: 18, color: 'white' }} onClick={handleSubmit}>
                       Set Main Image
                     </Button>
-                  </div>
-                </Grid>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           )}
         </DialogContent>
       </Dialog>
     </>
+  );
+};
+
+const styles = {
+  image: {
+    position: 'relative',
+    width: '100%',
+    aspectRatio: '4/3',
+    backgroundSize: 'cover',
+    cursor: 'pointer',
+  },
+};
+
+const ImageCard = ({ item, onClickImage, selected_image }) => {
+  const [hover, setHover] = useState(false);
+  const handleMouseEnter = () => { setHover(!hover); };
+  const handleMouseLeave = () => { setHover(!hover); };
+  return (
+    <Grid item xs={4}>
+      <div
+        style={{
+          ...styles.image,
+          backgroundImage: `url(${process.env.REACT_APP_S3}/${item?.path})`,
+          ...(hover && {
+            transitionDuration: '0.25s',
+            transform: 'scale(1.02)',
+          }),
+          border: selected_image?.id === item.id && '3px solid #022C64',
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        loading="lazy"
+        onClick={() => onClickImage(item)}
+      />
+    </Grid>
   );
 };
