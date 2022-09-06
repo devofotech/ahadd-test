@@ -88,6 +88,22 @@ export default function Hook({ project }) {
   };
   const onCloseSearch = () => { setKeyword(''); refresh(); };
 
+  const setMainImage = (InspectionFileId, InspectionId) => {
+    setIsLoading(true);
+    Api({
+      endpoint: endpoints.setMainImage(),
+      data: { InspectionFileId, InspectionId },
+      onSuccess: () => {
+        refresh();
+        toast('success', 'Successfully set main image');
+      },
+      onFail: () => {
+        toast('error', 'Failed to set main image');
+        setIsLoading(false);
+      },
+    });
+  };
+
   return {
     inspectionSessions,
     deleteInspection,
@@ -108,5 +124,6 @@ export default function Hook({ project }) {
     setPerPage,
     onKeyDown,
     onCloseSearch,
+    setMainImage,
   };
 }

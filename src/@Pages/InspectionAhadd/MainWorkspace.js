@@ -12,7 +12,7 @@ export default function MainWorkspace(props) {
       <Grid container spacing={3}>
         {props.isLoading && (
           <CenteredLoading style={{
-            position: 'absolute', height: '62vh', width: '72vw', backgroundColor: '#000000b3', zIndex: 2,
+            position: 'absolute', height: '62vh', width: '73.5vw', top: 58, backgroundColor: '#000000b3', zIndex: 2,
           }}
           />
         )}

@@ -6,10 +6,12 @@ import {
 import { Close } from '@material-ui/icons';
 import React, { useState } from 'react';
 import metro_pin_icon from '@Assets/Icons/metro-pin.svg';
+import NoData from '@Assets/Images/Data-not-found5.svg';
 
 export default ({ images }) => {
   const classes = useStyles();
   const [open, set_open] = useState(false);
+  const main_image = images.find(e => !!e.is_main);
 
   return (
     <>
@@ -38,10 +40,14 @@ export default ({ images }) => {
               <Close fontSize="small" />
             </IconButton>
           </div>
-          <p className="text-light" style={{ fontSize: '14px' }}>Click anywhere on the map to pin a location of the detection on the main image</p>
+          <p className="text-secondary" style={{ fontSize: '14px' }}>Click anywhere on the map to pin a location of the detection on the main image</p>
         </DialogTitle>
         <DialogContent className="flex-standard py-0" style={{ border: '1px solid grey', height: '100vh' }}>
-          {!images[0]?.src ? 'No Data' : <img src={`${process.env.REACT_APP_S3}/${images[0]?.src}`} style={{ maxHeight: '100%', maxWidth: '100%', display: 'block' }} />}
+          {!main_image ? (
+            <div className="d-flex justify-content-center">
+              <img src={NoData} style={{ width: '46rem', aspectRatio: '3/2', objectFit: 'cover' }} />
+            </div>
+          ) : <img src={`${process.env.REACT_APP_S3}/${main_image?.path}`} style={{ maxHeight: '100%', minWidth: '100%', display: 'block' }} />}
         </DialogContent>
         <DialogActions>
           <div className={classes.dialogAction}>

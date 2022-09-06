@@ -46,6 +46,8 @@ export const endpoints = {
   uploadInspectionFile: uuid => ['POST', `${URL}api/inspectionfile/${uuid}`],
   deleteInspectionFile: id => ['DELETE', `${URL}api/inspectionfile/${id}`],
   updateInspectionFileAnnotate: () => ['POST', `${URL}api/inspectionfile-annotate`],
+  setMainImage: () => ['POST', `${URL}api/inspectionfile-setmain`],
+  setLocationOnMainImage: (InspectionFileId) => ['POST', `${URL}api/inspectionfile-update/${InspectionFileId}`],
 
   closeIssue: (annotationId) => ['POST', `${URL}api/annotation/${annotationId}`],
 

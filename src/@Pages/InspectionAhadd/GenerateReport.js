@@ -10,6 +10,7 @@ export default ({ images }) => {
   const [open, set_open] = useState(false);
   const [selected_image, set_selected_image] = useState({});
   const handleChange = (event) => set_selected_image({ ...selected_image, [event.target.name]: event.target.checked });
+  const main_image = images.find(e => !!e.is_main);
 
   useEffect(() => {
     if (!open) set_selected_image({});
@@ -35,13 +36,13 @@ export default ({ images }) => {
               <Close fontSize="small" />
             </IconButton>
           </div>
-          <p className="text-light" style={{ fontSize: '14px' }}>Please select inspections to be included:</p>
+          <p className="text-secondary" style={{ fontSize: '14px' }}>Please select inspections to be included:</p>
         </DialogTitle>
         <DialogContent style={{ overflowY: 'hidden' }}>
           <Grid container xs={12}>
             <Grid item xs={6} className="p-1">
-              <Grid container xs={12} spacing={2} style={{ height: '65vh', overflow: 'auto' }}>
-                {images.map((item) => (
+              <Grid container xs={12} spacing={2} style={{ maxHeight: '65vh', overflow: 'auto' }}>
+                {images.filter(e => !e.is_main).map((item) => (
                   <Grid item xs={4}>
                     <div className="position-relative">
                       <GreenCheckbox
@@ -63,8 +64,8 @@ export default ({ images }) => {
                 ))}
               </Grid>
             </Grid>
-            <Grid item xs={6} className="flex-standard" style={{ border: '1px solid grey', borderRadius: 15 }}>
-              <img src={`${process.env.REACT_APP_S3}/${images[0]?.src}`} className="w-100" loading="lazy" />
+            <Grid item xs={6} className="flex-standard" style={{ border: '1px solid grey', borderRadius: 15, height: '65vh' }}>
+              <img src={`${process.env.REACT_APP_S3}/${main_image?.src}`} className="w-100" loading="lazy" />
             </Grid>
           </Grid>
         </DialogContent>

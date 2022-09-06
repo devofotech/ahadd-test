@@ -41,13 +41,16 @@ export default function Hook(props) {
     Api({
       endpoint: endpoints.getInspectionFile(),
       data: { ...inspectionsIds },
-      onSuccess: (response) => setInspections(response.data),
+      onSuccess: (response) => {
+        setInspections(response.data);
+      },
     });
   };
   useEffect(refresh, [props.InspectionId]);
   useEffect(() => {
     if (inspections.length > 0) {
       setImages(inspections.filter(f => !f.isVideo)
+        .sort((a, b) => b.is_main - a.is_main)
         .map(m => ({ ...m, src: m.path, metaData: [] })));
       setVideos(inspections.filter(f => f.isVideo)
         .map((m, i) => ({

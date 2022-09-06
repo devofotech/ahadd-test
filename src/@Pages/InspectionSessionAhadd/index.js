@@ -166,7 +166,7 @@ export default function InspectionSessionAhadd(props) {
     return (
       <div className="d-flex justify-content-around align-items-center" style={{ gap: 2, transform: 'scale(0.8)' }}>
         <ViewBtn {...x} />
-        <SetMainImage {...x} />
+        <SetMainImage {...x} onSave={h.setMainImage} />
         <DeleteBtn {...x} />
       </div>
     );
@@ -178,7 +178,7 @@ export default function InspectionSessionAhadd(props) {
     setData(modifiedInspections.map(eachSession => ({
       ...eachSession,
       cycle: <p style={{ color: 'var(--main-color)' }}>{`Cycle ${eachSession?.cycle}`}</p>,
-      year: <p style={{ color: 'var(--main-color)' }}>{moment(eachSession?.date).format('YYYY')}</p>,
+      year: <p style={{ color: 'var(--main-color)' }}>{eachSession?.year}</p>,
       inspectionAt: moment(eachSession.date).format('DD MMMM YYYY'),
       createdAt: moment(eachSession.createdAt).format('DD MMMM YYYY / HH:mm'),
       userimage: userImage(eachSession),
@@ -210,7 +210,7 @@ export default function InspectionSessionAhadd(props) {
           item
           xs={12}
           style={{
-            paddingLeft: 0, paddingRight: 20, paddingTop: 20, paddingBottom: 20,
+            paddingLeft: 0, paddingRight: 20, paddingTop: 0, paddingBottom: 20,
           }}
           className="flex-standard"
         >
