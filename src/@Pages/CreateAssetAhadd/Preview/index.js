@@ -1,12 +1,13 @@
 import Button from '@Components/Button';
 import { CircularProgress, Grid } from '@material-ui/core';
+import CenteredLoadingContainer from '@Components/CenteredLoadingContainer';
 import AssetPreview from './AssetPreview';
 import AssetSummary from './AssetSummary';
 
 export default (h) => {
   return (
     <div className="position-relative">
-      {h.isLoading ? <LoadingProgress /> : (
+      {h.isLoading ? <CenteredLoadingContainer height="50vh" size={75} hasText /> : (
         <>
           <div
             className="mx-auto"
@@ -25,7 +26,7 @@ export default (h) => {
               PREVIOUS
             </Button>
             <Button className="color-gradient-block" onClick={h.createAsset} size="small">
-              NEXT
+              CREATE ASSET
             </Button>
           </div>
         </>
