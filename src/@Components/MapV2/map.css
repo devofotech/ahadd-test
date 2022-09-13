@@ -11,7 +11,7 @@
 }
 .leaflet-control-container >
 .leaflet-top {
-    top: 70px;
+    top: 70px !important;
 }
 
 .space-children-horizontal > * {
