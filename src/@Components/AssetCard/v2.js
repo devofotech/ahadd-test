@@ -108,7 +108,7 @@ export default function AssetCard({
                 </Typography>
               </div>
             </Link>
-            <div
+            {/* <div
               className={`position-absolute flex-standard float-right ${classes.avatarContent}`}
               onClick={() => (
                 setOpenRelative(true),
@@ -137,7 +137,7 @@ export default function AssetCard({
                   ))}
                 </AvatarGroupIcon>
               )}
-            </div>
+            </div> */}
           </CardContent>
         </CardActionArea>
       </Card>
