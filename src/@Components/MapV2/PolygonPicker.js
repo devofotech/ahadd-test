@@ -16,6 +16,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-groupedlayercontrol/dist/leaflet.groupedlayercontrol.min.js';
 import 'leaflet-draw';
 import './leaflet.draw.css';
+import 'leaflet-fullscreen/dist/Leaflet.fullscreen';
+import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 import useBaseLayerHook from './BaseLayerHook';
 import { setBaseLayerActive, clearingMapLayers } from './helper';
 import { drawOptions, customColor } from './drawer';
@@ -60,6 +62,8 @@ export default ({
     // console.log('MAPDEBUG: initial', activeControl);
     if (activeControl) mapRef.current.leafletElement.removeControl(activeControl);
     const zoomctrl = L.control.zoom({ position: 'topleft' });
+    const fullscreenctrl = L.control.fullscreen({ position: 'topleft' });
+    mapRef.current.leafletElement.addControl(fullscreenctrl);
     mapRef.current.leafletElement.addControl(zoomctrl);
     // setZoomControl(zoomctrl);
     const control = new L.Control.GroupedLayers(basemapHook);
@@ -90,7 +94,7 @@ export default ({
           // polyLyr.options.color = customColor.primary;
           console.log('MAPDEBUG: Existing Drawing...', polyLyr._layers);
           polyLyr.getLayers()[0].addTo(editLayer); // sbb dlm satu poly tu not necessaryly single layer, in our case it should only be single
-          const { lat, lng } = polyLyr.getLayers()[0].getBounds().getCenter()
+          const { lat, lng } = polyLyr.getLayers()[0].getBounds().getCenter();
           set_center({ lat, lng });
         } else {
           drawAtt.withPolygon = true;
