@@ -11,17 +11,9 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function ActionBar({
-  inspection_module, mainImage, mainImageAnnotations, setMainImageAnnotations, mainAnnotationId, saveImage, isDeveloper, severity, user,
+  inspection_module, mainImage, mainImageAnnotations, setMainImageAnnotations, mainAnnotationId, saveImage, isDeveloper, severity, user, mainSetImage, handleChangeMainImage, setOpenPinLocationDialog,
 }) {
   const classes = useStyles();
-  const userCanEditAnnotation = false;
-  // let userCanEditAnnotation = false;
-  // if (!mainImage['Inspection.InspectionCategoryId']) userCanEditAnnotation = !!user?.can_annotate;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 1) userCanEditAnnotation = !!user?.can_edit_planning;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 2) userCanEditAnnotation = !!user?.can_edit_development;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 3) userCanEditAnnotation = !!user?.can_edit_construction;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 4) userCanEditAnnotation = !!user?.can_edit_om;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 5) userCanEditAnnotation = !!user?.can_edit_decommission;
   return (
     <div className="paper shadow overflow-auto" style={{ backgroundColor: 'var(--container-color)', maxHeight: '60vh', minHeight: '60vh' }}>
       <div>
@@ -32,23 +24,23 @@ export default function ActionBar({
           <p style={{ color: '#022C64' }}>DJI 9020.jpg</p>
           <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
             <p className="text-secondary">Date:</p>
-            <p>{moment().format('D MMMM YYYY')}</p>
+            <p>{moment(mainImage.createdAt).format('D MMMM YYYY')}</p>
           </div>
           <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
             <p className="text-secondary">Time:</p>
-            <p>{moment().format('hh:mm A')}</p>
+            <p>{moment(mainImage.createdAt).format('hh:mm A')}</p>
           </div>
           <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
             <p className="text-secondary">Coordinate:</p>
-            <p>101.12314, 1.01233</p>
+            <p>{(mainImage.lat && mainImage.lng) ? `${mainImage.lat}, ${mainImage.lng}` : 'N/A'}</p>
           </div>
-          <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
+          {/* <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
             <p className="text-secondary">Height:</p>
             <p>14.5m</p>
-          </div>
+          </div> */}
           <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
             <p className="text-secondary">Cycle:</p>
-            <p style={{ fontSize: 16 }}>Cycle 2</p>
+            <p style={{ fontSize: 16 }}>Cycle {mainImage['Inspection.cycle']}, {mainImage['Inspection.year']}</p>
           </div>
         </div>
       </div>
@@ -68,9 +60,15 @@ export default function ActionBar({
                 <p style={{ fontSize: 18, color: '#FEB019' }}>4</p>
               </div>
               <div className="d-flex justify-content-center" style={{ fontSize: 14 }}>
-                <Button className="color-gradient-inline" style={{ borderRadius: 18 }}>
-                  <p className="text-white">VIEW AT MAIN IMAGE</p>
-                </Button>
+                {!!mainImage.pin_on_main ? (
+                  <Button className="color-gradient-inline" style={{ borderRadius: 18 }} onClick={() => handleChangeMainImage(mainSetImage.id)}>
+                    <p className="text-white">VIEW AT MAIN IMAGE</p>
+                  </Button>
+                ) : (
+                  <Button style={{ borderRadius: 18, backgroundColor: 'red' }} onClick={() => setOpenPinLocationDialog(true)}>
+                    <p className="text-white">SET LOCATION ON MAIN IMAGE</p>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -78,14 +76,16 @@ export default function ActionBar({
             const isselected = !!(mainAnnotationId === annotation.id);
             if (!isselected) return;
             return (
-              <FormAnnotation
-                annotation={annotation}
-                setMainImageAnnotations={setMainImageAnnotations}
-                mainImageAnnotations={mainImageAnnotations}
-              />
+              <>
+                <FormAnnotation
+                  annotation={annotation}
+                  setMainImageAnnotations={setMainImageAnnotations}
+                  mainImageAnnotations={mainImageAnnotations}
+                />
+              </>
             );
           })}
-          {userCanEditAnnotation && (
+          {!mainImage.is_main && !!mainImageAnnotations.length && (
             <div className="d-flex justify-content-end my-2 pr-3">
               <Button variant="contained" className={`my-2 color-gradient-inline ${classes.saveButton}`} onClick={() => saveImage()}>
                 SAVE

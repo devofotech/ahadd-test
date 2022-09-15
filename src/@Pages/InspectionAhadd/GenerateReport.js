@@ -5,7 +5,7 @@ import {
 import { AddOutlined, Close } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 
-export default ({ images }) => {
+export default ({ images, mainSetImage }) => {
   const classes = useStyles();
   const [open, set_open] = useState(false);
   const [selected_image, set_selected_image] = useState({});
@@ -65,7 +65,7 @@ export default ({ images }) => {
               </Grid>
             </Grid>
             <Grid item xs={6} className="flex-standard" style={{ border: '1px solid grey', borderRadius: 15, height: '65vh' }}>
-              <img src={`${process.env.REACT_APP_S3}/${main_image?.src}`} className="w-100" loading="lazy" />
+              <img src={`${process.env.REACT_APP_S3}/${mainSetImage?.src}`} className="w-100" loading="lazy" />
             </Grid>
           </Grid>
         </DialogContent>
