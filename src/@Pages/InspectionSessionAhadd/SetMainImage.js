@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Dialog, DialogContent, DialogTitle, Button, Grid, IconButton, DialogContentText,
+  Dialog, DialogContent, DialogTitle, Button, Grid, IconButton, DialogContentText, Tooltip,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -27,9 +27,11 @@ export default ({ InspectionFiles, ...props }) => {
 
   return (
     <>
-      <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }} onClick={() => set_open(true)}>
-        <img src={metro_pin_icon} height="18px" width="18px" />
-      </IconButton>
+      <Tooltip title="Set Main Image" placement="top">
+        <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }} onClick={() => set_open(true)}>
+          <img src={metro_pin_icon} height="18px" width="18px" />
+        </IconButton>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={() => set_open(false)}
