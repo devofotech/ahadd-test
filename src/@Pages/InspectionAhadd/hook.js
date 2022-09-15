@@ -22,6 +22,8 @@ export default function Hook(props) {
   const [uploadPercentages, setUploadPercentages] = useState([0]);
   const [uploadFiles, setUploadFiles] = useState([]);
   const [inspection_module, set_inspection_module] = useState([]);
+  const [mainSetImage, setMainSetImage] = useState();
+  const [openPinLocationDialog, setOpenPinLocationDialog] = useState(false);
 
   const refresh = () => {
     let inspectionsIds = {};
@@ -52,6 +54,7 @@ export default function Hook(props) {
       setImages(inspections.filter(f => !f.isVideo)
         .sort((a, b) => b.is_main - a.is_main)
         .map(m => ({ ...m, src: m.path, metaData: [] })));
+      setMainSetImage(inspections.find(f => !f.isVideo && !!f.is_main));
       setVideos(inspections.filter(f => f.isVideo)
         .map((m, i) => ({
           ...m,
@@ -63,6 +66,7 @@ export default function Hook(props) {
     } else {
       setImages([]);
       setVideos([]);
+      setMainSetImage();
       setIsLoading(false);
     }
   }, [inspections]);
@@ -171,6 +175,22 @@ export default function Hook(props) {
     });
   };
 
+  const pinLocationOnMainImage = (data) => {
+    const { InspectionFileId, pin_on_main } = data;
+    Api({
+      endpoint: endpoints.setLocationOnMainImage(InspectionFileId),
+      data: { pin_on_main },
+      onSuccess: () => {
+        toast('success', 'Successfully Pin Location On Main Image');
+        refresh();
+      },
+      onFail: () => {
+        toast('error', 'Opss, something went wrong, please try again.');
+        refresh();
+      },
+    });
+  };
+
   return {
     inspectionType,
     setInspectionType,
@@ -204,5 +224,9 @@ export default function Hook(props) {
     ImgIdxForMap,
     setImgIdxForMap,
     inspection_module,
+    pinLocationOnMainImage,
+    mainSetImage,
+    openPinLocationDialog,
+    setOpenPinLocationDialog,
   };
 }

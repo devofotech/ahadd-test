@@ -60,7 +60,7 @@ export default function SideBar(props) {
             <Tooltip title="Filter (Coming Soon)">
               <img src={FilterIcon} style={{ padding: '15px 10px 10px 0px', cursor: 'pointer', width: '20px' }} />
             </Tooltip>
-            <PinLocation {...props} />
+            {!props.mainImage.is_main && <PinLocation {...props} onSubmit={props.pinLocationOnMainImage} />}
             <UploadInspectionPhoto {...props} onSave={props.uploadPhoto} />
           </div>
         </Grid>

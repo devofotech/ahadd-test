@@ -23,13 +23,15 @@ export default function FormAnnotation(props) {
             rows={5}
             variant="outlined"
             className="w-100 py-2"
+            value={props.annotation?.description ?? ''}
+            onChange={FAh.handleChangeDescription}
           />
         ),
       },
       {
         title: 'Severity',
         children: (
-          <RadioGroup name="severity" row value={props.annotation?.SeverityId ?? 1} onChange={FAh.handleChangeSeverity} className="d-flex justify-content-around mb-3">
+          <RadioGroup name="severity" row value={props.annotation?.SeverityId ?? 1} onChange={FAh.handleChangeSeverity} className="d-flex justify-content-around pt-2 mb-3">
             {[1, 2, 3, 4, 5].map((e) => (
               <FormControlLabel
                 className={classes.radio}

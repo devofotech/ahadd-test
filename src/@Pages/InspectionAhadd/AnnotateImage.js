@@ -52,14 +52,6 @@ export default function AnnotateImage({
   };
   let imageSettingsOnLoad = {};
   const userCanEditAnnotation = true;
-  // let userCanEditAnnotation = false;
-  // osh
-  // if (!mainImage['Inspection.InspectionCategoryId']) userCanEditAnnotation = !!user?.can_annotate;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 1) userCanEditAnnotation = !!user?.can_edit_planning;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 2) userCanEditAnnotation = !!user?.can_edit_development;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 3) userCanEditAnnotation = !!user?.can_edit_construction;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 4) userCanEditAnnotation = !!user?.can_edit_om;
-  // if (mainImage['Inspection.ProjectPhaseId'] === 5) userCanEditAnnotation = !!user?.can_edit_decommission;
   // for zoom and pan
   let isDragging = false;
   let lastPosX;
@@ -73,6 +65,7 @@ export default function AnnotateImage({
       id: newId,
       is_close: 0,
       isNew: true,
+      SeverityId: 1,
     };
     const newRectPostion = {
       top: editor.canvas?.height * 0.5 - (150 / 2),
@@ -387,7 +380,7 @@ export default function AnnotateImage({
       });
       editor.canvas.remove(...editor.canvas.getObjects());
       for (let annIdx = 0; annIdx < mainImageAnnotations.length; annIdx++) {
-        const { id, points, is_close, SeverityId } = mainImageAnnotations[annIdx];
+        const { id, points, is_close } = mainImageAnnotations[annIdx];
         const {
           left, top, width, height,
           image_size_during_annotation_width,
@@ -396,7 +389,6 @@ export default function AnnotateImage({
           // leftMarginOffset,
           // topMarginOffset,
         } = JSON.parse(points);
-        const borderColor = severity.filter(s => s.id === SeverityId)[0].colour
         const leftRatio = image_size_during_annotation_width / wcanvas;
         const topRatio = image_size_during_annotation_height / hcanvas;
         console.log('ANN DEBUG: point ratio', leftRatio, topRatio);
@@ -416,7 +408,7 @@ export default function AnnotateImage({
           leftMarginOffset: canvasMarginAdjustment.left ?? 0,
           topMarginOffset: canvasMarginAdjustment.top ?? 0,
           ...rectDefaultProps,
-          stroke: `#${borderColor}`,
+          stroke: '#51DBA5',
           ...isLock,
         });
         editor.canvas.add(rect);
@@ -437,9 +429,9 @@ export default function AnnotateImage({
   }, [mainImage, onZoomRatio, lock_canvas_w, lock_canvas_h]);
   return (
     // <div className="draw-image-container" style={{ ...marginAdjustment }} ref={ref}>
-    <div className="draw-image-container" ref={ref}>
+    <div className="draw-image-container" style={{ display: !!mainImage.is_main ? 'none' : 'block' }} ref={ref}>
       <div style={{ position: 'relative', zIndex: 1, left: 50, top: 30, height: 0, width: 'fit-content' }}>
-        {userCanEditAnnotation && (
+        {userCanEditAnnotation && !mainImage.is_main && (
           <>
             <Button variant="contained" className={classes.annotateButton} onClick={onAddRectangle} data-tut={buttonTour}><AnnotateIcon /><p className="text-white">&nbsp; Annotate</p></Button>
             &nbsp;
