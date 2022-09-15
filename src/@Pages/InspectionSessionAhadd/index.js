@@ -118,9 +118,11 @@ export default function InspectionSessionAhadd(props) {
 
   const ViewBtn = ({ id }) => (
     <Link to={`/inspection/${id}`}>
-      <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }}>
-        <Search style={{ color: 'white' }} height="18px" width="18px" />
-      </IconButton>
+      <Tooltip title="View Inspection" placement="top">
+        <IconButton className="color-gradient-inline" style={{ width: 18, height: 18 }}>
+          <Search style={{ color: 'white' }} height="18px" width="18px" />
+        </IconButton>
+      </Tooltip>
     </Link>
   );
 
@@ -128,12 +130,14 @@ export default function InspectionSessionAhadd(props) {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <Delete
-          style={{
-            color: 'red', width: 34, height: 34, cursor: 'pointer',
-          }}
-          onClick={() => setOpen(true)}
-        />
+        <Tooltip title="Delete Inspection" placement="top">
+          <Delete
+            style={{
+              color: 'red', width: 34, height: 34, cursor: 'pointer',
+            }}
+            onClick={() => setOpen(true)}
+          />
+        </Tooltip>
         <DeleteDialog
           open={open}
           setOpen={setOpen}
@@ -147,7 +151,7 @@ export default function InspectionSessionAhadd(props) {
   const userImage = ({ User, pilot_name }) => {
     return (
       User.image ? (
-        <Tooltip title={pilot_name} className="flex-standard">
+        <Tooltip title={pilot_name} className="flex-standard" placement="top">
           <img
             src={isValidHttpUrl(User.image)
               ? User.image
@@ -173,7 +177,7 @@ export default function InspectionSessionAhadd(props) {
   };
 
   useEffect(() => {
-    const filteredInspections = h.inspectionSessions.sort((b, a) => b.date.localeCompare(a.date));
+    const filteredInspections = h.inspectionSessions.sort((a, b) => b.date.localeCompare(a.date));
     const modifiedInspections = filteredInspections.map(getOpenCaseFromInspection);
     setData(modifiedInspections.map(eachSession => ({
       ...eachSession,

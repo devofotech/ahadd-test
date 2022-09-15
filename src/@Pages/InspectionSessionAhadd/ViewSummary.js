@@ -53,7 +53,7 @@ export default (props) => {
             ))}
             <Divider className="w-100 my-1" style={{ color: 'var(--secondary-color)' }} />
             {[
-              { label: 'Total Image', value: `${props?.total_image ?? 0} Images` },
+              { label: 'Total Image', value: `${props?.InspectionFiles.length ?? 0} Images` },
               { label: 'AI Slope Condition', value: props?.ai_slope_condition ?? 'No Record' },
               { label: 'Overall Condition', value: props?.overall_condition ?? 'No Record' },
             ].map(e => (
