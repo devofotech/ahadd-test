@@ -4,13 +4,24 @@ import {
 } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { Close } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default () => {
   const [open, set_open] = useState(false);
   const [eng_slope_condition, set_eng_slope_condition] = useState('1');
   const [remarks, set_remarks] = useState('');
   const classes = useStyles();
+
+  useEffect(() => {
+    set_remarks({
+      1: 'Slope in good condition with not more than one slope element requiring maintenance or minor repair.',
+      2: 'Slope in satisfactory condition with not more than one slope element requiring maintenance or minor repair/ repair.',
+      3: 'Slope in fair condition with not more than one slope element requiring minor repair/ repair.',
+      4: 'Slope in poor condition with more than one slope elements requiring repair or rehabilitation works.',
+      5: 'Slope in severe condition with extensive repair or rehabilitation works required to one or more slope elements.',
+    }[eng_slope_condition]);
+  }, [eng_slope_condition]);
+
   return (
     <>
       <Button className="color-gradient-inline" style={{ borderRadius: 18 }} onClick={() => set_open(true)}>
