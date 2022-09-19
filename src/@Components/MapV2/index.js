@@ -291,7 +291,7 @@ export default function Maps({
 
   useEffect(async () => {
     if (_.isEmpty(project) || !project?.lng || !initialReady) return;
-    const targetCenter = { lat: project.lat, lng: project.lng, zoom: 18 };
+    const targetCenter = { lat: project.lat, lng: project.lng, zoom: 13 };
     centeringMap(mapRef.current.leafletElement, targetCenter);
     let markerIcon = [];
     if (!isDrawAnnotation) {
