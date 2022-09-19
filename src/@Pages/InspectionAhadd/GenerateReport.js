@@ -1,6 +1,6 @@
 import Button from '@Components/Button';
 import {
-  Dialog, DialogTitle, DialogActions, makeStyles, DialogContent, IconButton, withStyles, Checkbox, Grid,
+  Dialog, DialogTitle, DialogActions, makeStyles, DialogContent, IconButton, withStyles, Checkbox, Grid, Tooltip,
 } from '@material-ui/core';
 import { AddOutlined, Close } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
@@ -18,10 +18,12 @@ export default ({ images, mainSetImage }) => {
 
   return (
     <>
-      <Button className="color-gradient-inline" style={{ borderRadius: 18 }} onClick={() => set_open(true)}>
-        <AddOutlined style={{ color: 'white' }} />
-        <p className="text-white">GENERATE REPORT</p>
-      </Button>
+      <Tooltip title="Coming Soon">
+        <Button className="color-gradient-inline" style={{ borderRadius: 18 }} onClick={() => set_open(false)}>
+          <AddOutlined style={{ color: 'white' }} />
+          <p className="text-white">GENERATE REPORT</p>
+        </Button>
+      </Tooltip>
       <Dialog
         open={open}
         onClose={() => set_open(false)}

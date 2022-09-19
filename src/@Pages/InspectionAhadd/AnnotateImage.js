@@ -430,7 +430,7 @@ export default function AnnotateImage({
   return (
     // <div className="draw-image-container" style={{ ...marginAdjustment }} ref={ref}>
     <div className="draw-image-container" style={{ display: !!mainImage.is_main ? 'none' : 'block' }} ref={ref}>
-      <div style={{ position: 'relative', zIndex: 1, left: 50, top: 30, height: 0, width: 'fit-content' }}>
+      <div style={{ position: 'relative', zIndex: 1, float: 'right', top: 30, height: 0, width: 'fit-content', paddingRight: 10 }}>
         {userCanEditAnnotation && !mainImage.is_main && (
           <>
             <Button variant="contained" className={classes.annotateButton} onClick={onAddRectangle} data-tut={buttonTour}><AnnotateIcon /><p className="text-white">&nbsp; Annotate</p></Button>

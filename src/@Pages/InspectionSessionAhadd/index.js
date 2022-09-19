@@ -160,7 +160,7 @@ export default function InspectionSessionAhadd(props) {
           />
         </Tooltip>
       ) : (
-        <Tooltip title={pilot_name}>
+        <Tooltip title={pilot_name} placement="top">
           <div className="flex-standard" style={avstyle}>{initialsFromUser({ name: pilot_name })}</div>
         </Tooltip>
       )
