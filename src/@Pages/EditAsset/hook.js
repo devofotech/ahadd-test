@@ -37,7 +37,7 @@ export default () => {
         setRanking(data.RankingId);
         setSection(data.SectionId);
         setRegion(data.RegionId);
-        setPolygon(data.polygon);
+        setPolygon(JSON.parse(data.polygon));
         setAssetType(data.AssetTypeId);
         setIsLoading(false);
       },
@@ -50,7 +50,7 @@ export default () => {
       name,
       NetworkId: network,
       RankingId: ranking,
-      polygon,
+      polygon: JSON.stringify(polygon),
       lat: marker.lat,
       lng: marker.lng,
     };

@@ -47,9 +47,6 @@ export default () => {
           </Grid>
         </Grid>
         <div className="d-flex justify-content-end mt-5" style={{ gap: 10 }}>
-          <Button variant="text" onClick={h.handleBackStep}>
-            PREVIOUS
-          </Button>
           <Button disabled={isDisabled} onClick={h.updateAsset}>
             SAVE CHANGES
           </Button>
