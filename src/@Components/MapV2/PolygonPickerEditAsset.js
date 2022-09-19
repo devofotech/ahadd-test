@@ -40,6 +40,7 @@ export default ({
   const [activeControl, setActiveControl] = useState(null);
   const [polygonDeleted, setPolygonDeleted] = useState(false);
   const [activeEditControl, setActiveEditControl] = useState(null);
+  const [haveZoomControl, setHaveZoomControl] = useState(false);
   //   const [zoomControl, setZoomControl] = useState(null);
   const [initialReady, set_initialReady] = useState(false);
   const createDragableMarker = async (latlng) => {
@@ -63,15 +64,22 @@ export default ({
     if (activeControl) mapRef.current.leafletElement.removeControl(activeControl);
     const zoomctrl = L.control.zoom({ position: 'topleft' });
     const fullscreenctrl = L.control.fullscreen({ position: 'topleft' });
-    mapRef.current.leafletElement.addControl(fullscreenctrl);
-    mapRef.current.leafletElement.addControl(zoomctrl);
+    if (haveZoomControl === false) {
+      mapRef.current.leafletElement.addControl(fullscreenctrl);
+      mapRef.current.leafletElement.addControl(zoomctrl);
+      setHaveZoomControl(true);
+    }
     // setZoomControl(zoomctrl);
     const control = new L.Control.GroupedLayers(basemapHook);
     // mapRef.current.leafletElement.addControl(control);
     setBaseLayerActive(basemapHook['Google Street'], mapRef.current.leafletElement); // set active basemap , control will keep track and smart enough
     setActiveControl(control);
-    set_initialReady(true);
-  }, []);
+    if (pickerFor === 'polygon') {
+      !!picker && set_initialReady(true);
+    } else {
+      set_initialReady(true);
+    }
+  }, [picker]);
   useEffect(async () => {
     if (!initialReady) return;
     if (isLeafletDraw) {

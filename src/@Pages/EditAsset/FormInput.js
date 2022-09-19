@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { useState, useEffect } from 'react';
-import PolygonPicker from '@Components/MapV2/PolygonPicker';
+import PolygonPicker from '@Components/MapV2/PolygonPickerEditAsset';
 import {
   Grid, TextField, MenuItem,
 } from '@material-ui/core';
@@ -97,7 +97,7 @@ export default (h) => {
           children: (<CustomTextField
             classes={classes}
             name="Section"
-            value={h.network == 1 ? h.region : []}
+            value={h.network == 1 ? h.section : []}
             itemList={h.sections}
             onChange={(e) => h.setSection(e.target.value)}
             select
