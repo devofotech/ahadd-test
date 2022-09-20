@@ -17,11 +17,11 @@ export const RankingAhaddIcon = ({ type = 'A', width = 75, height = 75 }) => {
         </g>
         <g id="Group_8216" data-name="Group 8216" transform="translate(-6877.339 -21641.561)">
           {{
-            A: <text id="A" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-28.423" y="0">A</tspan></text>,
-            B: <text id="B" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-26.703" y="0">B</tspan></text>,
-            C: <text id="C" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-30.96" y="0">C</tspan></text>,
-            AA: <text id="AA" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-56.846" y="0">AA</tspan></text>,
-            unrank: <text id="Unrank" transform="translate(56.641 119.375)" fill="#fff" fontSize="48" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-80.352" y="0">Unrank</tspan></text>,
+            1: <text id="A" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-28.423" y="0">A</tspan></text>,
+            2: <text id="B" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-26.703" y="0">B</tspan></text>,
+            3: <text id="C" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-30.96" y="0">C</tspan></text>,
+            4: <text id="AA" transform="translate(56.641 133.87)" fill="#fff" fontSize="86" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-56.846" y="0">AA</tspan></text>,
+            5: <text id="Unrank" transform="translate(56.641 119.375)" fill="#fff" fontSize="48" fontFamily="CeraPro-Bold, Cera Pro" fontWeight="700"><tspan x="-80.352" y="0">Unrank</tspan></text>,
           }[type]}
           <text id="Rank" transform="translate(56.64 37)" fill="#fff" fontSize="37" fontFamily="CeraPro-Regular, Cera Pro"><tspan x="-40.922" y="0">Rank</tspan></text>
         </g>

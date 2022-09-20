@@ -60,7 +60,7 @@ export default function AssetCard({
             transition: 'all .5s',
           }}
         >
-          <RankingAhaddIcon type="unrank" />
+          <RankingAhaddIcon type={projects.RankingId} />
         </div>
       </>
       <Card
