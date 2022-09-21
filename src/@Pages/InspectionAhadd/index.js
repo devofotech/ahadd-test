@@ -31,7 +31,7 @@ export default function InspectionAhadd(props) {
         />
         <div className="d-flex justify-content-end align-items-center mr-4" style={{ gap: 20 }}>
           <CustomToggleButton {...h} />
-          <OverallCondition />
+          <OverallCondition {...h} />
           <GenerateReport {...h} />
         </div>
       </div>

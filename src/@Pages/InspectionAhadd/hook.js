@@ -24,6 +24,7 @@ export default function Hook(props) {
   const [inspection_module, set_inspection_module] = useState([]);
   const [mainSetImage, setMainSetImage] = useState();
   const [openPinLocationDialog, setOpenPinLocationDialog] = useState(false);
+  const [inspectionDetail, setInspectionDetail] = useState({});
 
   const refresh = () => {
     let inspectionsIds = {};
@@ -38,6 +39,7 @@ export default function Hook(props) {
       onSuccess: ({ data }) => {
         set_asset_details(data.Asset);
         set_inspection_module(data.Module);
+        setInspectionDetail(data);
       },
     });
     Api({
@@ -191,6 +193,18 @@ export default function Hook(props) {
     });
   };
 
+  const updateOverallCondition = (data) => {
+    Api({
+      endpoint: endpoints.updateInspection(props.InspectionId),
+      data,
+      onSuccess: () => {
+        refresh();
+        toast('success', 'Successfully updated');
+      },
+      onFail: () => toast('error', 'Failed to update inspection'),
+    });
+  };
+
   return {
     inspectionType,
     setInspectionType,
@@ -228,5 +242,7 @@ export default function Hook(props) {
     mainSetImage,
     openPinLocationDialog,
     setOpenPinLocationDialog,
+    updateOverallCondition,
+    inspectionDetail,
   };
 }

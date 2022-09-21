@@ -130,12 +130,13 @@ export default function SidebarV2(props) {
             </Link>
 
             {/* <Link to={`/project/report?id=${props.project?.id}`} className="mx-auto flex-standard" style={{ width: '45%' }}> */}
-            <Link to="/project" className="mx-auto flex-standard" style={{ width: '45%' }}>
+            <div className="mx-auto flex-standard" style={{ width: '45%' }}>
               <Button className="w-100 color-gradient-disabled box-shadow-bottom" disabled style={{ borderRadius: 18 }}>
                 <ReportIcon color="var(--light-color)" transform="scale(0.55)" />
                 DOCUMENT
               </Button>
-            </Link>
+            </div>
+            {/* </Link> */}
           </div>
 
           <AssetDetail details={props.project} assetTypeList={props.assetTypeList} />
