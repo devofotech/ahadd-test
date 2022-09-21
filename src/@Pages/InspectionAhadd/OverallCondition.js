@@ -6,14 +6,15 @@ import { green } from '@material-ui/core/colors';
 import { Close } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 
-export default () => {
+export default ({ inspectionDetail, updateOverallCondition }) => {
   const [open, set_open] = useState(false);
-  const [eng_slope_condition, set_eng_slope_condition] = useState('1');
-  const [remarks, set_remarks] = useState('');
+  const [eng_slope_condition, set_eng_slope_condition] = useState(inspectionDetail.eng_slope_condition);
+  const [description, set_description] = useState(inspectionDetail.description ?? '');
   const classes = useStyles();
 
   useEffect(() => {
-    set_remarks({
+    if (!!inspectionDetail.description) return;
+    set_description({
       1: 'Slope in good condition with not more than one slope element requiring maintenance or minor repair.',
       2: 'Slope in satisfactory condition with not more than one slope element requiring maintenance or minor repair/ repair.',
       3: 'Slope in fair condition with not more than one slope element requiring minor repair/ repair.',
@@ -21,6 +22,17 @@ export default () => {
       5: 'Slope in severe condition with extensive repair or rehabilitation works required to one or more slope elements.',
     }[eng_slope_condition]);
   }, [eng_slope_condition]);
+
+  useEffect(() => {
+    set_eng_slope_condition(inspectionDetail.eng_slope_condition);
+    set_description(inspectionDetail.description ?? '');
+  }, [inspectionDetail]);
+
+  const handleSubmit = () => {
+    if (!eng_slope_condition) return;
+    updateOverallCondition({ description, eng_slope_condition });
+    set_open(false);
+  };
 
   return (
     <>
@@ -45,7 +57,11 @@ export default () => {
         </DialogTitle>
         <DialogContent style={{ overflowY: 'hidden' }}>
           <div>
-            <RadioGroup value={eng_slope_condition} onChange={(e) => set_eng_slope_condition(e.target.value)} style={{ flexDirection: 'row' }}>
+            <RadioGroup
+              value={String(eng_slope_condition)}
+              onChange={(e) => set_eng_slope_condition(e.target.value)}
+              style={{ flexDirection: 'row' }}
+            >
               {[
                 { value: '1', label: 'Very Good' },
                 { value: '2', label: 'Good' },
@@ -60,8 +76,8 @@ export default () => {
               rows={6}
               variant="outlined"
               className="w-100 py-2"
-              value={remarks}
-              onChange={(e) => set_remarks(e.target.value)}
+              value={description}
+              onChange={(e) => set_description(e.target.value)}
             />
           </div>
         </DialogContent>
@@ -78,7 +94,7 @@ export default () => {
             <Button
               className="color-gradient-inline mx-3"
               style={{ borderRadius: 20 }}
-              onClick={() => set_open(false)}
+              onClick={handleSubmit}
             >
               <p style={{ color: 'white' }}>SAVE</p>
             </Button>
