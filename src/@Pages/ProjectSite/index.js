@@ -15,7 +15,7 @@ import CCTV from '@Pages/CCTV';
 import IFrame from '@Pages/IFrame';
 import IFrameList from '@Pages/IFrameList';
 import CenteredLoading from '@Components/CenteredLoading';
-import AssetDemoButton from './components/AssetDemo';
+// import AssetDemoButton from './components/AssetDemo';
 import InfoDialog from './components/InfoDialog';
 
 import Sidebar from './Sidebar';
@@ -63,11 +63,11 @@ export default function Property(props) {
             ahadd: <SidebarV2 {...h} parentProps={props} />,
           }[process.env.REACT_APP_BRANCH]
         )}
-        {(!!!isAssetView && !h.isLoadingMap && _.isEmpty(h.project)) && (
+        {/* {(!!!isAssetView && !h.isLoadingMap && _.isEmpty(h.project)) && (
           <div onClick={() => { props.setCurrentStep(0); props.setIsOpen(false); }}>
             <AssetDemoButton {...h} tourId="demo_asset" />
           </div>
-        )}
+        )} */}
         <div data-tut="control-layer" style={{ position: 'fixed', top: '80px', right: '10px', width: '45px', height: '45px', zIndex: -1}}>&nbsp;&nbsp;</div>
         <Grid item xs={12} md={9} className="main d-flex">
           <Switch>

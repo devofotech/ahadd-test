@@ -86,8 +86,9 @@ export default function SidebarV2(props) {
               </Button>
             </Link>
 
-            <Link to={`/project/report?id=${props.project?.id}`} className="mx-auto flex-standard" style={{ width: '45%' }}>
-              <Button className="w-100 color-gradient-inline box-shadow-bottom" style={{ borderRadius: 18 }}>
+            {/* <Link to={`/project/report?id=${props.project?.id}`} className="mx-auto flex-standard" style={{ width: '45%' }}> */}
+            <Link to="/project" className="mx-auto flex-standard" style={{ width: '45%' }}>
+              <Button className="w-100 color-gradient-disabled box-shadow-bottom" disabled style={{ borderRadius: 18 }}>
                 <ReportIcon color="var(--light-color)" transform="scale(0.55)" />
                 DOCUMENT
               </Button>

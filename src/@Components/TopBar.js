@@ -181,7 +181,7 @@ export default function TopBar(props) {
             style={{ cursor: 'pointer', zIndex: 99999, minWidth: 'fit-content' }}
           >
             <Avatar {...props} />
-            <p style={{ fontSize: 16, fontWeight: 600 }} className="mb-0 navbar-text">
+            <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--dark-blue-color)' }} className="mb-0 navbar-text">
               {truncateString(props.name?.split(' ').slice(0, 2).join(' '), 15)}
             </p>
             <ExpandMore onBlur={handleCloseMenu} onClick={handleClickMenu} data-tut="dropdown_icon" />
@@ -195,7 +195,7 @@ export default function TopBar(props) {
           >
             <div data-tut="dropdown_topbar" style={{ marginBottom: -5, marginTop: -2 }}>
               <MenuItem disabled className="d-flex justify-content-between">
-                <div className="mr-2 navbar-text">{props.name?.split(' ').slice(0, 2).join(' ')}</div>
+                <div className="mr-2 navbar-text" style={{ color: 'var(--dark-blue-color)' }}>{props.name?.split(' ').slice(0, 2).join(' ')}</div>
               </MenuItem>
               {/* {!!props.can_view_admin_panel && (
               <Link to="/admin-panel">
@@ -211,7 +211,7 @@ export default function TopBar(props) {
                 </MenuItem>
               </Link>
             )} */}
-              {[1].includes(props.RoleId) && (
+              {/* {[1].includes(props.RoleId) && (
                 <Link to="/data-mining">
                   <MenuItem className="py-0">
                     <span className="color-primary navbar-text">Data Mining</span>
@@ -271,7 +271,7 @@ export default function TopBar(props) {
                 <MenuItem className="py-0">
                   <span className="color-primary navbar-text">Profile Page</span>
                 </MenuItem>
-              </Link>
+              </Link> */}
               <Link to="/logout">
                 <MenuItem className="py-0">
                   <span className="color-primary navbar-text">Logout</span>

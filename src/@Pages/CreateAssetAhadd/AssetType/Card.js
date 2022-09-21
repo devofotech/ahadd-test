@@ -10,7 +10,7 @@ export default (h) => {
           <>
             {h.assetTypeList.map(asset => (
               <Grid item xs={12} md={6}>
-                <AssetCardList {...h} data={asset} isAssetsType isDisabled={[3].includes(asset.id)} />
+                <AssetCardList {...h} data={asset} isAssetsType isDisabled={[null].includes(asset.id)} />
               </Grid>
             ))}
             <Grid container justify="center" alignItems="center" className="my-2">

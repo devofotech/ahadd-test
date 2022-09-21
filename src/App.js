@@ -276,7 +276,7 @@ function MainContainer({
       <Grid item xs={12}>
         {child}
       </Grid>
-      {process.env.REACT_APP_TAWK_TO_ENABLED === 'true' && <TawktoWidget user={user} />}
+      {/* {process.env.REACT_APP_TAWK_TO_ENABLED === 'true' && <TawktoWidget user={user} />} */}
     </Grid>
   );
 }
