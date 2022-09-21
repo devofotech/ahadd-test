@@ -87,11 +87,6 @@ export default ({ isAssetsType = false, isDisabled = false, ...h }) => {
                   <br />
                 </>
               )) ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'}
-              <p className="mt-2" style={{ position: 'absolute', bottom: 5 }}>
-                <a href="https://ofo.my" target="_blank" rel="noopener noreferrer" className={`text-justify ${textLearnMore}`} style={{ opacity }}>
-                  Learn More
-                </a>
-              </p>
             </Typography>
           </CardContent>
         </Box>
