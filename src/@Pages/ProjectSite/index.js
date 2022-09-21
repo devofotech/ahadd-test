@@ -14,7 +14,7 @@ import Report from '@Pages/Report';
 import CCTV from '@Pages/CCTV';
 import IFrame from '@Pages/IFrame';
 import IFrameList from '@Pages/IFrameList';
-import CenteredLoading from '@Components/CenteredLoading';
+import CenteredLoading from '@Components/CenteredLoading/v2';
 // import AssetDemoButton from './components/AssetDemo';
 import InfoDialog from './components/InfoDialog';
 

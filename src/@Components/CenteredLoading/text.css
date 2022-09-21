@@ -4,19 +4,19 @@
   
   @keyframes dots {
     0%, 20% {
-      color: var(--primary-color);
+      color: var(--main-color);
       text-shadow:
-        .25em 0 0 var(--primary-color),
-        .5em 0 0 var(--primary-color);}
+        .25em 0 0 var(--main-color),
+        .5em 0 0 var(--main-color);}
     40% {
       color: transparent;
       text-shadow:
-        .25em 0 0 var(--primary-color),
-        .5em 0 0 var(--primary-color);}
+        .25em 0 0 var(--main-color),
+        .5em 0 0 var(--main-color);}
     60% {
       text-shadow:
         .25em 0 0 transparent,
-        .5em 0 0 var(--primary-color);}
+        .5em 0 0 var(--main-color);}
     80%, 100% {
       text-shadow:
         .25em 0 0 transparent,
