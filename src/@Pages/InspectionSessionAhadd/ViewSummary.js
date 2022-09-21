@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog, DialogActions, DialogContent, DialogTitle, Button, Grid, Divider,
 } from '@material-ui/core';
@@ -15,6 +15,27 @@ const useStyles = makeStyles(() => ({
 export default (props) => {
   const classes = useStyles();
   const [open, set_open] = useState(false);
+  const [table_data, set_table_data] = useState([
+    { x: 1, y1: 0, y2: 0 },
+    { x: 2, y1: 0, y2: 0 },
+    { x: 3, y1: 0, y2: 0 },
+    { x: 4, y1: 0, y2: 0 },
+    { x: 5, y1: 0, y2: 0 },
+  ]);
+
+  useEffect(() => {
+    if (!props.id) return;
+    if (!props.InspectionFiles.filter(e => !e.is_main).length) return;
+    const inspectionList = props.InspectionFiles
+      .filter(e => !e.is_main)
+      .map(f => ({ ai_defect_rating: Math.floor(Math.random() * (6 - 1) + 1), ...f }));
+    inspectionList.forEach(element => {
+      set_table_data(prevVal => prevVal.map(ann => (ann.x === element.ai_defect_rating ? ({ ...ann, y2: ann.y2 + 1 }) : ann)));
+      if (!element.Annotations.length) return;
+      set_table_data(prevVal => prevVal.map(ann => (ann.x === element.Annotations[0].SeverityId ? ({ ...ann, y1: ann.y1 + 1 }) : ann)));
+    });
+  }, [props.InspectionFiles]);
+
   return (
     <>
       <Button className="color-gradient-inline px-3" style={{ borderRadius: 18, color: 'white', fontSize: 12 }} onClick={() => set_open(true)}>
@@ -66,9 +87,11 @@ export default (props) => {
                 </Grid>
               </>
             ))}
-            <div className="mt-2">
-              <BarChart />
-            </div>
+            {!!props.InspectionFiles.length && (
+              <div className="mt-2">
+                <BarChart data={table_data} />
+              </div>
+            )}
           </Grid>
         </DialogContent>
         <DialogActions>

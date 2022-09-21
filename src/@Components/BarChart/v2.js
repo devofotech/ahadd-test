@@ -2,7 +2,6 @@ import React from 'react';
 import {
   VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryTheme, VictoryTooltip,
 } from 'victory';
-import data from './data.json';
 
 function BarChart({ width, height, padding, ...props }) {
   const chartPadding = padding ?? { top: 30, bottom: 60, right: 50, left: 50 };
@@ -39,7 +38,7 @@ function BarChart({ width, height, padding, ...props }) {
           },
         ].map(e => (
           <VictoryBar
-            data={data}
+            data={props.data}
             x="x"
             y={e.y}
             barWidth={30}

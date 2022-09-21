@@ -2,18 +2,16 @@ import {
   Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, MenuItem, TextField,
 } from '@material-ui/core';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import React, { useState } from 'react';
+import React from 'react';
 import MomentUtils from '@date-io/moment';
 import { Close } from '@material-ui/icons';
 
 export default function CycleDialog({
-  openCycleDialog, setOpenCycleDialog, onSave,
+  openCycleDialog, setOpenCycleDialog, selectedDate, handleDateChange, cycle, setCycle, onSave,
 }) {
-  const [selectedDate, handleDateChange] = useState(new Date());
-  const [cycle, setCycle] = useState();
   const saveCycle = () => {
     if (!cycle) return;
-    onSave(cycle, selectedDate);
+    onSave();
     setOpenCycleDialog(false);
   };
   return (
@@ -51,7 +49,6 @@ export default function CycleDialog({
                   <MenuItem value={2} className="text-dark">Cycle 2</MenuItem>
                   <MenuItem value={3} className="text-dark">Cycle 3</MenuItem>
                   <MenuItem value={4} className="text-dark">Cycle 4</MenuItem>
-                  <MenuItem value={5} className="text-dark">Cycle 5</MenuItem>
                 </TextField>
               ),
             },

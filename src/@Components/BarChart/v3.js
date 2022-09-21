@@ -2,9 +2,9 @@ import React from 'react';
 import {
   VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryLabel, VictoryLegend, VictoryTheme, VictoryTooltip,
 } from 'victory';
-import data from './data.json';
+// import data from './data.json';
 
-function BarChart() {
+function BarChart({ data }) {
   return (
     <VictoryChart
       // domainPadding will add space to each side of VictoryBar to
