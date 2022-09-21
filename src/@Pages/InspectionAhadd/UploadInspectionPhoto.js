@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@Components/Button';
 import {
-  Box, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip,
+  Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Tooltip,
 } from '@material-ui/core';
 import { Add, Close } from '@material-ui/icons';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
@@ -13,6 +14,9 @@ const useStyles = makeStyles(() => ({
   blueBtnText: { color: '#FFFFFF', fontWeight: 600, fontSize: 16 },
   outlinedBtnText: { fontWeight: 600, fontSize: 16 },
   closeBtn: { cursor: 'pointer', float: 'right' },
+  dialogAction: {
+    display: 'flex', justifyContent: 'flex-end', padding: '10px 0', width: '100%',
+  },
 }));
 
 export default function UploadInspectionPhoto(props) {
@@ -50,43 +54,41 @@ export default function UploadInspectionPhoto(props) {
       <Dialog
         open={open}
         onClose={() => setOpen(false)}
-        PaperProps={{ style: { borderRadius: 10, maxHeight: '40rem', width: 'auto' } }}
+        PaperProps={{ style: { borderRadius: 10, maxHeight: '40rem', width: '100%' } }}
         fullWidth
-        maxWidth="md"
+        maxWidth="sm"
       >
         <DialogTitle>
-          Upload Inspection Media
-          <Close className={classes.closeBtn} onClick={() => { setOpen(false); setFiles([]); }} />
+          <div className="w-100 d-flex justify-content-between align-items-center">
+            <p style={{ color: '#022C64', fontWeight: 600 }}>Upload Inspection Media</p>
+            <IconButton onClick={() => { setOpen(false); setFiles([]); }}>
+              <Close fontSize="small" />
+            </IconButton>
+          </div>
         </DialogTitle>
         <DialogContent>
           <FileDropZone files={files} setFiles={setFiles} height={400} type="imageVideo" />
         </DialogContent>
         <DialogActions>
-          <div style={{
-            display: 'flex', justifyContent: 'space-between', padding: '0 20px', width: '100%',
-          }}
-          >
-            <Box
-              component="button"
-              className="blue-button-outlined"
+          <div className={classes.dialogAction}>
+            <Button
+              className="text-white"
+              variant="outlined"
+              style={{ border: '1px solid var(--main-color)', borderRadius: 20, backgroundColor: 'white' }}
               onClick={() => { setOpen(false); setFiles([]); }}
-              style={{ borderRadius: '6px', width: '120px', padding: 6 }}
             >
-              <h1 className={`${classes.outlinedBtnText} flex-standard`}>
-                Cancel
-              </h1>
-            </Box>
-            <Box
-              component="button"
-              className={`${classes.blueBtn} blue-button`}
+              <p style={{ color: 'var(--main-color)' }}>CANCEL</p>
+            </Button>
+            <Button
+              className="color-gradient-inline mx-3"
+              style={{ borderRadius: 20 }}
               onClick={() => clickUpload()}
-              style={{ borderRadius: '6px', width: '160px', marginLeft: '5rem' }}
             >
-              <h1 className={`${classes.blueBtnText} flex-standard`}>
+              <p style={{ color: 'white' }}>
                 <CloudUploadIcon style={{ marginRight: 3 }} />
                 Upload Media
-              </h1>
-            </Box>
+              </p>
+            </Button>
           </div>
         </DialogActions>
       </Dialog>

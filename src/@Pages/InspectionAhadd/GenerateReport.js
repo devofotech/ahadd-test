@@ -19,7 +19,7 @@ export default ({ images, mainSetImage }) => {
   return (
     <>
       <Tooltip title="Coming Soon">
-        <Button className="color-gradient-inline" style={{ borderRadius: 18 }} onClick={() => set_open(false)}>
+        <Button className="color-gradient-disabled" disabled style={{ borderRadius: 18 }} onClick={() => set_open(false)}>
           <AddOutlined style={{ color: 'white' }} />
           <p className="text-white">GENERATE REPORT</p>
         </Button>

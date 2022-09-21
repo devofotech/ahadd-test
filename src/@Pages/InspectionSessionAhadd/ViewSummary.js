@@ -75,8 +75,23 @@ export default (props) => {
             <Divider className="w-100 my-1" style={{ color: 'var(--secondary-color)' }} />
             {[
               { label: 'Total Image', value: `${props?.InspectionFiles.length ?? 0} Images` },
-              { label: 'AI Slope Condition', value: props?.ai_slope_condition ?? 'No Record' },
-              { label: 'Overall Condition', value: props?.overall_condition ?? 'No Record' },
+              // { label: 'AI Slope Condition', value: props?.ai_slope_condition ?? 'No Record' },
+              {
+                label: 'AI Slope Condition',
+                value: !props?.eng_slope_condition ? 'No Record' : (
+                  {
+                    1: 'Very Good', 2: 'Good', 3: 'Average', 4: 'Poor', 5: 'Very Poor',
+                  }[props?.eng_slope_condition]
+                ),
+              },
+              {
+                label: 'Overall Condition',
+                value: !props?.eng_slope_condition ? 'No Record' : (
+                  {
+                    1: 'Very Good', 2: 'Good', 3: 'Average', 4: 'Poor', 5: 'Very Poor',
+                  }[props?.eng_slope_condition]
+                ),
+              },
             ].map(e => (
               <>
                 <Grid xs={6} item className="my-1">
