@@ -8,7 +8,6 @@ export default function Hook(props) {
   const [inspectionType, setInspectionType] = useState('image');
   const [asset_details, set_asset_details] = useState({});
   const [inspections, setInspections] = useState([]);
-  const [severity, setSeverity] = useState([]);
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
   const [ImgIdxForMap, setImgIdxForMap] = useState(0);
@@ -25,15 +24,12 @@ export default function Hook(props) {
   const [mainSetImage, setMainSetImage] = useState();
   const [openPinLocationDialog, setOpenPinLocationDialog] = useState(false);
   const [inspectionDetail, setInspectionDetail] = useState({});
+  const [isLoadingInitial, setIsLoadingInitial] = useState(false);
 
   const refresh = () => {
     let inspectionsIds = {};
+    setIsLoadingInitial(true);
     if (props.InspectionId) inspectionsIds = { InspectionId: props.InspectionId };
-    Api({
-      endpoint: endpoints.getSeverity(),
-      data: { InspectionId: props.InspectionId },
-      onSuccess: (response) => setSeverity(response.data),
-    });
     Api({
       endpoint: endpoints.getInspectionDetails(props.InspectionId),
       onSuccess: ({ data }) => {
@@ -65,6 +61,7 @@ export default function Hook(props) {
           asset: m['Inspection.name'],
           title: `Video ${i + 1}`,
         })));
+      setIsLoadingInitial(false);
     } else {
       setImages([]);
       setVideos([]);
@@ -91,6 +88,7 @@ export default function Hook(props) {
       input.push(input_annotation);
     }
     console.log('save click input', input);
+    setIsLoadingInitial(true);
     Api({
       endpoint: endpoints.updateInspectionFileAnnotate(),
       data: {
@@ -109,6 +107,7 @@ export default function Hook(props) {
   };
 
   const handleChangeMainImage = async (id, changeByIdx) => {
+    if (mainImage.id === id) return;
     const image = changeByIdx ? images[id] : images.find(i => i.id == id);
     if (!image) return;
     setIsLoading(true);
@@ -178,6 +177,7 @@ export default function Hook(props) {
   };
 
   const pinLocationOnMainImage = (data) => {
+    setIsLoadingInitial(true);
     const { InspectionFileId, pin_on_main } = data;
     Api({
       endpoint: endpoints.setLocationOnMainImage(InspectionFileId),
@@ -194,6 +194,7 @@ export default function Hook(props) {
   };
 
   const updateOverallCondition = (data) => {
+    setIsLoadingInitial(true);
     Api({
       endpoint: endpoints.updateInspection(props.InspectionId),
       data,
@@ -232,7 +233,6 @@ export default function Hook(props) {
     uploadPhoto,
     uploadPercentages,
     setUploadPercentages,
-    severity,
     deleteImage,
     uploadFiles,
     ImgIdxForMap,
@@ -244,5 +244,6 @@ export default function Hook(props) {
     setOpenPinLocationDialog,
     updateOverallCondition,
     inspectionDetail,
+    isLoadingInitial,
   };
 }

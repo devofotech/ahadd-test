@@ -28,7 +28,7 @@ export default (props) => {
     if (!props.InspectionFiles.filter(e => !e.is_main).length) return;
     const inspectionList = props.InspectionFiles
       .filter(e => !e.is_main)
-      .map(f => ({ ai_defect_rating: Math.floor(Math.random() * (6 - 1) + 1), ...f }));
+      .map(f => ({ ai_defect_rating: 0, ...f }));
     inspectionList.forEach(element => {
       set_table_data(prevVal => prevVal.map(ann => (ann.x === element.ai_defect_rating ? ({ ...ann, y2: ann.y2 + 1 }) : ann)));
       if (!element.Annotations.length) return;
