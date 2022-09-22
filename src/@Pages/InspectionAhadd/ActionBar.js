@@ -53,11 +53,11 @@ export default function ActionBar({
             <div className="px-4 py-2">
               <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
                 <p className="text-secondary">Detection:</p>
-                <p style={{ fontSize: 16 }}>Gully Erosion</p>
+                <p style={{ fontSize: 16 }}>No Record</p>
               </div>
               <div className="d-flex justify-content-between" style={{ fontSize: 14 }}>
                 <p className="text-secondary">Severity:</p>
-                <p style={{ fontSize: 18, color: '#FEB019' }}>4</p>
+                <p style={{ fontSize: 18, color: '#FEB019' }}>No Record</p>
               </div>
               <div className="d-flex justify-content-center" style={{ fontSize: 14 }}>
                 {!!mainImage.pin_on_main ? (
@@ -85,7 +85,7 @@ export default function ActionBar({
               </>
             );
           })}
-          {!mainImage.is_main && !!mainImageAnnotations.length && (
+          {!mainImage.is_main && (
             <div className="d-flex justify-content-end my-2 pr-3">
               <Button variant="contained" className={`my-2 color-gradient-inline ${classes.saveButton}`} onClick={() => saveImage()}>
                 SAVE

@@ -53,7 +53,7 @@ export default ({ inspectionDetail, updateOverallCondition }) => {
               <Close fontSize="small" />
             </IconButton>
           </div>
-          <p style={{ fontSize: '16px', color: '#022C64' }}>AI Slope Condition: <strong>Good</strong></p>
+          <p style={{ fontSize: '16px', color: '#022C64' }}>AI Slope Condition: <strong>No Record</strong></p>
         </DialogTitle>
         <DialogContent style={{ overflowY: 'hidden' }}>
           <div>

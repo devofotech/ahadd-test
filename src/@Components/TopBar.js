@@ -110,7 +110,7 @@ export default function TopBar(props) {
             {[
               {
                 roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-                link: '/dashboard/analytic',
+                // link: '/dashboard/analytic',
                 selected: '/dashboard',
                 icon: (e) => <Dashboard color={iconColor(e)} />,
                 title: 'Dashboard',
@@ -172,9 +172,9 @@ export default function TopBar(props) {
             ))}
           </Grid>
           <div className="mr-4 ml-3">
-            <Badge badgeContent={hasRead ? 0 : activityLog.data?.length} color="secondary" onClick={(e) => handleClickNotification(e)}>
+            {/* <Badge badgeContent={hasRead ? 0 : activityLog.data?.length} color="secondary" onClick={(e) => handleClickNotification(e)}>
               <Notifications onClick={(e) => handleClickNotification(e)} style={{ backgroundColor: 'primary' }} data-tut="notification" />
-            </Badge>
+            </Badge> */}
           </div>
           <div
             className="d-flex flex-row flex-standard"
