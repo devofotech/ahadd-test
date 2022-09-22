@@ -78,7 +78,7 @@ export default (props) => {
               // { label: 'AI Slope Condition', value: props?.ai_slope_condition ?? 'No Record' },
               {
                 label: 'AI Slope Condition',
-                value: !props?.eng_slope_condition ? 'No Record' : (
+                value: !props?.ai_slope_condition ? 'No Record' : (
                   {
                     1: 'Very Good', 2: 'Good', 3: 'Average', 4: 'Poor', 5: 'Very Poor',
                   }[props?.eng_slope_condition]
