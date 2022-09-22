@@ -6,7 +6,7 @@ import Navbar from '@Components/Navbar';
 import Map from '@Components/MapV2';
 import CustomToggleButton from '@Components/CustomToggleButton';
 import './mapcustomdraw.css';
-
+import CenteredLoadingContainer from '@Components/CenteredLoadingContainer';
 import Hook from './hook';
 import SideBar from './SideBar';
 import ActionBar from './ActionBar';
@@ -47,20 +47,24 @@ export default function InspectionAhadd(props) {
           </Grid>
         )}
         <Grid item xs={12} lg={showImageActionBar || showVideoActionBar ? 9 : 12} className="mapgrid" data-tut="workspace">
-          {h.inspectionType === 'image' ? <MainWorkspace {...h} buttonTour="annotate-button" />
-            : (
-              <Map
-                filtered_projects={h.images.map(d => ({ ...d, lat: d.lat ?? h.asset_details.lat, lng: d.lng ?? h.asset_details.lng }))}
-                selected_project={h.ImgIdxForMap}
-                set_selected_project={h.setImgIdxForMap}
-                project={h.mainImage}
-                mapStyle={{
-                  maxHeight: '60vh', minHeight: '60vh', minWidth: '71vw', maxWidth: '71vw',
-                }}
-                iconType="WithImage"
-                isInspection
-              />
-            )}
+          {h.isLoadingInitial ? <CenteredLoadingContainer height="50vh" size={75} hasText text="inspection" /> : (
+            <>
+              {h.inspectionType === 'image' ? <MainWorkspace {...h} buttonTour="annotate-button" />
+                : (
+                  <Map
+                    filtered_projects={h.images.map(d => ({ ...d, lat: d.lat ?? h.asset_details.lat, lng: d.lng ?? h.asset_details.lng }))}
+                    selected_project={h.ImgIdxForMap}
+                    set_selected_project={h.setImgIdxForMap}
+                    project={h.mainImage}
+                    mapStyle={{
+                      maxHeight: '60vh', minHeight: '60vh', minWidth: '71vw', maxWidth: '71vw',
+                    }}
+                    iconType="WithImage"
+                    isInspection
+                  />
+                )}
+            </>
+          )}
         </Grid>
         <Grid item xs={12} data-tut="annotate-sidebar">
           <SideBar {...h} />
