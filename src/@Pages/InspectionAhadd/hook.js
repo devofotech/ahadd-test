@@ -67,6 +67,7 @@ export default function Hook(props) {
       setVideos([]);
       setMainSetImage();
       setIsLoading(false);
+      setIsLoadingInitial(false);
     }
   }, [inspections]);
   useEffect(async () => {

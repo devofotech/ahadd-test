@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import BusinessIcon from '@material-ui/icons/Business';
@@ -6,31 +5,25 @@ import PublicIcon from '@material-ui/icons/Public';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import moment from 'moment';
 
-export default function AssetDetail({ details, assetTypeList = [] }) {
-  const [assetType, setAssetType] = useState([]);
+export default function AssetDetail({
+  details, assetTypeList = [], regions = [], sections = [],
+}) {
   let lastinspection = moment(details.lastinspection).isValid() ? moment(details.lastinspection).format('DD MMM YYYY') : 'No Inspection';
   if (!details.lastinspection) lastinspection = 'No Inspection';
 
-  const removeAsset = asset => asset?.replace('Asset', '');
-
-  useEffect(() => {
-    if (!assetTypeList.length) return;
-    if (!details.AssetTypeId) return;
-    const filteredAssetType = assetTypeList.filter(f => f.id == details.AssetTypeId);
-    setAssetType(Object.assign(...filteredAssetType));
-  }, [assetTypeList, details]);
+  const getLabel = (arr, id) => (!arr.length ? '-' : arr.find(e => e.id === id).name);
 
   return (
     <Grid container spacing={1} style={{ width: '93%', flexWrap: 'wrap', justifyContent: 'center' }} className="my-2">
       {[
         {
-          title: 'Asset Type', data: removeAsset(assetType?.name ?? details.asset_type) ?? 'Loading', show: true, icon: <BusinessIcon fontSize="default" />,
+          title: 'Asset Type', data: getLabel(assetTypeList, details.AssetTypeId), show: true, icon: <BusinessIcon fontSize="default" />,
         },
         {
-          title: 'Region', data: details.state, show: true, icon: <PublicIcon fontSize="default" />,
+          title: 'Region', data: getLabel(regions, details.RegionId), show: true, icon: <PublicIcon fontSize="default" />,
         },
         {
-          title: 'Section', data: details.location, show: true, icon: <LocationOnIcon fontSize="default" />,
+          title: 'Section', data: getLabel(sections, details.SectionId), show: true, icon: <LocationOnIcon fontSize="default" />,
         },
         {
           title: 'Last Inspection', data: lastinspection, show: true, icon: <CalendarTodayIcon fontSize="default" />,

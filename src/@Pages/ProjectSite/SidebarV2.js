@@ -139,7 +139,12 @@ export default function SidebarV2(props) {
             {/* </Link> */}
           </div>
 
-          <AssetDetail details={props.project} assetTypeList={props.assetTypeList} />
+          <AssetDetail
+            details={props.project}
+            assetTypeList={props.assetTypeList}
+            regions={props.regions}
+            sections={props.sections}
+          />
 
           <div className="py-2 flex-standard" style={{ width: '90%', backgroundColor: '#022C64', borderRadius: 10 }}>
             <p style={{ color: 'var(--light-color)' }}>INSPECTION DETECTION RATING</p>
