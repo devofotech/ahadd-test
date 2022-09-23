@@ -108,15 +108,15 @@ export default function TopBar(props) {
             alignItems="center"
           >
             {[
-              {
-                roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-                // link: '/dashboard/analytic',
-                selected: '/dashboard',
-                icon: (e) => <Dashboard color={iconColor(e)} />,
-                title: 'Dashboard',
-                page_access: true,
-                tourId: 'dashboard',
-              },
+              // {
+              //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
+              //   link: '/dashboard/analytic',
+              //   selected: '/dashboard',
+              //   icon: (e) => <Dashboard color={iconColor(e)} />,
+              //   title: 'Dashboard',
+              //   page_access: true,
+              //   tourId: 'dashboard',
+              // },
               {
                 roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
                 link: '/project',

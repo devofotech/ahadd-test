@@ -44,6 +44,8 @@ export default function Hook({ user, setIsOpen }) {
   const queryParam = queryString.parse(location.search);
   const prefixLocation = location.pathname.split('/');
   const isOrgUnlimited = !!user?.['Organization.StoreStorage.is_token_unlimited'];
+  const [sections, setSections] = useState([]);
+  const [regions, setRegions] = useState([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -57,23 +59,6 @@ export default function Hook({ user, setIsOpen }) {
     setIsOpen(true);
     setOpen(false);
   };
-
-  const getAllParameters = () => {
-    Api({
-      endpoint: endpoints.getParameters(),
-      onSuccess: ({ data }) => setParameterList(_.groupBy(data, 'ModuleId')),
-      onFail: () => toast('error', 'Error getting data. Please try again later.'),
-    });
-  };
-
-  const getModules = () => {
-    Api({
-      endpoint: endpoints.getModules(),
-      onSuccess: ({ data }) => setModules(data.map(e => ({ ...e, value: e.id, label: e.name }))),
-      onFail: () => toast('error', 'Error getting modules data. Please try again later.'),
-    });
-  };
-
   const deleteFile = (id) => {
     Api({
       endpoint: endpoints.deleteAssetFile(id),
@@ -115,16 +100,11 @@ export default function Hook({ user, setIsOpen }) {
     Api({
       endpoint: endpoints.getStaticData(),
       onSuccess: ({
-        data: {
-          AssetType, projectphase, products_storage, OshCategory, EnvironmentCategory, issue, Module,
-        },
+        data: { AssetType, Region, Section },
       }) => {
-        set_phases(projectphase);
-        setAssetTypeList(AssetType);
-        setStorages(products_storage);
-        setOshCategory(OshCategory);
-        setEnvironmentCategory(EnvironmentCategory);
-        setIssues(issue);
+        setAssetTypeList(AssetType ?? []);
+        setRegions(Region ?? []);
+        setSections(Section ?? []);
       },
       onFail: (err) => toast('error', err),
     });
@@ -283,5 +263,7 @@ export default function Hook({ user, setIsOpen }) {
     setIsShowIntroWithTour,
     isLoadingMap,
     isLoading,
+    sections,
+    regions,
   };
 }
