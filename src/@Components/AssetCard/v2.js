@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import {
   Card, Grid, Typography, CardActionArea, CardMedia, CardContent, Tooltip, Button, Avatar,
 } from '@material-ui/core';
+import { Edit, Delete, Cancel } from '@material-ui/icons';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
+import modalImage from '@Assets/Images/undraw_processing_re_tbdu 1.svg';
 import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -76,22 +78,8 @@ export default function AssetCard({
           <Grid item className={classes.editButtonContent}>
             <Button
               onClick={() => {
-                MySwal.fire({
-                  title: 'Please choose the action that you want',
-                  showCancelButton: true,
-                  showDenyButton: true,
-                  showConfirmButton: true,
-                  denyButtonText: 'Delete Asset',
-                  confirmButtonText: 'Edit Asset',
-                  confirmButtonColor: 'var(--primary-color)',
-                  cancelButtonText: 'Do Nothing',
-                }).then((result) => {
-                  if (result.isConfirmed && projects?.id) history.push(`/edit-asset/${projects.id}`);
-                  if (result.isDenied) {
-                    setSelectedAsset(projects);
-                    setOpen(true);
-                  }
-                });
+                h.setOpenCardDialog(true);
+                setSelectedAsset(projects);
               }}
             >
               <h3 className="text-white mr-1 h-25" style={{ fontSize: 16 }}>• • •</h3>

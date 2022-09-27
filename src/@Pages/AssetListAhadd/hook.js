@@ -8,6 +8,7 @@ export default function Hook() {
   const [filterProjects, setFilterProjects] = useState([]);
   const [selectedAsset, setSelectedAsset] = useState();
   const [open, setOpen] = useState(false);
+  const [openCardDialog, setOpenCardDialog] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [tagsFilter, setTagsFilter] = useState(['']);
   const [openRelative, setOpenRelative] = useState(false);
@@ -163,5 +164,7 @@ export default function Hook() {
     setSelectedSection,
     selectedRanking,
     setSelectedRanking,
+    openCardDialog,
+    setOpenCardDialog,
   };
 }
