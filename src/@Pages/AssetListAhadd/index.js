@@ -16,6 +16,7 @@ import Dropdown from './components/Dropdown';
 import useHook from './hook';
 import AssetListContent from './components/AssetListContent';
 import SortDropdown from './components/SortDropdown';
+import AssetCardDialog from './components/AssetCardDialog';
 
 const titleStyle = {
   fontWeight: 600,
@@ -94,6 +95,13 @@ export default function AssetList({ user, closeTour }) {
           selected={h.selectedAsset}
           setSelected={h.setSelectedAsset}
           deleteFunction={() => h.deleteAsset()}
+        />
+        <AssetCardDialog
+          open={h.openCardDialog}
+          setOpen={h.setOpenCardDialog}
+          selected={h.selectedAsset}
+          setSelected={h.setSelectedAsset}
+          setOpenDeleteDialog={h.setOpen}
         />
         <RelativeDialog {...h} user={user} />
       </div>
