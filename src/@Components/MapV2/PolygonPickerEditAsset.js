@@ -74,11 +74,7 @@ export default ({
     // mapRef.current.leafletElement.addControl(control);
     setBaseLayerActive(basemapHook['Google Street'], mapRef.current.leafletElement); // set active basemap , control will keep track and smart enough
     setActiveControl(control);
-    if (pickerFor === 'polygon') {
-      !!picker && set_initialReady(true);
-    } else {
-      set_initialReady(true);
-    }
+    set_initialReady(true);
   }, [picker]);
   useEffect(async () => {
     if (!initialReady) return;
@@ -140,7 +136,7 @@ export default ({
         setPicker(null);
       });
     }
-  }, [initialReady, polygonDeleted]);
+  }, [initialReady, polygonDeleted, picker]);
   useEffect(() => {
     if (!initialReady) return;
     if (!picker) return;
