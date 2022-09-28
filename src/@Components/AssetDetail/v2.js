@@ -11,7 +11,7 @@ export default function AssetDetail({
   let lastinspection = moment(details.lastinspection).isValid() ? moment(details.lastinspection).format('DD MMM YYYY') : 'No Inspection';
   if (!details.lastinspection) lastinspection = 'No Inspection';
 
-  const getLabel = (arr, id) => (!arr.length ? '-' : arr.find(e => e.id === id).name);
+  const getLabel = (arr, id) => (!arr.length ? '-' : arr.find(e => e.id === id)?.name);
 
   return (
     <Grid container spacing={1} style={{ width: '93%', flexWrap: 'wrap', justifyContent: 'center' }} className="my-2">
