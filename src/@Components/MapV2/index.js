@@ -20,6 +20,7 @@ import 'leaflet-draw';
 import './leaflet.draw.css';
 import uuid from 'react-uuid';
 import moment from 'moment';
+import NoTagImage from '@Assets/Images/no-tag-image.png';
 import useBaseLayerHook from './BaseLayerHook';
 import {
   genLyr, centeringMap, setBaseLayerActive, setGroupLayerOverlayActive, clearingMapLayers,
@@ -86,7 +87,7 @@ export default function Maps({
         // console.log('MAPDEBUG: marker ',m.lat, m.lng, m)
         L.marker([m.lat, m.lng], {
           icon: iconType === 'WithImage' ? markerStyle.ImageIcon({
-            url: `${process.env.REACT_APP_S3}/${m.thumbnail}`,
+            url: !!m.tagImage ? `${process.env.REACT_APP_S3}/${m.tagImage}` : NoTagImage,
           }) : markerStyle.GreenIcon,
           layer_type: 'marker',
           riseOnHover: true,
@@ -300,7 +301,7 @@ export default function Maps({
       mapRef.current.leafletElement.getPane('locationMarker').style.zIndex = 999;
       markerIcon = L.marker([targetCenter.lat, targetCenter.lng], {
         icon: iconType === 'WithImage'
-          ? markerStyle.SelectedImageIcon({ url: `${process.env.REACT_APP_S3}/${project.thumbnail}` }) : markerStyle.GreenIcon,
+          ? markerStyle.SelectedImageIcon({ url: !!project.tagImage ? `${process.env.REACT_APP_S3}/${project.tagImage}` : NoTagImage }) : markerStyle.GreenIcon,
         layer_type: 'marker',
         pane: 'locationMarker',
       }).addTo(mapRef.current.leafletElement);
