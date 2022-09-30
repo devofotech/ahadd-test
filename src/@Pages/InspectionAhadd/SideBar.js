@@ -6,15 +6,13 @@ import { PlayCircleFilled } from '@material-ui/icons';
 import TabPanel from '@Components/TabPanel/v1';
 import FilterIcon from '@Assets/Icons/filter-solid.svg';
 import { a11yProps } from '@Helpers';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import ReactPlayer from 'react-player';
 import './inspection.css';
+import DeleteDialog from '@Components/DeleteDialog';
 import UploadInspectionPhoto from './UploadInspectionPhoto';
 import PinLocation from './PinLocation';
 
 export default function SideBar(props) {
-  const MySwal = withReactContent(Swal);
   const tabsItems = [
     { label: 'Image', length: props.images?.length ?? 0, a11yProps: a11yProps(0), action: () => props.setTab(0) },
   ];
@@ -84,22 +82,8 @@ export default function SideBar(props) {
                             className="text-white mr-1 h-25"
                             style={{ fontSize: 16 }}
                             onClick={() => {
-                              MySwal.fire({
-                                title: image['Inspection.name'],
-                                imageUrl: `${process.env.REACT_APP_S3}/${image.src}`,
-                                imageHeight: 320,
-                                imageAlt: 'Annotation Image',
-                                showCancelButton: true,
-                                showDenyButton: true,
-                                showConfirmButton: false,
-                                denyButtonText: 'Delete Image',
-                                cancelButtonText: 'Do Nothing',
-                              }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isDenied) {
-                                  props.deleteImage(image.id);
-                                }
-                              });
+                              props.setSelectedItem(props.images.find(d => d.id === image.id));
+                              props.setOpenDeleteDialog(true);
                             }}
                           >
                             • • •
@@ -145,23 +129,8 @@ export default function SideBar(props) {
                       className="text-white float-right position-absolute"
                       style={{ fontSize: 16, marginLeft: 85 }}
                       onClick={() => {
-                        MySwal.fire({
-                          title: 'Are you sure want to delete this video?',
-                          // imageUrl: `${process.env.REACT_APP_S3}/${video.imgSrc}`,
-                          // imageUrl: video.imgSrc,
-                          imageHeight: 320,
-                          imageAlt: 'Annotation Video',
-                          showCancelButton: true,
-                          showDenyButton: true,
-                          showConfirmButton: false,
-                          denyButtonText: 'Delete Video',
-                          cancelButtonText: 'Do Nothing',
-                        }).then((result) => {
-                          /* Read more about isConfirmed, isDenied below */
-                          if (result.isDenied) {
-                            props.deleteImage(video.id);
-                          }
-                        });
+                        props.setSelectedItem(props.videos.find(d => d.id === video.id));
+                        props.setOpenDeleteDialog(true);
                       }}
                     >
                       • • •
@@ -172,6 +141,14 @@ export default function SideBar(props) {
           </Grid>
         </TabPanel>
       </div>
+      <DeleteDialog
+        open={props.openDeleteDialog}
+        setOpen={props.setOpenDeleteDialog}
+        selected={props.selectedItem}
+        setSelected={props.setSelectedItem}
+        deleteFunction={props.deleteImage}
+        showImage={!props.selectedItem?.isVideo}
+      />
     </div>
   );
 }

@@ -88,7 +88,7 @@ export default function AssetList({ user }) {
           setOpen={h.setOpen}
           selected={h.selectedAsset}
           setSelected={h.setSelectedAsset}
-          deleteFunction={() => h.deleteAsset()}
+          deleteFunction={h.deleteAsset}
         />
         <AssetCardDialog
           open={h.openCardDialog}
