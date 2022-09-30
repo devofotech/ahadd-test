@@ -7,7 +7,6 @@ export default function Hook({ project }) {
   const project_id = queryString.parse(window.location.search).id;
   const [inspectionSessions, setInspectionSessions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [openInspectionTour, setOpenInspectionTour] = useState(false);
   const [keys, setKeys] = useState('id');
   const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
@@ -111,8 +110,6 @@ export default function Hook({ project }) {
     isLoading,
     setIsLoading,
     updateInspection,
-    openInspectionTour,
-    setOpenInspectionTour,
     project_id,
     keys,
     setKeys,

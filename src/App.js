@@ -4,7 +4,6 @@ import React, { useContext } from 'react';
 import {
   BrowserRouter as Router, Switch, Route, Redirect,
 } from 'react-router-dom';
-import { useTour } from '@reactour/tour';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Grid } from '@material-ui/core';
@@ -71,7 +70,6 @@ const HomePage = (h) => {
 export default function App() {
   const h = Hook();
   console.log('hook', h);
-  const { setIsOpen, setCurrentStep, setDisabledActions } = useTour();
   return (
     <AuthProvider>
       <Router>
@@ -110,9 +108,6 @@ export default function App() {
                 <ProjectSite
                   {...h}
                   setIsMap={h.setIsMap}
-                  setIsOpen={setIsOpen}
-                  setDisabledActions={setDisabledActions}
-                  setCurrentStep={setCurrentStep}
                 />
               )}
               isProjectSite={h.isMap}
@@ -125,7 +120,7 @@ export default function App() {
             <MainContainer user={h.user} child={<Analytics {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/asset/" user={h.user}>
-            <MainContainer user={h.user} child={<AssetListAhadd {...h} closeTour={() => setIsOpen(false)} />} />
+            <MainContainer user={h.user} child={<AssetListAhadd {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
             <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />
@@ -247,9 +242,6 @@ export default function App() {
 function MainContainer({
   user, child, adjustedStyle, isProjectSite = false, isFullPage = false,
 }) {
-  const {
-    setIsOpen, setDisabledActions, setCurrentStep, currentStep, disabledActions,
-  } = useTour();
   return (
     <Grid
       className={`${!isFullPage && 'content'}`}
@@ -267,11 +259,6 @@ function MainContainer({
       <TopBar
         {...user}
         isProjectSite={isProjectSite}
-        setIsOpen={setIsOpen}
-        setDisabledActions={setDisabledActions}
-        setCurrentStep={setCurrentStep}
-        currentStep={currentStep}
-        disabledActions={disabledActions}
       />
       <Grid item xs={12}>
         {child}

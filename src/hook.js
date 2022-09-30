@@ -47,7 +47,6 @@ export default function Hook() {
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState('');
   const [isMap, setIsMap] = useState(false);
-  const [openDemoTour, setOpenDemoTour] = useState(false);
 
   const login = ({ email, password }) => {
     setIsLoading(true);
@@ -137,7 +136,5 @@ export default function Hook() {
     isMap,
     setIsMap,
     getUser,
-    openDemoTour,
-    setOpenDemoTour,
   };
 }

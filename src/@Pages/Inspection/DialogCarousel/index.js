@@ -15,7 +15,7 @@ import Api, { endpoints } from '@Helpers/api';
 //   { desc: 'Click on the button Add Asset to create new asset', no: 1, gif: img1 }, { desc: 'JWalla', no: 2, gif: img2 },
 // ];
 
-export default function index({ title, name, style = {}, isFirstTimeAnnotate, setIsFirstTimeAnnotate, setOpenAnnotateTour }) {
+export default function index({ title, name, style = {} }) {
   const [isOpen, setIsOpen] = useState(false);
   const [buttonIndex, setButtonIndex] = useState(0);
   const [guides, setGuides] = useState([]);
@@ -32,10 +32,6 @@ export default function index({ title, name, style = {}, isFirstTimeAnnotate, se
     if (buttonIndex == (guides.length - 1)) {
       setIsOpen(false);
       setButtonIndex(0);
-      if (isFirstTimeAnnotate) {
-        setOpenAnnotateTour(true)
-        setIsFirstTimeAnnotate(false)
-      }
       return;
     }
     setButtonIndex(buttonIndex + 1);

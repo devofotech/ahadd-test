@@ -24,15 +24,9 @@ const titleStyle = {
   color: 'var(--dark-blue-color)',
 };
 
-export default function AssetList({ user, closeTour }) {
+export default function AssetList({ user }) {
   const history = useHistory();
-  const location = useLocation();
   const h = useHook();
-  useEffect(() => {
-    if (location.pathname === '/asset') {
-      closeTour();
-    }
-  }, [location.pathname]);
 
   return (
     <MainContentContainer style={{ minHeight: '85vh' }}>

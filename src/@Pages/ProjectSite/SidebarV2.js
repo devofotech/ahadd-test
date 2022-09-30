@@ -7,7 +7,6 @@ import Button from '@Components/Button';
 import AssetDetail from '@Components/AssetDetail/v2';
 import { CameraAlt } from '@material-ui/icons';
 import DemoLabel from '@Assets/Images/demo-label.svg';
-import Tour from 'reactour';
 import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
 import BarChart from '@Components/BarChart/v2';
@@ -71,19 +70,6 @@ export default function SidebarV2(props) {
         setCycle={setCycle}
       />
       <Grid item xs={12} md={3} id="top" className="sidebar position-relative" style={{ zIndex: 1 }}>
-        <Tour
-          steps={sidebarSteps}
-          isOpen={props.isFirstSidebarTour}
-          onRequestClose={() => { props.setIsFirstSidebarTour(false); window.localStorage.setItem('tour', false); }}
-          showNumber={false}
-          showNavigationNumber={false}
-          showCloseButton={false}
-          disableInteraction
-          getCurrentStep={(curr) => setCurrentStep(curr)}
-          nextButton={<Button>NEXT</Button>}
-          prevButton={prevButton(currentStep)}
-          lastStepNextButton={<Button>GOT IT!</Button>}
-        />
         {!!props.project.is_demo && (
           <img
             src={DemoLabel}
@@ -108,10 +94,9 @@ export default function SidebarV2(props) {
           style={{ objectFit: 'cover', width: '100%', aspectRatio: '3/2' }}
           src={`${process.env.REACT_APP_S3}/${!!props.project.image ? props.project.image : 'static/media/defaultAssetImg-01.png'}`}
           alt="asset"
-          data-tut="side-img"
         />
         <div className="d-flex justify-content-center flex-wrap" style={{ flex: 1 }}>
-          <Box className="mt-2" style={{ width: '90%' }} data-tut="side-dropdown">
+          <Box className="mt-2" style={{ width: '90%' }}>
             <Dropdown
               selectedItem={props.selected_project}
               setSelectedItem={props.set_selected_project}
@@ -172,73 +157,3 @@ export default function SidebarV2(props) {
     </>
   );
 }
-
-function prevButton(currStep) {
-  return (
-    currStep === 0 ? <Button disabled>PREVIOUS</Button> : <Button>PREVIOUS</Button>
-  );
-}
-
-const sidebarSteps = [
-  {
-    selector: '[data-tut="side-img"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Map Side Panel</h3>
-        <hr />
-        This is your side panel of your asset. All information of your assets will be shown here
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="side-dropdown"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Asset Dropdown</h3>
-        <hr />
-        You may choose to view any added assets here
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="side-phase"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Asset Phase Dropdown</h3>
-        <hr />
-        You may toggle displayed data according to the asset project phase
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="side-chart"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Inspection Summary</h3>
-        <hr />
-        The summary of inspection details and status will be shown here
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="side-buttons"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Asset Details</h3>
-        <hr />
-        All the asset details such as inspection data, 3D data, 360 data and report will be shwon here.
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="control-layer"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Geospatial Layers</h3>
-        <hr />
-        All the GIS and imagery layers (vector and raster) will be available here.
-      </>
-    ),
-  },
-  // ...
-];

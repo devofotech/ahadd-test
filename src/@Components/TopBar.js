@@ -31,7 +31,6 @@ export default function TopBar(props) {
   const isOrgUnlimited = !!props?.['Organization.StoreStorage.is_token_unlimited'];
   const handleClickMenu = (event) => {
     setAnchorEl(event.currentTarget);
-    props.setDisabledActions(false);
   };
   const handleCloseMenu = () => setAnchorEl(null);
   const handleClickNotification = (e) => {
@@ -48,26 +47,6 @@ export default function TopBar(props) {
     const notificationsRef = ref(db, 'notifications');
     onChildAdded(notificationsRef, () => setIsLogUpdated(prev => prev + 1));
   }, []);
-
-  useEffect(() => {
-    const delay = 350;
-    let timer;
-    if (props.currentStep === 8) {
-      setAnchorEl(null);
-    } else if (anchorEl === null && props.currentStep > 6) {
-      props.setCurrentStep(0);
-    } else if (anchorEl !== null) {
-      timer = setTimeout(
-        () => props.setCurrentStep(7),
-        delay,
-      );
-    } else if (props.currentStep === 6) {
-      setAnchorEl(null);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [props.currentStep, anchorEl]);
 
   const topbarStyle = {
     zIndex: 99,
@@ -108,22 +87,12 @@ export default function TopBar(props) {
             alignItems="center"
           >
             {[
-              // {
-              //   roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
-              //   link: '/dashboard/analytic',
-              //   selected: '/dashboard',
-              //   icon: (e) => <Dashboard color={iconColor(e)} />,
-              //   title: 'Dashboard',
-              //   page_access: true,
-              //   tourId: 'dashboard',
-              // },
               {
                 roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
                 link: '/project',
                 icon: (e) => <MapView color={iconColor(e)} />,
                 title: 'Map',
                 page_access: true,
-                tourId: 'map_view',
               },
               {
                 roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
@@ -131,7 +100,6 @@ export default function TopBar(props) {
                 icon: (e) => <AssetList color={iconColor(e)} />,
                 title: 'Asset List',
                 page_access: true,
-                tourId: 'asset_list',
               },
               {
                 roles: ['developer', 'organization_admin', 'asset_manager', 'user'],
@@ -162,7 +130,6 @@ export default function TopBar(props) {
                     className={path.includes(nav.selected ?? nav.link)
                       ? 'color-secondary shadow-selected mt-1'
                       : 'color-tertiary shadow-unselected mt-1'}
-                    data-tut={nav.tourId}
                     style={{ fontWeight: 600 }}
                   >
                     {nav.title}
@@ -184,7 +151,7 @@ export default function TopBar(props) {
             <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--dark-blue-color)' }} className="mb-0 navbar-text">
               {truncateString(props.name?.split(' ').slice(0, 2).join(' '), 15)}
             </p>
-            <ExpandMore onBlur={handleCloseMenu} onClick={handleClickMenu} data-tut="dropdown_icon" />
+            <ExpandMore onBlur={handleCloseMenu} onClick={handleClickMenu} />
           </div>
           <Menu
             anchorEl={anchorEl}
@@ -193,7 +160,7 @@ export default function TopBar(props) {
             onClose={handleCloseMenu}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           >
-            <div data-tut="dropdown_topbar" style={{ marginBottom: -5, marginTop: -2 }}>
+            <div style={{ marginBottom: -5, marginTop: -2 }}>
               <MenuItem disabled className="d-flex justify-content-between">
                 <div className="mr-2 navbar-text" style={{ color: 'var(--dark-blue-color)' }}>{props.name?.split(' ').slice(0, 2).join(' ')}</div>
               </MenuItem>

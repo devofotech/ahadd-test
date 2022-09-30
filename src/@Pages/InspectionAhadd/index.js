@@ -37,19 +37,19 @@ export default function InspectionAhadd(props) {
       </div>
       <Grid container item xs={12} spacing={2}>
         {showImageActionBar && (
-          <Grid item md={12} lg={3} data-tut="annotate-list">
+          <Grid item md={12} lg={3}>
             {!!Object.keys(h.mainImage).length && <ActionBar {...h} isDeveloper={isDeveloper} />}
           </Grid>
         )}
         {showVideoActionBar && (
-          <Grid item md={12} lg={3} data-tut="annotate-list">
+          <Grid item md={12} lg={3}>
             {!!Object.keys(h.mainVideo).length && <VideoActionBar {...h} isDeveloper={isDeveloper} />}
           </Grid>
         )}
-        <Grid item xs={12} lg={showImageActionBar || showVideoActionBar ? 9 : 12} className="mapgrid" data-tut="workspace">
+        <Grid item xs={12} lg={showImageActionBar || showVideoActionBar ? 9 : 12} className="mapgrid">
           {h.isLoadingInitial ? <CenteredLoadingContainer height="50vh" size={75} hasText text="inspection" /> : (
             <>
-              {h.inspectionType === 'image' ? <MainWorkspace {...h} buttonTour="annotate-button" />
+              {h.inspectionType === 'image' ? <MainWorkspace {...h} />
                 : (
                   <Map
                     filtered_projects={h.images.map(d => ({ ...d, lat: d.lat ?? h.asset_details.lat, lng: d.lng ?? h.asset_details.lng }))}
@@ -66,7 +66,7 @@ export default function InspectionAhadd(props) {
             </>
           )}
         </Grid>
-        <Grid item xs={12} data-tut="annotate-sidebar">
+        <Grid item xs={12}>
           <SideBar {...h} />
         </Grid>
       </Grid>

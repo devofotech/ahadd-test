@@ -20,29 +20,14 @@ import {
   ChevronLeft, ChevronRight, HelpOutline, InfoOutlined,
 } from '@material-ui/icons';
 import DemoLabel from '@Assets/Images/demo-label.svg';
-import Tour from 'reactour';
 import SidebarCards from './SidebarCards';
 
 export default function Property(props) {
   const hasSeverity = ![92, 93].includes(props.project.id);
   const hasProjectPhasePackage = ![92, 93].includes(props.project.id);
   const hasPhasePageAccess = !!props.selectedPhaseWithViewPageAccess.length;
-  const [currentStep, setCurrentStep] = useState(0);
   return (
     <Grid item xs={12} md={3} id="top" className="sidebar position-relative" style={{ zIndex: 1 }}>
-      <Tour
-        steps={sidebarSteps}
-        isOpen={props.isFirstSidebarTour}
-        onRequestClose={() => {props.setIsFirstSidebarTour(false); window.localStorage.setItem('tour', false)}}
-        showNumber={false}
-        showNavigationNumber={false}
-        showCloseButton={false}
-        disableInteraction
-        getCurrentStep={(curr) => setCurrentStep(curr)}
-        nextButton={<Button>NEXT</Button>}
-        prevButton={prevButton(currentStep)}
-        lastStepNextButton={<Button>GOT IT!</Button>}
-      />
       {!!props.project.is_demo && (
         <img
           src={DemoLabel}
@@ -68,11 +53,6 @@ export default function Property(props) {
           <Tooltip title="View Asset Info Description">
             <IconButton disableRipple style={{ backgroundColor: 'transparent', padding: 0 }}>
               <InfoOutlined onClick={() => props.setOpenInfoDialog(true)} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="View Sidebar Guide">
-            <IconButton disableRipple style={{ backgroundColor: 'transparent', padding: 0 }}>
-              <HelpOutline onClick={() => props.setIsFirstSidebarTour(true)} />
             </IconButton>
           </Tooltip>
         </div>

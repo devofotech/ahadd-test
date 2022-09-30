@@ -3,7 +3,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid, makeStyles } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
-import Tour from 'reactour';
 import Navbar from '@Components/Navbar';
 import Map from '@Components/MapV2';
 import Button from '@Components/Button'
@@ -42,18 +41,6 @@ export default function Inspection(props) {
   return (
     <>
       <div className="w-100 d-flex justify-content-between align-items-center">
-        <Tour
-          steps={stepsAnnotate}
-          isOpen={h.openAnnotateTour}
-          onRequestClose={() => h.setOpenAnnotateTour(false)}
-          showNumber={false}
-          showNavigationNumber={false}
-          showCloseButton={false}
-          getCurrentStep={(curr) => h.setCurrentStep(curr)}
-          nextButton={<Button>NEXT</Button>}
-          prevButton={prevButton(h.currentStep)}
-          lastStepNextButton={<Button>GOT IT!</Button>}
-        />
         <Navbar
           to={false}
           text="INSPECTION"
@@ -78,8 +65,8 @@ export default function Inspection(props) {
       </div>
       <Grid container item xs={12} spacing={2}>
         <Grid container item xs={12} lg={showImageActionBar || showVideoActionBar ? 9 : 12} spacing={2}>
-          <Grid item xs={12} className="mapgrid" data-tut="workspace">
-            {h.toggleAnnotationView === 'image' ? <MainWorkspace {...h} buttonTour="annotate-button" />
+          <Grid item xs={12} className="mapgrid">
+            {h.toggleAnnotationView === 'image' ? <MainWorkspace {...h} />
               : (
                 <Map
                   filtered_projects={h.images.map(d => ({ ...d, lat: d.lat ?? h.asset_details.lat, lng: d.lng ?? h.asset_details.lng }))}
@@ -94,17 +81,17 @@ export default function Inspection(props) {
                 />
               )}
           </Grid>
-          <Grid item xs={12} data-tut="annotate-sidebar">
+          <Grid item xs={12}>
             <SideBar {...h} />
           </Grid>
         </Grid>
         {showImageActionBar && (
-          <Grid item md={12} lg={3} data-tut="annotate-list">
+          <Grid item md={12} lg={3}>
             {!!Object.keys(h.mainImage).length && <ActionBar {...h} isDeveloper={isDeveloper} />}
           </Grid>
         )}
         {showVideoActionBar && (
-          <Grid item md={12} lg={3} data-tut="annotate-list">
+          <Grid item md={12} lg={3}>
             {!!Object.keys(h.mainVideo).length && <VideoActionBar {...h} isDeveloper={isDeveloper} />}
           </Grid>
         )}
@@ -112,52 +99,3 @@ export default function Inspection(props) {
     </>
   );
 }
-
-function prevButton(currStep) {
-  return (
-    currStep === 0 ? <Button disabled>PREVIOUS</Button> : <Button>PREVIOUS</Button>
-  );
-}
-
-const stepsAnnotate = [
-  {
-    selector: '[data-tut="workspace"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Annotation Canvas </h3>
-        <hr />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="annotate-sidebar"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Annotation Sidebar </h3>
-        <hr />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="annotate-list"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Annotation Action Bar </h3>
-        <hr />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </>
-    ),
-  },
-  {
-    selector: '[data-tut="annotate-button"]',
-    content: () => (
-      <>
-        <h3 style={{ color: 'black', textAlign: 'center' }}>Annotation Button </h3>
-        <hr />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </>
-    ),
-  },
-];

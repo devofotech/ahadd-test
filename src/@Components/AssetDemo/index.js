@@ -13,17 +13,17 @@ const useStyles = makeStyles({
   description: { height: '14rem', overflow: 'auto', padding: '0 5px' },
 });
 
-export default function AssetDemoButton({ user, refreshAsset, projects, tourId }) {
+export default function AssetDemoButton({ user, refreshAsset, projects }) {
   const h = useHook({ user, refreshAsset });
   const hasDemo = !!projects.filter(a => !!a.is_demo).length;
   return (
     <>
       {hasDemo ? (
-        <AddDemoButton className="mr-2" variant="outlined" border="red" onClick={() =>{ h.createDemoAccount('clear'); window.location.reload();}} data-tut={tourId}>
+        <AddDemoButton className="mr-2" variant="outlined" border="red" onClick={() =>{ h.createDemoAccount('clear'); window.location.reload();}}>
           <p className="text-danger">Clear Demo</p>
         </AddDemoButton>
       ) : (
-        <AddDemoButton className="mr-2" variant="outlined" onClick={() => h.setOpen(true)} data-tut={tourId}>
+        <AddDemoButton className="mr-2" variant="outlined" onClick={() => h.setOpen(true)}>
           <p>Add Demo</p>
         </AddDemoButton>
       )}
