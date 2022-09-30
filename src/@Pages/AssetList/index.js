@@ -33,9 +33,8 @@ const titleStyle = {
   color: 'var(--primary-color)',
 };
 
-export default function AssetList({ user, closeTour }) {
+export default function AssetList({ user }) {
   const history = useHistory();
-  const location = useLocation();
   const ref = useRef(null);
   const h = useHook();
   const [openDialog, setOpenDialog] = useState(false);
@@ -43,12 +42,6 @@ export default function AssetList({ user, closeTour }) {
     if (h.projects.filter(e => !e.is_demo).length < user['Organization.AssetLimit']) return history.push('/create-asset');
     setOpenDialog(true);
   };
-
-  useEffect(() => {
-    if (location.pathname === '/asset') {
-      closeTour();
-    }
-  }, [location.pathname]);
 
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;

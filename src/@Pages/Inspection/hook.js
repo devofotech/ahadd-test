@@ -24,7 +24,6 @@ export default function Hook(props) {
   const [inspection_module, set_inspection_module] = useState([]);
   const [isFirstTimeAnnotate, setIsFirstTimeAnnotate] = useState(true)
   const [currentStep, setCurrentStep] = useState(0);
-  const [openAnnotateTour, setOpenAnnotateTour] = useState(false);
 
   const refresh = () => {
     let inspectionsIds = {};
@@ -208,7 +207,5 @@ export default function Hook(props) {
     setIsFirstTimeAnnotate,
     currentStep,
     setCurrentStep,
-    openAnnotateTour,
-    setOpenAnnotateTour,
   };
 }

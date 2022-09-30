@@ -17,7 +17,6 @@ export default function Hook({
   const [hasOpenIssue, setHasOpenIssue] = useState(false);
   const [assetModuleList, setAssetModuleList] = useState({});
   const [selectedPhaseId, setSelectedPhaseId] = useState(0);
-  const [openInspectionTour, setOpenInspectionTour] = useState(false);
   const [tab, setTab] = useState('');
   const currentAssetPhase = selectedPhaseWithViewPageAccess[category];
 
@@ -150,8 +149,6 @@ export default function Hook({
     currentAssetPhase,
     tab,
     setTab,
-    openInspectionTour,
-    setOpenInspectionTour,
     project_id,
   };
 }

@@ -23,7 +23,6 @@ export default function Hook({ user, setIsOpen }) {
   const [showSidebar, setShowSidebar] = useState(false);
   const [storages, setStorages] = useState([]);
   const [currentPlan, setCurrentPlan] = useState('');
-  const [open, setOpen] = useState(true);
   const [oshCategory, setOshCategory] = useState([]);
   const [environmentCategory, setEnvironmentCategory] = useState([]);
   const [openInfoDialog, setOpenInfoDialog] = useState(false);
@@ -35,8 +34,6 @@ export default function Hook({ user, setIsOpen }) {
   const [parameterList, setParameterList] = useState([]);
   const [issuesType, setIssuesType] = useState([]);
   const [modules, setModules] = useState([]);
-  const [isShowIntroWithTour, setIsShowIntroWithTour] = useState(!!user?.is_show_intro);
-  const [isFirstSidebarTour, setIsFirstSidebarTour] = useState(!!user?.is_show_intro);
   const [isLoadingMap, setIsLoadingMap] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -47,18 +44,6 @@ export default function Hook({ user, setIsOpen }) {
   const [sections, setSections] = useState([]);
   const [regions, setRegions] = useState([]);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setIsShowIntroWithTour(false);
-    Api({
-      endpoint: endpoints.updateUser(user?.id),
-      data: { is_show_intro: 'false' },
-      onSuccess: () => window.localStorage.setItem('tour', true),
-      onFail: (response) => console.log('lol'),
-    });
-    setIsOpen(true);
-    setOpen(false);
-  };
   const deleteFile = (id) => {
     Api({
       endpoint: endpoints.deleteAssetFile(id),
@@ -116,7 +101,6 @@ export default function Hook({ user, setIsOpen }) {
     });
     // getModules();
     // getAllParameters();
-    setIsFirstSidebarTour(JSON.parse(window.localStorage.getItem('tour')));
   }, []);
 
   useEffect(() => {
@@ -235,11 +219,7 @@ export default function Hook({ user, setIsOpen }) {
     showSidebar,
     setShowSidebar,
     storages,
-    open,
-    setOpen,
     currentPlan,
-    handleClose,
-    handleOpen,
     user,
     plan: Object.assign({}, ...storages.filter(p => p.name === currentPlan)),
     openInfoDialog,
@@ -257,10 +237,6 @@ export default function Hook({ user, setIsOpen }) {
     modules,
     moduleParameter: _.groupBy(project?.module_parameters, 'ModuleId'),
     isOrgUnlimited,
-    isFirstSidebarTour,
-    setIsFirstSidebarTour,
-    isShowIntroWithTour,
-    setIsShowIntroWithTour,
     isLoadingMap,
     isLoading,
     sections,

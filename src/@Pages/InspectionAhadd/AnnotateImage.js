@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => ({
   annotateButton: { backgroundColor: 'var(--primary-color)', color: 'white' },
 }));
 export default function AnnotateImage({
-  mainImage, mainImageAnnotations, setMainImageAnnotations, setMainAnnotationId, setIsLoading, user, severity, paperRef, inspection_module, buttonTour
+  mainImage, mainImageAnnotations, setMainImageAnnotations, setMainAnnotationId, setIsLoading, user, severity, paperRef, inspection_module,
 }) {
   const ref = useRef(null);
   const classes = useStyles();
@@ -433,7 +433,7 @@ export default function AnnotateImage({
       <div style={{ position: 'relative', zIndex: 1, float: 'right', top: 30, height: 0, width: 'fit-content', paddingRight: 10 }}>
         {userCanEditAnnotation && !mainImage.is_main && (
           <>
-            <Button variant="contained" className={classes.annotateButton} onClick={onAddRectangle} data-tut={buttonTour}><AnnotateIcon /><p className="text-white">&nbsp; Annotate</p></Button>
+            <Button variant="contained" className={classes.annotateButton} onClick={onAddRectangle}><AnnotateIcon /><p className="text-white">&nbsp; Annotate</p></Button>
             &nbsp;
             {editor?.canvas.getActiveObject() && (
               <Button variant="contained" color="secondary" onClick={onDelRectangle}><DeleteIcon /><p className="text-white">&nbsp; Remove</p></Button>

@@ -13,17 +13,17 @@ const useStyles = makeStyles({
   description: { height: '14rem', overflow: 'auto', padding: '0 5px' },
 });
 
-export default function AssetDemoButton({ projects, tourId }) {
+export default function AssetDemoButton({ projects }) {
   const h = useHook();
   const hasDemo = !!projects.filter(a => !!a.is_demo).length;
   return (
     <>
       {hasDemo ? (
-        <AddDemoButton variant="outlined" border="red" onClick={() => h.createDemoAccount('clear')} data-tut={tourId}>
+        <AddDemoButton variant="outlined" border="red" onClick={() => h.createDemoAccount('clear')}>
           <p className="text-danger">Clear Demo</p>
         </AddDemoButton>
       ) : (
-        <AddDemoButton variant="outlined" onClick={() => h.setOpen(true)} data-tut={tourId}>
+        <AddDemoButton variant="outlined" onClick={() => h.setOpen(true)}>
           <p>Add Demo</p>
         </AddDemoButton>
       )}

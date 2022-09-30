@@ -9,7 +9,6 @@ import {
 } from '@material-ui/core';
 import { HelpOutline } from '@material-ui/icons';
 import Swal from 'sweetalert2';
-import Tour from 'reactour';
 import withReactContent from 'sweetalert2-react-content';
 import Table from '@Components/MaterialTable/v4';
 import Navbar from '@Components/Navbar';
@@ -238,18 +237,6 @@ export default function InspectionSession(props) {
   }, [h.project_id]);
   return (
     <MainContentContainer>
-      <Tour
-        steps={!!data.length ? stepsIfHaveInspection : stepsIfNoInspection}
-        isOpen={h.openInspectionTour}
-        onRequestClose={() => h.setOpenInspectionTour(false)}
-        showNumber={false}
-        showNavigationNumber={false}
-        showCloseButton={false}
-        getCurrentStep={(curr) => setCurrentStep(curr)}
-        nextButton={<Button>NEXT</Button>}
-        prevButton={prevButton(currentStep)}
-        lastStepNextButton={<Button>GOT IT!</Button>}
-      />
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Navbar
           to="/project/"
@@ -257,9 +244,6 @@ export default function InspectionSession(props) {
           subtext={props.filtered_projects[props.selected_project]?.name}
         />
         <div className="d-flex align-items-center">
-          <IconButton disableRipple style={{ backgroundColor: 'transparent', padding: 0 }}>
-            <HelpOutline onClick={() => h.setOpenInspectionTour(true)} />
-          </IconButton>
           &nbsp;&nbsp;
           <div data-tut="toggle-button">
             <CustomToggleButton {...h} />
