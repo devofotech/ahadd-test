@@ -1,6 +1,6 @@
 import Button from '@Components/Button';
 import {
-  Dialog, DialogTitle, DialogActions, makeStyles, DialogContent, IconButton, withStyles, Checkbox, Grid, Tooltip,
+  Dialog, DialogTitle, DialogActions, makeStyles, DialogContent, IconButton, withStyles, Checkbox, Grid, Tooltip, TextField,
 } from '@material-ui/core';
 import { AddOutlined, Close } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
@@ -9,12 +9,17 @@ export default ({ images, mainSetImage }) => {
   const classes = useStyles();
   const [open, set_open] = useState(false);
   const [selected_image, set_selected_image] = useState({});
+  const [report_name, set_report_name] = useState('');
   const handleChange = (event) => set_selected_image({ ...selected_image, [event.target.name]: event.target.checked });
-  const main_image = images.find(e => !!e.is_main);
 
   useEffect(() => {
     if (!open) set_selected_image({});
   }, [open]);
+
+  const handleSubmit = () => {
+    console.log('aaa-selected_image', selected_image);
+    set_open(false);
+  };
 
   return (
     <>
@@ -31,7 +36,7 @@ export default ({ images, mainSetImage }) => {
         fullWidth
         maxWidth="lg"
       >
-        <DialogTitle>
+        <DialogTitle className="pb-0 pt-2">
           <div className="w-100 d-flex justify-content-between align-items-center">
             <p style={{ color: '#022C64', fontWeight: 600 }}>Generate Report</p>
             <IconButton onClick={() => set_open(false)}>
@@ -42,6 +47,19 @@ export default ({ images, mainSetImage }) => {
         </DialogTitle>
         <DialogContent style={{ overflowY: 'hidden' }}>
           <Grid container xs={12}>
+            <Grid container item xs={12} className="p-1" alignItems="center">
+              <Grid item xs={1}>Report Name:&nbsp;</Grid>
+              <Grid item xs={4}>
+                <TextField
+                  size="small"
+                  value={report_name}
+                  onChange={(e) => set_report_name(e.target.value)}
+                  variant="outlined"
+                  placeholder="Enter report name here"
+                  className="py-1 w-75"
+                />
+              </Grid>
+            </Grid>
             <Grid item xs={6} className="p-1">
               <Grid container xs={12} spacing={2} style={{ maxHeight: '65vh', overflow: 'auto' }}>
                 {images.filter(e => !e.is_main).map((item) => (
@@ -67,7 +85,7 @@ export default ({ images, mainSetImage }) => {
               </Grid>
             </Grid>
             <Grid item xs={6} className="flex-standard" style={{ border: '1px solid grey', borderRadius: 15, height: '65vh' }}>
-              <img src={`${process.env.REACT_APP_S3}/${mainSetImage?.src}`} className="w-100" loading="lazy" />
+              <img src={`${process.env.REACT_APP_S3}/${mainSetImage?.path}`} className="w-100" loading="lazy" />
             </Grid>
           </Grid>
         </DialogContent>
@@ -84,7 +102,7 @@ export default ({ images, mainSetImage }) => {
             <Button
               className="color-gradient-inline mx-3"
               style={{ borderRadius: 20 }}
-              onClick={() => set_open(false)}
+              onClick={handleSubmit}
             >
               <p style={{ color: 'white' }}>GENERATE REPORT</p>
             </Button>
