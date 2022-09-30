@@ -7,8 +7,6 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import {
   Button, Grid, IconButton, Tooltip,
 } from '@material-ui/core';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import Table from '@Components/MaterialTable/v7';
 import Navbar from '@Components/Navbar';
 import DeleteDialog from '@Components/DeleteDialog';

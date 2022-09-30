@@ -25,6 +25,8 @@ export default function Hook(props) {
   const [openPinLocationDialog, setOpenPinLocationDialog] = useState(false);
   const [inspectionDetail, setInspectionDetail] = useState({});
   const [isLoadingInitial, setIsLoadingInitial] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const refresh = () => {
     let inspectionsIds = {};
@@ -71,7 +73,7 @@ export default function Hook(props) {
     }
   }, [inspections]);
   useEffect(async () => {
-    console.log('vv inspectionType', inspectionType)
+    console.log('vv inspectionType', inspectionType);
     if (inspectionType === 'map') {
       // console.log('vv images', images[1]?.lat, images[1]?.lng)
       setTab(0);
@@ -162,9 +164,10 @@ export default function Hook(props) {
     setUploadPercentages(arr => { arr[i] = p; return [...arr]; });
   };
 
-  const deleteImage = (id) => {
+  const deleteImage = () => {
+    if (!selectedItem.id) return;
     Api({
-      endpoint: endpoints.deleteInspectionFile(id),
+      endpoint: endpoints.deleteInspectionFile(selectedItem.id),
       onSuccess: () => {
         toast('success', 'File Deleted');
         refresh();
@@ -246,5 +249,9 @@ export default function Hook(props) {
     updateOverallCondition,
     inspectionDetail,
     isLoadingInitial,
+    selectedItem,
+    setSelectedItem,
+    openDeleteDialog,
+    setOpenDeleteDialog,
   };
 }

@@ -4,12 +4,11 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { Delete } from '@material-ui/icons';
 
 export default function DeleteDialog({
-  open = false, setOpen = () => null, selected = {}, setSelected = () => null, deleteFunction = () => null, message = '',
+  open = false, setOpen = () => null, selected = {}, setSelected = () => null, deleteFunction = () => null, message = '', showImage = false,
 }) {
   const click = useRef(null);
   const container = useRef(null);
@@ -20,7 +19,7 @@ export default function DeleteDialog({
     deleteFunction();
     handleClose();
   };
-  const refresh = () => click.current.click();
+  const refresh = () => click.current?.click();
   const onShow = () => { if (!isShow) { setIsShow(!isShow); setDoneCycle(true); } };
 
   useEffect(() => {
@@ -44,20 +43,30 @@ export default function DeleteDialog({
   return (
     <MuiThemeProvider theme={getMuiTheme()}>
       <Dialog open={open} onClose={handleClose}>
-        {/* <DialogTitle>Are you sure you want to delete?</DialogTitle> */}
-        <DialogContent className="mx-3">
-          <div className="d-flex justify-content-center mx-auto" ref={container} style={{ marginTop: -20, height: '70%', width: '70%' }} />
-          <h2 className="text-center mb-2" ref={click} onClick={onShow} style={{ fontSize: 20 }}>Are you sure you want to delete?</h2>
-          <DialogContentText align="center">
-            {!!message ? message : `Delete ${selected?.name || 'this data'}`}
-          </DialogContentText>
+        <DialogContent style={{ textAlign: 'center' }}>
+          <div className="d-flex flex-column font-weight-normal">
+            {!!showImage ? (
+              <div className="d-flex justify-content-center mx-auto">
+                <img src={`${process.env.REACT_APP_S3}/${selected.src}`} className="w-100 pb-2" />
+              </div>
+            ) : (
+              <div className="d-flex justify-content-center mx-auto" ref={container} style={{ marginTop: -20, height: '70%', width: '70%' }} />
+            )}
+            <p style={{ fontSize: 20 }}><b>Are you sure you want to delete?</b></p>
+            <span>{!!message ? message : `Delete ${selected?.name || 'this item'}`}</span>
+          </div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>
-            Cancel
+        <DialogActions style={{ justifyContent: 'center', marginTop: 10, marginBottom: 10 }}>
+          <Button onClick={handleClose} style={{ backgroundColor: 'grey', width: 150 }}>
+            <div className="d-flex align-items-center text-light">
+              Cancel
+            </div>
           </Button>
-          <Button onClick={handleDelete} color="secondary" autoFocus>
-            Delete
+          <Button onClick={handleDelete} style={{ backgroundColor: 'red', width: 150 }}>
+            <div className="d-flex align-items-center text-light">
+              <Delete style={{ width: 12, marginRight: 5 }} />
+              Delete
+            </div>
           </Button>
         </DialogActions>
       </Dialog>

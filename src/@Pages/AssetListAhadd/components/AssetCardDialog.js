@@ -18,7 +18,7 @@ export default ({
           <h3>{selected?.name}</h3>
         </DialogTitle>
         <IconButton style={{ backgroundColor: 'transparent', padding: 0 }}>
-          <Cancel style={{ color: 'grey', padding: 20 }} onClick={() => setOpenDeleteDialog(false)} />
+          <Cancel style={{ color: 'grey', padding: 20 }} onClick={() => setOpen(false)} />
         </IconButton>
       </div>
       <DialogContent style={{ textAlign: 'center' }}>
