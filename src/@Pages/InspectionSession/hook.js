@@ -66,6 +66,7 @@ export default function Hook({
       onSuccess: (response) => {
         setInspectionSessions(response.data);
         setIsLoading(false);
+        console.log('success');
       },
       onFail: setInspectionSessions([]),
     });
