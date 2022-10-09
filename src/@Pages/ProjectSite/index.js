@@ -1,15 +1,13 @@
 /* eslint-disable complexity */
 import React from 'react';
 import {
-  Switch, Route, useLocation, Redirect,
+  Switch, Route, useLocation,
 } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import Map from '@Components/MapV2';
 import _ from 'lodash';
 
-import InspectionSession from '@Pages/InspectionSession';
 import InspectionSessionAhadd from '@Pages/InspectionSessionAhadd';
-import Mapping from '@Pages/Mapping';
 import Report from '@Pages/Report';
 import CCTV from '@Pages/CCTV';
 import IFrame from '@Pages/IFrame';
@@ -18,7 +16,6 @@ import CenteredLoading from '@Components/CenteredLoading/v2';
 // import AssetDemoButton from './components/AssetDemo';
 import InfoDialog from './components/InfoDialog';
 
-import Sidebar from './Sidebar';
 import SidebarV2 from './SidebarV2';
 import Hook from './hook';
 import WelcomePage from './components/WelcomePage';
@@ -56,13 +53,7 @@ export default function Property(props) {
       <Grid container className="position-relative">
         {!!h.openInfoDialog && <InfoDialog {...h} />}
         {!!props.user?.is_show_intro && <WelcomePage {...h} />}
-        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && (
-          {
-            galaxy: <Sidebar {...h} parentProps={props} />,
-            supervision: <Sidebar {...h} parentProps={props} />,
-            ahadd: <SidebarV2 {...h} parentProps={props} />,
-          }[process.env.REACT_APP_BRANCH]
-        )}
+        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && <SidebarV2 {...h} parentProps={props} />}
         <Grid item xs={12} md={9} className="main d-flex">
           <Switch>
             {[
@@ -73,21 +64,11 @@ export default function Property(props) {
               },
               {
                 path: '/project/inspection',
-                children: (
-                  {
-                    galaxy: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
-                    supervision: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
-                    ahadd: <InspectionSessionAhadd {...h} user={props.user} assetTypeList={h.assetTypeList} />,
-                  }[process.env.REACT_APP_BRANCH]
-                ),
+                children: <InspectionSessionAhadd {...h} user={props.user} assetTypeList={h.assetTypeList} />,
               },
               {
                 path: '/project/report',
                 children: <Report {...h} user={props.user} />,
-              },
-              {
-                path: '/project/mapping',
-                children: <Mapping {...h} />,
               },
               {
                 path: '/project/cctv',

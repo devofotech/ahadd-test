@@ -1,16 +1,12 @@
 /* eslint-disable complexity */
 import React, { useState } from 'react';
 import {
-  Card, Grid, Typography, CardActionArea, CardMedia, CardContent, Tooltip, Button, Avatar,
+  Card, Grid, Typography, CardActionArea, CardMedia, CardContent, Button,
 } from '@material-ui/core';
-import { Edit, Delete, Cancel } from '@material-ui/icons';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { makeStyles, styled } from '@material-ui/core/styles';
 import { RankingAhaddIcon } from '@Assets/Icons/RankingAhaddIcon';
 import moment from 'moment';
-import modalImage from '@Assets/Images/undraw_processing_re_tbdu 1.svg';
 import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -34,7 +30,6 @@ export default function AssetCard({
   setWorkflowAccess, setTeamAccess, setUserAccess, ...h
 }) {
   const history = useHistory();
-  const MySwal = withReactContent(Swal);
   const classes = useStyles();
   const project_img = `${process.env.REACT_APP_S3}/${!!projects?.image ? projects.image : 'static/media/defaultAssetImg-01.png'}`;
   const assetWorkflowAccess = projects.AssetAccesses.filter(acc => !!acc.Workflow).map(acc => ({ ...acc.Workflow, type: 'Workflow' }));

@@ -12,7 +12,7 @@ const DefaultIcon = L.icon({
 });
 const LeafIcon = L.Icon.extend({ options: {} });
 const GreenIcon = new LeafIcon({
-  iconUrl: `${process.env.REACT_APP_BRANCH === 'galaxy' ? GreenMarker : YellowMarker}`,
+  iconUrl: { YellowMarker },
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [27, 38],
   iconAnchor: [12, 41],

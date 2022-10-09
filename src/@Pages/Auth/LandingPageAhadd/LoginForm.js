@@ -6,7 +6,7 @@ export default function LoginForm() {
   return (
     <div className="my-5">
       <Button
-        className="btn-block mx-auto"
+        className="btn-block w-50 mx-auto"
         style={{ backgroundColor: '#fff', borderRadius: '5px' }}
         onClick={() => window.location.replace(`${process.env.REACT_APP_ENDPOINT_URL}auth/microsoft?redirect_url=${loginUrl}`)}
         children={(
