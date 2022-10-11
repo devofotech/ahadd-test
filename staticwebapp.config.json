@@ -5,37 +5,5 @@
       "/images/*.{png,jpg,gif}",
       "/css/*"
     ]
-  },
-  "responseOverrides": {
-    "400": {
-      "rewrite": "/"
-    },
-    "401": {
-      "redirect": "/login",
-      "statusCode": 302
-    },
-    "403": {
-      "rewrite": "/"
-    },
-    "404": {
-      "rewrite": "/index.html"
-    }
-  },
-  "globalHeaders": {
-    "Content-Type": "charset=UTF-8",
-    "content-security-policy": "default-src https: 'self'; object-src 'none'; frame-src 'self'; img-src 'self'",
-    "Access-Control-Allow-Origin": "identity.azurestaticapps.net, *.azurestaticapps.net, *.google-analytics.com, *.visualstudio.com",
-    "X-Frame-Options": "SAMEORIGIN",
-    "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
-    "X-Content-Type-Options": "nosniff",
-    "x-xss-protection": "1; mode=block",
-    "referrer-policy": "same-origin"
-  },
-  "mimeTypes": {
-    ".html": "text/html",
-    "custom": "text/html",
-    ".json": "text/json",
-    ".css": "text/css",
-    ".js": "text/javascript"
   }
 }
