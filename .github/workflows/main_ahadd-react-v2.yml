@@ -23,7 +23,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
-          npm install --legacy-peer-deps
+          npm install
           npm run build --if-present
           npm run test --if-present
 
@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'ahadd-react-v2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EF875B8474E74277B9356B44F77B47F1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_437A14CC305945FCA51773B06855FACB }}
           package: .
