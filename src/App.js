@@ -36,7 +36,7 @@ const HomePage = (h) => {
 
 export default function App() {
   const h = Hook();
-  console.log('hook', h);
+  console.log('aaa-hook', h);
   return (
     <AuthProvider>
       <Router>
