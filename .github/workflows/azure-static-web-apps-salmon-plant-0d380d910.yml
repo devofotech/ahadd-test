@@ -3,19 +3,35 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - main
       - dev
       - staging
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
       - main
 
 jobs:
-  build_and_deploy_job:
+  test_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
+    name: Test Job
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn test
+
+  build_job:
+    needs: test_job
+    runs-on: ubuntu-latest
+    name: Build Job
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn build
+
+
+  build_and_deploy_job:
+    # if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    needs: build_job
+    runs-on: ubuntu-latest
     name: Build and Deploy Job
+    only:
+      - main
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,25 +51,13 @@ jobs:
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env: # Add environment variables here
-          REACT_APP_ENDPOINT_URL: https://ahaddv2.azurewebsites.net/
-          REACT_APP_S3: https://ahadd-container.azureedge.net/
-          REACT_APP_STRIPE_PKEY: pk_test_51JTzqeLCZg5pGgvFNh4LbEbZr9gOI8xDNaNENyJADdkxOs3Lu1AVGpMoG6lf7mvTElrc6Q09pIHXwC6vTPcJH97o00QYtp6n30
-          REACT_APP_GOOGLE_MAP_API_KEY: AIzaSyDxX1rmVEUQI27Rcj26E_jOMq6j0WjhX2M
-          REACT_APP_AZURE_MAP_API_KEY: zoQhHoFA6g6Q-eVlk8f92B3AByY-26L6zBrRK1IGxCA
-          REACT_APP_TAWK_TO_PROPERTY_ID: 6237f8dd1ffac05b1d7f8d3f
-          REACT_APP_TAWK_TO_TASK_ID: 1fula8934
-          REACT_APP_TAWK_TO_ENABLED: false
-          REACT_APP_BRANCH: ahadd
-          DISABLE_ESLINT_PLUGIN: true
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_SALMON_PLANT_0D380D910 }}
-          action: "close"
+          REACT_APP_ENDPOINT_URL: ${{ secrets.REACT_APP_ENDPOINT_URL }}
+          REACT_APP_S3: ${{ secrets.REACT_APP_S3 }}
+          REACT_APP_STRIPE_PKEY: ${{ secrets.REACT_APP_STRIPE_PKEY }}
+          REACT_APP_GOOGLE_MAP_API_KEY: ${{ secrets.REACT_APP_GOOGLE_MAP_API_KEY }}
+          REACT_APP_AZURE_MAP_API_KEY: ${{ secrets.REACT_APP_AZURE_MAP_API_KEY }}
+          REACT_APP_TAWK_TO_PROPERTY_ID: ${{ secrets.REACT_APP_TAWK_TO_PROPERTY_ID }}
+          REACT_APP_TAWK_TO_TASK_ID: ${{ secrets.REACT_APP_TAWK_TO_TASK_ID }}
+          REACT_APP_TAWK_TO_ENABLED: ${{ secrets.REACT_APP_TAWK_TO_ENABLED }}
+          REACT_APP_BRANCH: ${{ secrets.REACT_APP_BRANCH }}
+          DISABLE_ESLINT_PLUGIN: ${{ secrets.DISABLE_ESLINT_PLUGIN }}
