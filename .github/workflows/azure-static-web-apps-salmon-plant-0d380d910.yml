@@ -55,7 +55,7 @@ jobs:
           DISABLE_ESLINT_PLUGIN: ${{ secrets.DISABLE_ESLINT_PLUGIN }}
 
   build_and_deploy_for_staging:
-    if: github.ref == 'refs/heads/dev' && github.ref == 'refs/heads/staging'
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging'
     environment: staging
     needs: test_and_build
     runs-on: ubuntu-latest
