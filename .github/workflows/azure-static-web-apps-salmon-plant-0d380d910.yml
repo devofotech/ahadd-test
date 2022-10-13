@@ -26,13 +26,11 @@ jobs:
       - run: yarn
       - run: yarn build
 
-
   build_and_deploy_job:
-    # if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.ref == 'refs/heads/main'
     needs: build_job
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
         with:
