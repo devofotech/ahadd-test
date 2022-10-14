@@ -31,7 +31,6 @@ export default function Hook({ user, setIsOpen }) {
   const [selectedFile, setSelectedFile] = useState();
   const [piechartType, setPiechartType] = useState(0);
   const [issues, setIssues] = useState([]);
-  const [parameterList, setParameterList] = useState([]);
   const [issuesType, setIssuesType] = useState([]);
   const [modules, setModules] = useState([]);
   const [isLoadingMap, setIsLoadingMap] = useState(false);

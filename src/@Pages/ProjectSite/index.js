@@ -7,24 +7,20 @@ import { Grid } from '@material-ui/core';
 import Map from '@Components/MapV2';
 import _ from 'lodash';
 
-import InspectionSessionAhadd from '@Pages/InspectionSessionAhadd';
+import InspectionSession from '@Pages/InspectionSession';
 import Report from '@Pages/Report';
 import CCTV from '@Pages/CCTV';
 import IFrame from '@Pages/IFrame';
 import IFrameList from '@Pages/IFrameList';
 import CenteredLoading from '@Components/CenteredLoading/v2';
-// import AssetDemoButton from './components/AssetDemo';
 import InfoDialog from './components/InfoDialog';
 
-import SidebarV2 from './SidebarV2';
 import Hook from './hook';
 import WelcomePage from './components/WelcomePage';
+import Sidebar from './Sidebar';
 
 export default function Property(props) {
   const location = useLocation();
-  // if (!!props.user && ['name', 'email'].map(attr => !!props.user[attr]).includes(false)) {
-  //   if (props.user.RoleId > 1 && !!props.user.OrganizationId) return <Redirect to="/pending-information" />;
-  // }
   const prefixLocation = location.pathname.split('/');
   const isAssetView = prefixLocation.length > 4 && prefixLocation[2] === 'asset';
 
@@ -53,7 +49,7 @@ export default function Property(props) {
       <Grid container className="position-relative">
         {!!h.openInfoDialog && <InfoDialog {...h} />}
         {!!props.user?.is_show_intro && <WelcomePage {...h} />}
-        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && <SidebarV2 {...h} parentProps={props} />}
+        {(!!!isAssetView && !!h.projects.length && !_.isEmpty(h.project)) && <Sidebar {...h} parentProps={props} />}
         <Grid item xs={12} md={9} className="main d-flex">
           <Switch>
             {[
@@ -64,7 +60,7 @@ export default function Property(props) {
               },
               {
                 path: '/project/inspection',
-                children: <InspectionSessionAhadd {...h} user={props.user} assetTypeList={h.assetTypeList} />,
+                children: <InspectionSession {...h} user={props.user} assetTypeList={h.assetTypeList} />,
               },
               {
                 path: '/project/report',
