@@ -110,7 +110,7 @@ const avstyle = {
   boxShadow: '0.5px 0.5px 4px 1px rgba(0,0,0,0.1)',
 };
 
-export default function InspectionSessionAhadd(props) {
+export default function InspectionSession(props) {
   const h = Hook(props);
   const [data, setData] = useState([]);
 

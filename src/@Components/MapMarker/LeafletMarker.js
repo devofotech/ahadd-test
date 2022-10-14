@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import * as L from 'leaflet';
-import GreenMarker from '@Assets/Icons/Marker2.svg';
 import YellowMarker from '@Assets/Icons/Marker3.svg';
 
 const DefaultIcon = L.icon({
