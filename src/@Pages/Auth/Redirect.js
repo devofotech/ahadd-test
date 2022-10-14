@@ -5,7 +5,7 @@ import plus_ahadd from '@Assets/Images/plus_ahadd.svg';
 import '@Components/CenteredLoading/text.css';
 import './index.css';
 
-export default function LoginForm() {
+export default function RedirectPage() {
   const container = useRef(null);
 
   useEffect(() => {

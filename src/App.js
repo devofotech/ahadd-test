@@ -14,17 +14,17 @@ import SignUp from '@Pages/Auth/SignUp';
 import ProjectSite from '@Pages/ProjectSite';
 import Dashboard from '@Pages/Dashboard';
 import { AuthProvider, AuthContext } from '@Context/Auth';
-import AssetListAhadd from '@Pages/AssetListAhadd';
 import PrivacyPolicy from '@Pages/PrivacyPolicy';
 import ExternalMap from '@Pages/ExternalMap';
 import DeniedPage from '@Pages/DeniedPage';
 import PendingInformation from '@Pages/PendingInformation';
 import './App.css';
 import AboutUs from '@Pages/AboutUs';
-import InspectionAhadd from '@Pages/InspectionAhadd';
-import CreateAssetAhadd from '@Pages/CreateAssetAhadd';
 import Analytics from '@Pages/Analytics';
-import EditAsset from '@Pages/EditAsset'
+import EditAsset from '@Pages/EditAsset';
+import AssetList from '@Pages/AssetList';
+import CreateAsset from '@Pages/CreateAsset';
+import Inspection from '@Pages/Inspection';
 import Hook from './hook';
 
 const HomePage = (h) => {
@@ -87,10 +87,10 @@ export default function App() {
             <MainContainer user={h.user} child={<Analytics {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/asset/" user={h.user}>
-            <MainContainer user={h.user} child={<AssetListAhadd {...h} />} />
+            <MainContainer user={h.user} child={<AssetList {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/create-asset" user={h.user}>
-            <MainContainer user={h.user} child={<CreateAssetAhadd {...h} />} />
+            <MainContainer user={h.user} child={<CreateAsset {...h} />} />
           </PrivateRoute>
           <PrivateRoute exact path="/edit-asset/:AssetId" user={h.user}>
             <MainContainer user={h.user} child={<EditAsset {...h} />} />
@@ -98,7 +98,7 @@ export default function App() {
           <PrivateRoute path="/inspection/:inspection_session" user={h.user} accessible={[2, 3].includes(h.user?.RoleId)}>
             <MainContainer
               user={h.user}
-              child={<InspectionAhadd {...h} />}
+              child={<Inspection {...h} />}
               adjustedStyle={{ paddingLeft: '2%', paddingRight: '0%' }}
             />
           </PrivateRoute>

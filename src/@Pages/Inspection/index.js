@@ -15,7 +15,7 @@ import VideoActionBar from './VideoActionBar';
 import OverallCondition from './OverallCondition';
 import GenerateReport from './GenerateReport';
 
-export default function InspectionAhadd(props) {
+export default function Inspection(props) {
   const { inspection_session } = useParams();
   const h = Hook({ ...props, InspectionId: inspection_session });
   const isDeveloper = props.user?.raise_role === 'developer';
