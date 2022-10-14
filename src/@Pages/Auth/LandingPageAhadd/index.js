@@ -37,7 +37,7 @@ export default function LandingPageAhadd(h) {
                   />
                 </div>
                 <Grid className="flex-standard" direction="column">
-                  <p style={{ color: '#0061AA', fontWeight: 'bold' }}>Automated Highway Asset Defect Detection</p>
+                  <p style={{ color: '#0061AA', fontWeight: 'bold' }}>{process.env.REACT_APP_ENV} Automated Highway Asset Defect Detection</p>
                   <p className="text-wrap text-dark mt-2" style={{ fontSize: 14, width: '28rem' }}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laborisnisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   </p>
