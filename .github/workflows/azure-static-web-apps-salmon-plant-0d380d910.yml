@@ -53,6 +53,7 @@ jobs:
           REACT_APP_TAWK_TO_ENABLED: ${{ secrets.REACT_APP_TAWK_TO_ENABLED }}
           REACT_APP_BRANCH: ${{ secrets.REACT_APP_BRANCH }}
           DISABLE_ESLINT_PLUGIN: ${{ secrets.DISABLE_ESLINT_PLUGIN }}
+          REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
 
   build_and_deploy_for_staging:
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/staging'
@@ -89,3 +90,4 @@ jobs:
           REACT_APP_TAWK_TO_ENABLED: ${{ secrets.REACT_APP_TAWK_TO_ENABLED }}
           REACT_APP_BRANCH: ${{ secrets.REACT_APP_BRANCH }}
           DISABLE_ESLINT_PLUGIN: ${{ secrets.DISABLE_ESLINT_PLUGIN }}
+          REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
